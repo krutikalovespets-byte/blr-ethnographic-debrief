@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand-First Lens: BLR Ethnographic Research — Team Version</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Shantell+Sans:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --st-green: #2ECC71;
+    --st-green-deep: #1A7A44;
+    --st-green-soft: #E8F8EF;
+    --st-black: #0F0F0F;
+    --st-white: #FAFAF8;
+    --st-cream: #F5F3EE;
+    --ink-1: #0F0F0F;
+    --ink-2: #2C2C2C;
+    --ink-3: #5E5E5E;
+    --ink-4: #9A9A9A;
+    --line: #E2E2DC;
+    --red: #EF4444;
+    --red-soft: #FEF2F2;
+    --font-display: 'Poppins', sans-serif;
+    --font-body: 'Nunito Sans', sans-serif;
+    --font-accent: 'Shantell Sans', cursive;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--st-cream);
+    color: var(--ink-1);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===================== HEADER ===================== */
+  .site-header {
+    background: var(--st-black);
+    color: var(--st-white);
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--st-green);
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .team-badge {
+    background: var(--st-green);
+    color: var(--st-black);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .header-meta {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--ink-4);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .site-header h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(22px, 3vw, 36px);
+    line-height: 1.15;
+    color: var(--st-white);
+    max-width: 800px;
+    margin-bottom: 12px;
+  }
+
+  .site-header h1 span {
+    color: var(--st-green);
+  }
+
+  .site-header .subtitle {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--ink-3);
+    font-style: italic;
+    max-width: 600px;
+  }
+
+  .header-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--st-green);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ===================== TAB NAV ===================== */
+  .tab-nav-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--st-black);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+  }
+
+  .tab-nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0 48px;
+  }
+
+  .tab-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--ink-4);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 16px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--st-green);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+
+  .tab-btn:hover {
+    color: var(--st-white);
+  }
+
+  .tab-btn.active {
+    color: var(--st-green);
+  }
+
+  .tab-btn.active::after {
+    transform: scaleX(1);
+  }
+
+  .tab-num {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--st-green);
+    margin-right: 6px;
+    opacity: 0.7;
+  }
+
+  /* ===================== MAIN CONTENT ===================== */
+  .tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 48px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .section-header h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--ink-1);
+    margin-bottom: 8px;
+  }
+
+  .section-subtitle {
+    font-size: 15px;
+    color: var(--ink-3);
+    font-style: italic;
+    max-width: 680px;
+    line-height: 1.6;
+  }
+
+  /* ===================== TAB 1: MANIFESTO MOMENTS ===================== */
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  @media (max-width: 800px) {
+    .manifesto-grid { grid-template-columns: 1fr; }
+    .section-wrap { padding: 40px 24px; }
+    .tab-nav { padding: 0 24px; }
+    .site-header { padding: 40px 24px 36px; }
+  }
+
+  .manifesto-col-header {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .col-lived .manifesto-col-header {
+    background: var(--st-green-soft);
+    color: var(--st-green-deep);
+  }
+
+  .col-failed .manifesto-col-header {
+    background: var(--red-soft);
+    color: var(--red);
+  }
+
+  .moment-card {
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    position: relative;
+    border-left: 4px solid transparent;
+  }
+
+  .moment-card.lived {
+    background: var(--st-white);
+    border-left-color: var(--st-green);
+  }
+
+  .moment-card.failed {
+    background: #1a1a1a;
+    border-left-color: var(--red);
+    color: var(--st-white);
+  }
+
+  .moment-badge {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+
+  .moment-card.lived .moment-badge {
+    background: var(--st-green-soft);
+    color: var(--st-green-deep);
+  }
+
+  .moment-card.failed .moment-badge {
+    background: rgba(239,68,68,0.15);
+    color: #FC8181;
+  }
+
+  .moment-card h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .moment-card.lived h3 { color: var(--ink-1); }
+  .moment-card.failed h3 { color: var(--st-white); }
+
+  .moment-quote {
+    font-family: var(--font-accent);
+    font-size: 14px;
+    line-height: 1.6;
+    border-left: 2px solid;
+    padding-left: 14px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .moment-card.lived .moment-quote {
+    border-color: var(--st-green);
+    color: var(--ink-2);
+  }
+
+  .moment-card.failed .moment-quote {
+    border-color: var(--red);
+    color: #D1D5DB;
+  }
+
+  .moment-manifesto {
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .moment-card.lived .moment-manifesto { color: var(--ink-4); }
+  .moment-card.failed .moment-manifesto { color: #6B7280; }
+
+  .moment-why {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .moment-card.lived .moment-why { color: var(--ink-2); }
+  .moment-card.failed .moment-why { color: #9CA3AF; }
+
+  /* ===================== TAB 2: VOICE CALIBRATION ===================== */
+  .voice-subsection {
+    margin-bottom: 48px;
+  }
+
+  .voice-subsection h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--ink-1);
+    margin-bottom: 6px;
+  }
+
+  .voice-subsection .sub-label {
+    font-size: 12px;
+    color: var(--st-green-deep);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .language-reality-intro {
+    background: var(--st-black);
+    color: var(--st-white);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .language-reality-intro strong {
+    color: var(--st-green);
+  }
+
+  .dos-donts-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .dos-donts-table th {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  .dos-donts-table th:first-child {
+    background: var(--st-green-soft);
+    color: var(--st-green-deep);
+    border-radius: 8px 0 0 0;
+  }
+
+  .dos-donts-table th:last-child {
+    background: var(--red-soft);
+    color: var(--red);
+    border-radius: 0 8px 0 0;
+  }
+
+  .dos-donts-table td {
+    padding: 12px 16px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+
+  .dos-donts-table tr:nth-child(even) td:first-child {
+    background: rgba(46,204,113,0.04);
+  }
+
+  .dos-donts-table tr:nth-child(even) td:last-child {
+    background: rgba(239,68,68,0.03);
+  }
+
+  .dos-donts-table td:first-child {
+    border-right: 1px solid var(--line);
+  }
+
+  .fear-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .fear-card {
+    background: var(--st-black);
+    border-radius: 10px;
+    padding: 18px 20px;
+    position: relative;
+  }
+
+  .fear-label {
+    font-size: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--st-green);
+    margin-bottom: 8px;
+  }
+
+  .fear-card blockquote {
+    font-family: var(--font-accent);
+    font-size: 13px;
+    color: #D1D5DB;
+    line-height: 1.55;
+  }
+
+  .humour-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .humour-card {
+    background: var(--st-white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .humour-tone {
+    font-size: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--st-green-deep);
+    background: var(--st-green-soft);
+    padding: 3px 10px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .humour-card blockquote {
+    font-family: var(--font-accent);
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .humour-attr {
+    font-size: 11px;
+    color: var(--ink-4);
+    font-style: italic;
+  }
+
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .vocab-card {
+    background: var(--st-white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .vocab-term {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--st-green-deep);
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .vocab-def {
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+
+  /* ===================== TAB 3: SIDEKICK ABSENT ===================== */
+  .absent-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 800px) {
+    .absent-grid { grid-template-columns: 1fr; }
+    .manifesto-grid { grid-template-columns: 1fr; }
+  }
+
+  .absent-card {
+    background: #111111;
+    border-radius: 14px;
+    overflow: hidden;
+    color: var(--st-white);
+  }
+
+  .absent-card-header {
+    background: #1a1a1a;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .absent-moment-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--st-white);
+    margin-bottom: 6px;
+  }
+
+  .absent-who {
+    font-size: 11px;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 10px;
+  }
+
+  .absent-quote {
+    font-family: var(--font-accent);
+    font-size: 13px;
+    color: #9CA3AF;
+    line-height: 1.55;
+    border-left: 2px solid var(--red);
+    padding-left: 12px;
+  }
+
+  .absent-card-body {
+    padding: 18px 22px;
+  }
+
+  .absent-should-have {
+    font-size: 13px;
+    color: #D1D5DB;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .absent-should-have strong {
+    color: var(--st-green);
+  }
+
+  .brief-for-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .brief-pill {
+    font-size: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: rgba(46,204,113,0.12);
+    color: var(--st-green);
+    padding: 4px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(46,204,113,0.2);
+  }
+
+  /* ===================== TAB 4: CONVICTION GAP ===================== */
+  .conviction-intro {
+    background: var(--st-black);
+    color: var(--st-white);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+    font-size: 15px;
+    line-height: 1.8;
+    border-left: 4px solid var(--st-green);
+  }
+
+  .conviction-intro strong {
+    color: var(--st-green);
+  }
+
+  .conviction-parents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .conviction-parent-card {
+    background: var(--st-white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .conv-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--ink-1);
+    margin-bottom: 8px;
+  }
+
+  .conv-quote {
+    font-family: var(--font-accent);
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+
+  .conv-descriptor {
+    font-size: 11px;
+    color: var(--st-green-deep);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .gap-analysis {
+    background: #f9f5ee;
+    border: 1px solid #e8e0d0;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+
+  .gap-analysis h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink-1);
+    margin-bottom: 12px;
+  }
+
+  .gap-analysis p {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.75;
+  }
+
+  .gap-analysis p strong {
+    color: var(--st-green-deep);
+    font-style: italic;
+  }
+
+  .implications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .implication-item {
+    background: var(--st-white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .implication-num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--st-green);
+    line-height: 1;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .implication-text {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+
+  /* ===================== TAB 5: CREATIVE BRIEFS ===================== */
+  .briefs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .brief-card {
+    background: var(--st-white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .brief-card-header {
+    background: var(--st-black);
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .brief-num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 11px;
+    color: var(--st-green);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .brief-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--st-white);
+    margin-top: 4px;
+    line-height: 1.25;
+  }
+
+  .brief-persona-tag {
+    font-size: 11px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: rgba(46,204,113,0.15);
+    color: var(--st-green);
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(46,204,113,0.25);
+    white-space: nowrap;
+  }
+
+  .brief-card-body {
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 800px) {
+    .brief-card-body { grid-template-columns: 1fr; }
+    .absent-grid { grid-template-columns: 1fr; }
+  }
+
+  .brief-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .brief-field-label {
+    font-size: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-4);
+  }
+
+  .brief-field-value {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .brief-field-value.proposition {
+    color: var(--ink-1);
+    font-weight: 600;
+  }
+
+  .brief-source-quote {
+    grid-column: 1 / -1;
+    background: var(--st-cream);
+    border-radius: 8px;
+    padding: 16px 20px;
+    border-left: 3px solid var(--st-green);
+  }
+
+  .brief-source-quote blockquote {
+    font-family: var(--font-accent);
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .brief-source-attr {
+    font-size: 11px;
+    color: var(--ink-4);
+    font-style: italic;
+  }
+
+  /* ===================== DIVIDER ===================== */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 40px 0;
+  }
+
+  .subsection-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--st-green-deep);
+    background: var(--st-green-soft);
+    padding: 4px 12px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  /* ===================== FOOTER ===================== */
+  .site-footer {
+    background: var(--st-black);
+    padding: 24px 48px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-4);
+    letter-spacing: 0.04em;
+  }
+
+  /* ===================== SCROLL TO TOP ===================== */
+  .scroll-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--st-green);
+    color: var(--st-black);
+    border: none;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(46,204,113,0.3);
+    transition: transform 0.2s, opacity 0.2s;
+    z-index: 200;
+  }
+
+  .scroll-top:hover {
+    transform: translateY(-2px);
+  }
+
+  .scroll-top.visible {
+    display: flex;
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================== HEADER ======================== -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="header-meta">Supertails · Brand Team Internal · Apr 2026</div>
+      </div>
+      <span class="team-badge">Team Version</span>
+    </div>
+    <h1>Brand-First Lens: What <span>17 BLR Pet Parents</span> Tell Us About the Brand</h1>
+    <p class="subtitle">For the brand team. Direct. Uncomfortable where it needs to be.</p>
+    <div class="header-stats">
+      <div class="stat-item">
+        <span class="stat-num">17</span>
+        <span class="stat-label">Respondents</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">10</span>
+        <span class="stat-label">Immigrants</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Conviction Parents</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Creative Briefs</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ======================== TAB NAV ======================== -->
+<nav class="tab-nav-wrapper">
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="manifesto">
+      <span class="tab-num">01</span>Manifesto Moments
+    </button>
+    <button class="tab-btn" data-tab="voice">
+      <span class="tab-num">02</span>BLR Voice Calibration
+    </button>
+    <button class="tab-btn" data-tab="absent">
+      <span class="tab-num">03</span>Where the Sidekick Was Absent
+    </button>
+    <button class="tab-btn" data-tab="conviction">
+      <span class="tab-num">04</span>The Conviction Gap
+    </button>
+    <button class="tab-btn" data-tab="briefs">
+      <span class="tab-num">05</span>Creative Briefs
+    </button>
+  </div>
+</nav>
+
+<!-- ======================== TAB 1: MANIFESTO MOMENTS ======================== -->
+<div class="tab-content active" id="tab-manifesto">
+  <div class="section-wrap">
+    <div class="section-header">
+      <h2>Manifesto Moments</h2>
+      <p class="section-subtitle">Where we lived the manifesto. Where we didn't. From 17 real interactions.</p>
+    </div>
+    <div class="manifesto-grid">
+      <!-- LIVED IT COLUMN -->
+      <div class="col-lived">
+        <div class="manifesto-col-header">✓ Lived It</div>
+
+        <div class="moment-card lived">
+          <span class="moment-badge">Lived It</span>
+          <h3>The Proactive Vaccine Call</h3>
+          <blockquote class="moment-quote">"Supertails called me about the vaccine before I even remembered. That was impressive." — Ritik (A)</blockquote>
+          <p class="moment-manifesto">"We stand behind you when you need support."</p>
+          <p class="moment-why">Showed up before the parent had to ask. That's the sidekick.</p>
+        </div>
+
+        <div class="moment-card lived">
+          <span class="moment-badge">Lived It</span>
+          <h3>The Clinic Walkthrough</h3>
+          <blockquote class="moment-quote">"They gave me that walkthrough — one side cat clinic, one side dog. They have an operation theatre." — Ritik (A)</blockquote>
+          <p class="moment-manifesto">"Capable & Reliable — know the right thing to do."</p>
+          <p class="moment-why">Transparency + expertise + care in one gesture. Ritik still talks about this 12 months later.</p>
+        </div>
+
+        <div class="moment-card lived">
+          <span class="moment-badge">Lived It</span>
+          <h3>Gift in Every Order</h3>
+          <blockquote class="moment-quote">"They know what we want. Whatever you order, they keep giving small gifts." — Ritik (A)</blockquote>
+          <p class="moment-manifesto">"Friendly & Warm."</p>
+          <p class="moment-why">Zero-cost, maximum-recall brand touch. The sidekick being thoughtful without being asked.</p>
+        </div>
+
+        <div class="moment-card lived">
+          <span class="moment-badge">Lived It</span>
+          <h3>Welfare-First Positioning</h3>
+          <blockquote class="moment-quote">Multiple welfare-first respondents chose Supertails because of perceived alignment with their values. — Smrithi, Vihaar, Lakshmi</blockquote>
+          <p class="moment-manifesto">"We believe that with great pets comes greater responsibility."</p>
+          <p class="moment-why">Values alignment is the strongest acquisition signal in this cohort.</p>
+        </div>
+
+        <div class="moment-card lived">
+          <span class="moment-badge">Lived It</span>
+          <h3>The Trust Anchor: Doctor Expertise</h3>
+          <blockquote class="moment-quote">"I trust the vet. That's why I stay." — Pratham (B)</blockquote>
+          <p class="moment-manifesto">"Authoritative — know the right thing to do."</p>
+          <p class="moment-why">Healthcare is the only touchpoint where Supertails is unambiguously expert. It anchors the entire platform relationship.</p>
+        </div>
+      </div>
+
+      <!-- FAILED IT COLUMN -->
+      <div class="col-failed">
+        <div class="manifesto-col-header">✗ Failed It</div>
+
+        <div class="moment-card failed">
+          <span class="moment-badge">Failed It</span>
+          <h3>The Grooming Rejection</h3>
+          <blockquote class="moment-quote">"They said they can't handle Rio because he won't stay still. I felt like they were calling me a bad parent." — Ritik (A)</blockquote>
+          <p class="moment-manifesto">"We stand beside you when you are struggling."</p>
+          <p class="moment-why">The sidekick judged the pet parent at the exact moment they needed support. Antithetical to the brand promise.</p>
+        </div>
+
+        <div class="moment-card failed">
+          <span class="moment-badge">Failed It</span>
+          <h3>The 10pm Pharmacy Failure</h3>
+          <blockquote class="moment-quote">"She needed medicine at 10pm. Elastic Run said they can't find the location." — Lakshmi</blockquote>
+          <p class="moment-manifesto">"Capable, reliable and resilient — when the time comes."</p>
+          <p class="moment-why">The "when the time comes" moment arrived. The sidekick didn't show up. Lakshmi hasn't trusted pharmacy delivery since.</p>
+        </div>
+
+        <div class="moment-card failed">
+          <span class="moment-badge">Failed It</span>
+          <h3>The Bug Report Ignored</h3>
+          <blockquote class="moment-quote">"I sent feedback with screenshots. I didn't receive anything back." — Ritik (A)</blockquote>
+          <p class="moment-manifesto">"Resilient — never give up."</p>
+          <p class="moment-why">The most engaged user submitted the best feedback the brand will ever receive. Silence is the opposite of resilient.</p>
+        </div>
+
+        <div class="moment-card failed">
+          <span class="moment-badge">Failed It</span>
+          <h3>Language Exclusion at Grooming</h3>
+          <blockquote class="moment-quote">"The grooming staff only spoke Kannada. I couldn't understand them." — Anushi (G)</blockquote>
+          <p class="moment-manifesto">"Friendly & Warm — easy to approach."</p>
+          <p class="moment-why">The friendly neighbourhood pet parent was inaccessible to a significant portion of the neighbourhood.</p>
+        </div>
+
+        <div class="moment-card failed">
+          <span class="moment-badge">Failed It</span>
+          <h3>App as Friction, Not Sidekick</h3>
+          <blockquote class="moment-quote">"Application is bad, it is very lagging." — Ritik (A) &nbsp;·&nbsp; "When the app is slow, I just go to Zepto." — Komal (K)</blockquote>
+          <p class="moment-manifesto">"Makes pet parenting easier, enjoyable and cool."</p>
+          <p class="moment-why">The primary product interaction is creating friction, not ease. A slow app is not a sidekick. It's an obstacle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TAB 2: VOICE CALIBRATION ======================== -->
+<div class="tab-content" id="tab-voice">
+  <div class="section-wrap">
+    <div class="section-header">
+      <h2>BLR Voice Calibration</h2>
+      <p class="section-subtitle">What does "friendly neighbourhood pet parent" actually sound like in Bangalore? The manifesto describes the character. This is the field guide.</p>
+    </div>
+
+    <!-- 2a -->
+    <div class="voice-subsection">
+      <div class="subsection-label">2a</div>
+      <h3>The Language Reality</h3>
+      <div class="language-reality-intro">
+        These respondents speak Hindi, English, Tamil, Malayalam, and sometimes Kannada. <strong>10 of 17 are from outside Bangalore.</strong> The "neighbourhood" is a multilingual, multi-origin, highly mobile one.
+      </div>
+      <table class="dos-donts-table">
+        <thead>
+          <tr>
+            <th>Do</th>
+            <th>Don't</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hindi/English — the lingua franca of the immigrant pet parent</td>
+            <td>Kannada-only in any service touchpoint</td>
+          </tr>
+          <tr>
+            <td>Acknowledge the chaos of a new city with a new pet</td>
+            <td>Assume they have a network, a trusted vet, a community</td>
+          </tr>
+          <tr>
+            <td>Use the specific fears: 10pm pharmacy, Elastic Run, camera guilt</td>
+            <td>Use generic "pet parenting is hard" framing</td>
+          </tr>
+          <tr>
+            <td>Name the actual breeds: Shih Tzu, Beagle, Indie, Persian</td>
+            <td>Say "your dog" when you could say "your Shih Tzu"</td>
+          </tr>
+          <tr>
+            <td>Reference the immigrant reality: "new to Bangalore? here's what to know"</td>
+            <td>Treat all pet parents as settled Bangaloreans</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- 2b -->
+    <div class="voice-subsection">
+      <div class="subsection-label">2b</div>
+      <h3>The Fears That Are Specific to BLR</h3>
+      <p style="font-size:13px;color:var(--ink-3);margin-bottom:16px;">Not generic pet parent fears — the ones that only show up in this city, in this context.</p>
+      <div class="fear-grid">
+        <div class="fear-card">
+          <div class="fear-label">Camera Guilt</div>
+          <blockquote>"The camera shows me he's alone and I feel worse, not better."</blockquote>
+        </div>
+        <div class="fear-card">
+          <div class="fear-label">Last-mile Failure Anxiety</div>
+          <blockquote>"Elastic Run at 10pm said they can't find the address."</blockquote>
+        </div>
+        <div class="fear-card">
+          <div class="fear-label">Language Exclusion</div>
+          <blockquote>"The grooming staff only spoke Kannada."</blockquote>
+        </div>
+        <div class="fear-card">
+          <div class="fear-label">Platform Loyalty Erosion</div>
+          <blockquote>"Zepto has it cheaper. Should I switch?"</blockquote>
+        </div>
+        <div class="fear-card">
+          <div class="fear-label">Immigrant Isolation</div>
+          <blockquote>"I don't know any vets here. Back home I had my vet."</blockquote>
+        </div>
+        <div class="fear-card">
+          <div class="fear-label">Algorithm Anxiety</div>
+          <blockquote>"ChatGPT said it might be serious. Now I'm panicking."</blockquote>
+        </div>
+        <div class="fear-card">
+          <div class="fear-label">Brand Indifference</div>
+          <blockquote>"I sent a bug report. Nobody replied."</blockquote>
+        </div>
+        <div class="fear-card">
+          <div class="fear-label">Urban Constraint Guilt</div>
+          <blockquote>"Is it okay that my flat doesn't have a garden?"</blockquote>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- 2c -->
+    <div class="voice-subsection">
+      <div class="subsection-label">2c</div>
+      <h3>The Humour That Lands</h3>
+      <p style="font-size:13px;color:var(--ink-3);margin-bottom:4px;">The manifesto calls for "quippy and fun." Here's what quippy looks like for this specific audience.</p>
+      <div class="humour-grid">
+        <div class="humour-card">
+          <span class="humour-tone">Relief</span>
+          <blockquote>"He responds when we talk through the camera. That's enough."</blockquote>
+          <div class="humour-attr">— Ritik</div>
+        </div>
+        <div class="humour-card">
+          <span class="humour-tone">Self-deprecation</span>
+          <blockquote>"We do small mistakes and keep learning and improving."</blockquote>
+          <div class="humour-attr">— Anushi</div>
+        </div>
+        <div class="humour-card">
+          <span class="humour-tone">Deadpan</span>
+          <blockquote>"She is sitting on the bed doing nothing. When we come back, she will not be happy."</blockquote>
+          <div class="humour-attr">— Anushi</div>
+        </div>
+        <div class="humour-card">
+          <span class="humour-tone">Absurdist Commitment</span>
+          <blockquote>"He is the centre of our life. I got his name tattooed on me."</blockquote>
+          <div class="humour-attr">— Unit I</div>
+        </div>
+        <div class="humour-card">
+          <span class="humour-tone">Dark Relatability</span>
+          <blockquote>"First night I just kept waking up to see if he is still alive."</blockquote>
+          <div class="humour-attr">— Unit N</div>
+        </div>
+        <div class="humour-card">
+          <span class="humour-tone">Persian Parent Energy</span>
+          <blockquote>"Sophie is suffering from dehydration. Just now we came from the clinic."</blockquote>
+          <div class="humour-attr">— Nazia</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- 2d -->
+    <div class="voice-subsection">
+      <div class="subsection-label">2d</div>
+      <h3>The Inside Vocabulary</h3>
+      <p style="font-size:13px;color:var(--ink-3);margin-bottom:16px;">Words and phrases that came up organically across multiple transcripts. These belong in the brand's content vocabulary for BLR.</p>
+      <div class="vocab-grid">
+        <div class="vocab-card">
+          <span class="vocab-term">"Camera"</span>
+          <span class="vocab-def">Not "pet cam" — how they refer to home monitoring</span>
+        </div>
+        <div class="vocab-card">
+          <span class="vocab-term">"10pm"</span>
+          <span class="vocab-def">"Mall road" vs "10pm" — urgency language for late-night emergencies</span>
+        </div>
+        <div class="vocab-card">
+          <span class="vocab-term">"WhatsApp group"</span>
+          <span class="vocab-def">How community is described — not "forum" or "community"</span>
+        </div>
+        <div class="vocab-card">
+          <span class="vocab-term">"ChatGPT told me"</span>
+          <span class="vocab-def">The new 'I Googled it' — owns the panic search</span>
+        </div>
+        <div class="vocab-card">
+          <span class="vocab-term">"They know what we want"</span>
+          <span class="vocab-def">The standard for brand trust — what earns loyalty</span>
+        </div>
+        <div class="vocab-card">
+          <span class="vocab-term">"Soul partner"</span>
+          <span class="vocab-def">The vocabulary of deep bond — not "pet" or "companion" (Unit I)</span>
+        </div>
+        <div class="vocab-card">
+          <span class="vocab-term">"Indie"</span>
+          <span class="vocab-def">Not "stray" or "mixed breed" — the preferred term for rescued dogs</span>
+        </div>
+        <div class="vocab-card">
+          <span class="vocab-term">"He responded"</span>
+          <span class="vocab-def">"He responded when we talked through the camera" — the specific consolation of remote presence</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TAB 3: SIDEKICK ABSENT ======================== -->
+<div class="tab-content" id="tab-absent">
+  <div class="section-wrap">
+    <div class="section-header">
+      <h2>Where the Sidekick Was Absent</h2>
+      <p class="section-subtitle">8 moments where nobody showed up. Each one is a brief.</p>
+    </div>
+    <div class="absent-grid">
+
+      <div class="absent-card">
+        <div class="absent-card-header">
+          <div class="absent-who">100% of respondents · Universal</div>
+          <div class="absent-moment-title">Arrival Night</div>
+          <blockquote class="absent-quote">"First night I just kept waking up to see if he is still alive." — Unit N</blockquote>
+        </div>
+        <div class="absent-card-body">
+          <p class="absent-should-have"><strong>What the sidekick should have done:</strong> A "10 things to expect on night one" push notification the evening of the first purchase. Not a product push. A hand-hold.</p>
+          <div class="brief-for-pills">
+            <span class="brief-pill">CRM</span>
+            <span class="brief-pill">Content</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absent-card">
+        <div class="absent-card-header">
+          <div class="absent-who">10 of 17 immigrants · 6 described as stressful</div>
+          <div class="absent-moment-title">The First Vet Search</div>
+          <blockquote class="absent-quote">"Here I had to find everything myself. No one to ask." — Smrithi (D)</blockquote>
+        </div>
+        <div class="absent-card-body">
+          <p class="absent-should-have"><strong>What the sidekick should have done:</strong> In-app vet finder by neighbourhood. With real reviews from pet parents like them. Before they turn to Google.</p>
+          <div class="brief-for-pills">
+            <span class="brief-pill">Product</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absent-card">
+        <div class="absent-card-header">
+          <div class="absent-who">8 have cameras · 6 described guilt not relief</div>
+          <div class="absent-moment-title">The Camera Moment</div>
+          <blockquote class="absent-quote">"We are always on camera. She is sitting on the bed doing nothing. When we come back, she will not be happy." — Anushi (G)</blockquote>
+        </div>
+        <div class="absent-card-body">
+          <p class="absent-should-have"><strong>What the sidekick should have done:</strong> Content that names this feeling. "You're watching the camera and feeling worse. That's normal. Here's what actually helps." Not a product push. Recognition.</p>
+          <div class="brief-for-pills">
+            <span class="brief-pill">Brand</span>
+            <span class="brief-pill">Content</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absent-card">
+        <div class="absent-card-header">
+          <div class="absent-who">Lakshmi (direct) · 3 others named the fear</div>
+          <div class="absent-moment-title">The 10pm Pharmacy Moment</div>
+          <blockquote class="absent-quote">"Elastic Run said they can't find the location. At 10pm. For medicine." — Lakshmi</blockquote>
+        </div>
+        <div class="absent-card-body">
+          <p class="absent-should-have"><strong>What the sidekick should have done:</strong> Show up. Deliver the medicine. 30-minute pharmacy in this city's pet-parent hubs is not a nice-to-have. It is the definition of sidekick.</p>
+          <div class="brief-for-pills">
+            <span class="brief-pill">Operations</span>
+            <span class="brief-pill">Product</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absent-card">
+        <div class="absent-card-header">
+          <div class="absent-who">12 respondents described this · All turned to ChatGPT first</div>
+          <div class="absent-moment-title">The First Illness Panic</div>
+          <blockquote class="absent-quote">"I don't think there is any redo. Because what if he catches a virus?" — Smrithi (D)</blockquote>
+        </div>
+        <div class="absent-card-body">
+          <p class="absent-should-have"><strong>What the sidekick should have done:</strong> Own the panic search. "My cat isn't eating" should return a Supertails article, not a random forum. Then a vet booking CTA.</p>
+          <div class="brief-for-pills">
+            <span class="brief-pill">Digital</span>
+            <span class="brief-pill">Content</span>
+            <span class="brief-pill">Product</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absent-card">
+        <div class="absent-card-header">
+          <div class="absent-who">Ritik (direct) · 2 others heard similar</div>
+          <div class="absent-moment-title">The Grooming Rejection</div>
+          <blockquote class="absent-quote">"They said they can't handle Rio. I felt like they were calling me a bad parent." — Ritik (A)</blockquote>
+        </div>
+        <div class="absent-card-body">
+          <p class="absent-should-have"><strong>What the sidekick should have done:</strong> Never say can't. Offer an alternative. "We'd love to work with Rio — can we start with a 15-minute meet and greet?" Train every groomer on this script.</p>
+          <div class="brief-for-pills">
+            <span class="brief-pill">CX</span>
+            <span class="brief-pill">Ops</span>
+            <span class="brief-pill">Brand</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absent-card">
+        <div class="absent-card-header">
+          <div class="absent-who">Anushi (direct) · Ritik (preference for English staff)</div>
+          <div class="absent-moment-title">The Language Barrier</div>
+          <blockquote class="absent-quote">"The grooming staff only spoke Kannada. I couldn't understand them." — Anushi (G)</blockquote>
+        </div>
+        <div class="absent-card-body">
+          <p class="absent-should-have"><strong>What the sidekick should have done:</strong> Bilingual minimum at every customer-facing touchpoint. This is not optional in a city where 10 of 17 pet parents are from elsewhere.</p>
+          <div class="brief-for-pills">
+            <span class="brief-pill">CX</span>
+            <span class="brief-pill">HR</span>
+            <span class="brief-pill">Ops</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absent-card">
+        <div class="absent-card-header">
+          <div class="absent-who">Ritik (bug report) · Lakshmi (written complaint)</div>
+          <div class="absent-moment-title">The Feedback Void</div>
+          <blockquote class="absent-quote">"I sent detailed feedback. I didn't receive anything back. That is very bad for a tech company." — Ritik (A)</blockquote>
+        </div>
+        <div class="absent-card-body">
+          <p class="absent-should-have"><strong>What the sidekick should have done:</strong> The sidekick listens. Auto-acknowledge within 24 hours. Monthly fix log: "here's what changed because you told us." The feedback loop is a brand moment.</p>
+          <div class="brief-for-pills">
+            <span class="brief-pill">Product</span>
+            <span class="brief-pill">CX</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TAB 4: CONVICTION GAP ======================== -->
+<div class="tab-content" id="tab-conviction">
+  <div class="section-wrap">
+    <div class="section-header">
+      <h2>The Conviction Gap</h2>
+      <p class="section-subtitle">The persona the manifesto doesn't have. The one that's most present in BLR.</p>
+    </div>
+
+    <div class="conviction-intro">
+      <strong>5 of 17 respondents are primarily driven by conviction, not comfort.</strong> They didn't get a pet on impulse. They adopt Indies from the street. They feed strays. They choose brands that align with their ethics.<br><br>
+      They are not the premium Ashok (not control-driven), not the emotional Akanksha (not feel-good driven), not the lonely Shalaka (not warmth-seeking), not the clueless Aarav (not learning). <strong>They know what they believe and they're looking for a brand that believes it too.</strong>
+    </div>
+
+    <div class="subsection-label">The Five</div>
+    <div class="conviction-parents-grid" style="margin-top:16px;">
+      <div class="conviction-parent-card">
+        <div class="conv-name">Smrithi (D)</div>
+        <div class="conv-quote">"I don't think there is any redo."</div>
+        <div class="conv-descriptor">First-time, conviction-driven</div>
+      </div>
+      <div class="conviction-parent-card">
+        <div class="conv-name">Lakshmi</div>
+        <div class="conv-quote">"We feed about 40 street animals. It is part of our life."</div>
+        <div class="conv-descriptor">Multi-dog, welfare-mission</div>
+      </div>
+      <div class="conviction-parent-card">
+        <div class="conv-name">Unit F</div>
+        <div class="conv-quote">Multiple pets + street feeding + welfare-first product decisions</div>
+        <div class="conv-descriptor">Mission-integrated lifestyle</div>
+      </div>
+      <div class="conviction-parent-card">
+        <div class="conv-name">Vihaar (R)</div>
+        <div class="conv-quote">"I research everything. I want to know what I am buying and why."</div>
+        <div class="conv-descriptor">High-research, high-conviction</div>
+      </div>
+      <div class="conviction-parent-card">
+        <div class="conv-name">Unit N</div>
+        <div class="conv-quote">"I adopted her from the street. I don't believe in buying animals."</div>
+        <div class="conv-descriptor">Adoption-only, values-led</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="gap-analysis">
+      <h3>The Gap</h3>
+      <p>The manifesto's brand purpose: "Because pets and pet parents deserve better." This is the strongest platform for conviction parents. But the brand primarily delivers it through comfort and service.<br><br>
+      The conviction parent doesn't want comfort. They want a brand that fights alongside them. <strong>The sidekick for this persona isn't helping — it's standing up.</strong></p>
+    </div>
+
+    <div class="subsection-label">What This Means for the Brand</div>
+    <div class="implications-list" style="margin-top:16px;">
+      <div class="implication-item">
+        <span class="implication-num">1</span>
+        <p class="implication-text"><strong>Indie pet content is not a niche — it's a values signal.</strong> Treat it as a brand pillar, not a segment. Every time Supertails features an Indie, it recruits the conviction cohort.</p>
+      </div>
+      <div class="implication-item">
+        <span class="implication-num">2</span>
+        <p class="implication-text"><strong>Welfare messaging needs to be specific, not sentimental.</strong> "We donate X% to rescue" beats "we love all animals." The conviction parent has a finely tuned BS detector for performative purpose.</p>
+      </div>
+      <div class="implication-item">
+        <span class="implication-num">3</span>
+        <p class="implication-text"><strong>The conviction parent is the highest advocacy multiplier in the room.</strong> Win them and they recruit. Lose them and they are vocal about why. This cohort does not stay quiet.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TAB 5: CREATIVE BRIEFS ======================== -->
+<div class="tab-content" id="tab-briefs">
+  <div class="section-wrap">
+    <div class="section-header">
+      <h2>Creative Briefs</h2>
+      <p class="section-subtitle">5 briefs that come directly from the transcripts. Each one is ready to brief an agency or a content team.</p>
+    </div>
+
+    <div class="briefs-grid">
+
+      <!-- Brief 1 -->
+      <div class="brief-card">
+        <div class="brief-card-header">
+          <div>
+            <div class="brief-num">Brief 01</div>
+            <div class="brief-title">"You're watching the camera and feeling worse."</div>
+          </div>
+          <span class="brief-persona-tag">Aarav + Shalaka</span>
+        </div>
+        <div class="brief-card-body">
+          <div class="brief-field">
+            <span class="brief-field-label">Insight</span>
+            <span class="brief-field-value">Cameras amplify guilt, not security. Parents are more anxious after watching their pet sit alone.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Proposition</span>
+            <span class="brief-field-value proposition">Name the feeling before selling the solution.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Format</span>
+            <span class="brief-field-value">Instagram carousel / Reel. No product. Just recognition.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Tone</span>
+            <span class="brief-field-value">Warm, slightly humorous, deeply human.</span>
+          </div>
+          <div class="brief-source-quote">
+            <blockquote>"We are always on camera. She is sitting on the bed doing nothing. When we come back, she will not be happy."</blockquote>
+            <div class="brief-source-attr">— Anushi (G)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brief 2 -->
+      <div class="brief-card">
+        <div class="brief-card-header">
+          <div>
+            <div class="brief-num">Brief 02</div>
+            <div class="brief-title">"New to Bangalore. One dog. No idea who to call."</div>
+          </div>
+          <span class="brief-persona-tag">Aarav (immigrant variant)</span>
+        </div>
+        <div class="brief-card-body">
+          <div class="brief-field">
+            <span class="brief-field-label">Insight</span>
+            <span class="brief-field-value">10 of 17 are immigrants. The arrival moment is the highest-anxiety, lowest-brand-presence moment.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Proposition</span>
+            <span class="brief-field-value proposition">"Supertails knows Bangalore pet parenting so you don't have to figure it out alone."</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Format</span>
+            <span class="brief-field-value">Welcome kit (email/push) triggered by first order from a new-to-BLR user. City guide: trusted vets by area, breed groups, pet-friendly parks.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Tone</span>
+            <span class="brief-field-value">Warm, local, practical.</span>
+          </div>
+          <div class="brief-source-quote">
+            <blockquote>"When I came to Bangalore with two dogs, I had no idea where anything was."</blockquote>
+            <div class="brief-source-attr">— Lakshmi</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brief 3 -->
+      <div class="brief-card">
+        <div class="brief-card-header">
+          <div>
+            <div class="brief-num">Brief 03</div>
+            <div class="brief-title">"He is my soul partner. I got his name tattooed."</div>
+          </div>
+          <span class="brief-persona-tag">Shalaka (identity-integrated)</span>
+        </div>
+        <div class="brief-card-body">
+          <div class="brief-field">
+            <span class="brief-field-label">Insight</span>
+            <span class="brief-field-value">For a significant cohort, the pet has restructured their identity. The relationship is not casual.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Proposition</span>
+            <span class="brief-field-value proposition">Content that honours the depth of the bond — not the products used in service of it.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Format</span>
+            <span class="brief-field-value">Long-form portrait series — real pet parents, real bonds, no product placement. Brand as witness, not supplier.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Tone</span>
+            <span class="brief-field-value">Quiet, intimate, Shantell Sans energy.</span>
+          </div>
+          <div class="brief-source-quote">
+            <blockquote>"He is my soul partner. I got his name tattooed on me."</blockquote>
+            <div class="brief-source-attr">— Unit I</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brief 4 -->
+      <div class="brief-card">
+        <div class="brief-card-header">
+          <div>
+            <div class="brief-num">Brief 04</div>
+            <div class="brief-title">"The first vet visit defines everything. Forever."</div>
+          </div>
+          <span class="brief-persona-tag">All personas</span>
+        </div>
+        <div class="brief-card-body">
+          <div class="brief-field">
+            <span class="brief-field-label">Insight</span>
+            <span class="brief-field-value">The first clinic experience creates vet loyalty that is non-transferable.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Proposition</span>
+            <span class="brief-field-value proposition">Own the first visit. Design it. Name it. Make it a brand moment.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Format</span>
+            <span class="brief-field-value">Campaign for first clinic visits. "First visit" badge in the app. Post-visit message: "Thank you for trusting us with [pet name]'s first visit."</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Tone</span>
+            <span class="brief-field-value">Capable, warm, ceremonial without being overdone.</span>
+          </div>
+          <div class="brief-source-quote">
+            <blockquote>"Dr. Prasad came to the house. After that I trust only him."</blockquote>
+            <div class="brief-source-attr">— Ritik (A)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brief 5 -->
+      <div class="brief-card">
+        <div class="brief-card-header">
+          <div>
+            <div class="brief-num">Brief 05</div>
+            <div class="brief-title">"Indie parents feed 40 strays. That's not a customer profile. That's a calling."</div>
+          </div>
+          <span class="brief-persona-tag">Akanksha (welfare-mission) + Conviction parents</span>
+        </div>
+        <div class="brief-card-body">
+          <div class="brief-field">
+            <span class="brief-field-label">Insight</span>
+            <span class="brief-field-value">Welfare-first parents don't want product recommendations. They want a brand that stands for something.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Proposition</span>
+            <span class="brief-field-value proposition">"Every Supertails order funds [X meals / X vet visits / X rescues]." Specific, verifiable, not sentimental.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Format</span>
+            <span class="brief-field-value">Transparency report (annual). Monthly counter in the app. Rescue partner stories.</span>
+          </div>
+          <div class="brief-field">
+            <span class="brief-field-label">Tone</span>
+            <span class="brief-field-value">Direct, honest, no fluff.</span>
+          </div>
+          <div class="brief-source-quote">
+            <blockquote>"We feed about 40 street animals. It is not separate from our life."</blockquote>
+            <div class="brief-source-attr">— Unit F</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ======================== FOOTER ======================== -->
+<footer class="site-footer">
+  Supertails · Brand Team Internal · BLR Ethnographic Research · April 2026 · Not for external distribution
+</footer>
+
+<!-- ======================== SCROLL TO TOP ======================== -->
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+<!-- ======================== JS ======================== -->
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById('tab-' + target).classList.add('active');
+
+      // Scroll to top of content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Scroll to top button
+  const scrollBtn = document.getElementById('scrollTop');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
