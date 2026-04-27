@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLR Ethnographic Debrief V2 — Function Cuts | Supertails 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Shantell+Sans:wght@600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS — Supertails 2026
+============================================================ */
+:root {
+  --st-green:       #2ECC71;
+  --st-green-deep:  #1A7A44;
+  --st-green-soft:  #E8F8EF;
+  --st-mint:        #BFFFD8;
+  --st-black:       #0F0F0F;
+  --st-white:       #FAFAF8;
+  --st-cream:       #F5F3EE;
+  --ink-1:          #0F0F0F;
+  --ink-2:          #2C2C2C;
+  --ink-3:          #5E5E5E;
+  --ink-4:          #9A9A9A;
+  --line:           #E2E2DC;
+
+  --font-display: 'Poppins', sans-serif;
+  --font-body:    'Nunito Sans', sans-serif;
+  --font-accent:  'Shantell Sans', cursive;
+
+  --gap-1:4px; --gap-2:8px; --gap-3:12px; --gap-4:16px;
+  --gap-5:24px; --gap-6:32px; --gap-7:48px; --gap-8:64px;
+  --r-sm:6px; --r-md:12px; --r-lg:20px; --r-pill:999px;
+  --max:1200px;
+
+  /* function accent colours */
+  --fn-marketplace:  #2ECC71;
+  --fn-healthcare:   #3B82F6;
+  --fn-retention:    #F97316;
+  --fn-product:      #8B5CF6;
+  --fn-merch:        #EC4899;
+  --fn-digital:      #06B6D4;
+  --fn-brand:        #EAB308;
+  --fn-cx:           #EF4444;
+  --fn-supply:       #64748B;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--st-white);
+  color: var(--ink-1);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.site-header {
+  background: var(--st-black);
+  padding: var(--gap-6) var(--gap-6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--gap-5);
+  flex-wrap: wrap;
+}
+.site-header .wordmark {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--st-green);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.site-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(22px,3vw,36px);
+  font-weight: 900;
+  color: var(--st-white);
+  line-height: 1.1;
+  margin-top: var(--gap-2);
+}
+.site-header .subtitle {
+  color: var(--ink-4);
+  font-size: 13px;
+  margin-top: var(--gap-2);
+}
+.site-header .badge {
+  background: var(--st-green);
+  color: var(--st-black);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+/* ============================================================
+   FUNCTION TAB BAR
+============================================================ */
+.fn-bar-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--st-black);
+  border-bottom: 1px solid #1f1f1f;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.fn-bar-wrap::-webkit-scrollbar { display: none; }
+.fn-bar {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+}
+.fn-tab {
+  flex: 0 0 auto;
+  padding: 14px 22px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  user-select: none;
+}
+.fn-tab:hover { color: var(--st-white); }
+.fn-tab.active { color: var(--st-white); }
+.fn-tab[data-fn="marketplace"].active  { border-color: var(--fn-marketplace); color: var(--fn-marketplace); }
+.fn-tab[data-fn="healthcare"].active   { border-color: var(--fn-healthcare);  color: var(--fn-healthcare);  }
+.fn-tab[data-fn="retention"].active    { border-color: var(--fn-retention);   color: var(--fn-retention);   }
+.fn-tab[data-fn="product"].active      { border-color: var(--fn-product);     color: var(--fn-product);     }
+.fn-tab[data-fn="merch"].active        { border-color: var(--fn-merch);       color: var(--fn-merch);       }
+.fn-tab[data-fn="digital"].active      { border-color: var(--fn-digital);     color: var(--fn-digital);     }
+.fn-tab[data-fn="brand"].active        { border-color: var(--fn-brand);       color: var(--fn-brand);       }
+.fn-tab[data-fn="cx"].active           { border-color: var(--fn-cx);          color: var(--fn-cx);          }
+.fn-tab[data-fn="supply"].active       { border-color: var(--fn-supply);      color: var(--fn-supply);      }
+
+/* ============================================================
+   FUNCTION PANELS
+============================================================ */
+.fn-panel { display: none; }
+.fn-panel.active { display: block; }
+
+/* ============================================================
+   HERO BANNER
+============================================================ */
+.fn-hero {
+  padding: var(--gap-7) var(--gap-6);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--gap-6);
+  align-items: center;
+}
+@media (max-width: 700px) { .fn-hero { grid-template-columns: 1fr; } }
+.fn-hero .fn-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: var(--gap-3);
+}
+.fn-hero h2 {
+  font-family: var(--font-display);
+  font-size: clamp(22px,3vw,38px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--ink-1);
+  margin-bottom: var(--gap-4);
+}
+.fn-hero .hero-body {
+  font-size: 16px;
+  color: var(--ink-3);
+  max-width: 580px;
+  line-height: 1.7;
+}
+.fn-stat-block {
+  background: var(--st-black);
+  color: var(--st-white);
+  border-radius: var(--r-lg);
+  padding: var(--gap-6);
+  text-align: center;
+  min-width: 180px;
+}
+.fn-stat-block .stat-num {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+}
+.fn-stat-block .stat-label {
+  font-size: 12px;
+  color: var(--ink-4);
+  margin-top: var(--gap-2);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   SECTION WRAPPERS
+============================================================ */
+.fn-section {
+  padding: var(--gap-7) var(--gap-6);
+  border-bottom: 1px solid var(--line);
+  max-width: var(--max);
+  margin: 0 auto;
+  width: 100%;
+}
+.fn-section-full {
+  padding: var(--gap-7) var(--gap-6);
+  border-bottom: 1px solid var(--line);
+}
+.fn-hero { max-width: var(--max); margin: 0 auto; }
+
+.section-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: var(--gap-5);
+  display: flex;
+  align-items: center;
+  gap: var(--gap-3);
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ============================================================
+   THEME CARDS
+============================================================ */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: var(--gap-4);
+}
+.theme-card {
+  background: var(--st-cream);
+  border-radius: var(--r-md);
+  padding: var(--gap-5);
+  cursor: pointer;
+  transition: transform 0.15s;
+  border: 1px solid var(--line);
+}
+.theme-card:hover { transform: translateY(-2px); }
+.theme-card .tc-tag {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: var(--gap-3);
+}
+.theme-card h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: var(--gap-3);
+  color: var(--ink-1);
+}
+.theme-card p {
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.6;
+}
+.theme-card .tc-count {
+  display: inline-block;
+  margin-top: var(--gap-3);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: var(--st-black);
+  color: var(--st-green);
+}
+.theme-card .tc-evidence {
+  display: none;
+  margin-top: var(--gap-4);
+  padding-top: var(--gap-4);
+  border-top: 1px solid var(--line);
+}
+.theme-card.open .tc-evidence { display: block; }
+.tc-quote {
+  background: white;
+  border-radius: var(--r-sm);
+  padding: var(--gap-4);
+  margin-bottom: var(--gap-3);
+  border-left: 3px solid var(--st-green);
+}
+.tc-quote p { font-size: 13px; color: var(--ink-2); font-style: italic; }
+.tc-quote span { font-size: 11px; color: var(--ink-4); margin-top: 4px; display: block; }
+
+/* ============================================================
+   VERBATIM BRICKS
+============================================================ */
+.brick-wall {
+  columns: 3;
+  column-gap: var(--gap-4);
+}
+@media (max-width:900px) { .brick-wall { columns: 2; } }
+@media (max-width:560px) { .brick-wall { columns: 1; } }
+.brick {
+  break-inside: avoid;
+  margin-bottom: var(--gap-4);
+  background: var(--st-black);
+  color: var(--st-white);
+  border-radius: var(--r-md);
+  padding: var(--gap-5);
+}
+.brick.alt { background: var(--st-green-soft); }
+.brick.alt .bq { color: var(--ink-2); }
+.brick.alt .bs { color: var(--ink-4); }
+.brick .btag {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--st-green);
+  margin-bottom: var(--gap-3);
+}
+.brick.alt .btag { color: var(--st-green-deep); }
+.brick .bq {
+  font-family: var(--font-accent);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--st-white);
+}
+.brick.lg .bq { font-size: 17px; }
+.brick .bs {
+  font-size: 11px;
+  color: var(--ink-4);
+  margin-top: var(--gap-3);
+}
+
+/* ============================================================
+   PROVOCATION TILES
+============================================================ */
+.prov-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+  gap: var(--gap-4);
+}
+.prov-tile {
+  background: var(--st-black);
+  color: var(--st-white);
+  border-radius: var(--r-md);
+  padding: var(--gap-6);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.prov-tile:hover { transform: translateY(-2px); }
+.prov-num {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--st-green);
+  margin-bottom: var(--gap-3);
+}
+.prov-tile h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: var(--gap-4);
+}
+.prov-tile p { font-size: 13px; color: var(--ink-4); line-height: 1.7; }
+.prov-tile .prov-more {
+  display: none;
+  margin-top: var(--gap-5);
+  padding-top: var(--gap-5);
+  border-top: 1px solid #2a2a2a;
+}
+.prov-tile.open .prov-more { display: block; }
+.prov-evidence {
+  background: #1a1a1a;
+  border-radius: var(--r-sm);
+  padding: var(--gap-4);
+  margin-bottom: var(--gap-3);
+  border-left: 3px solid var(--st-green);
+}
+.prov-evidence p { font-size: 13px; color: #ccc; font-style: italic; }
+.prov-evidence span { font-size: 11px; color: #666; margin-top: 4px; display: block; }
+
+/* ============================================================
+   ACTION CARDS
+============================================================ */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: var(--gap-4);
+}
+.action-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--gap-5);
+  display: flex;
+  gap: var(--gap-4);
+}
+.action-card .ac-icon {
+  font-size: 28px;
+  flex: 0 0 auto;
+  line-height: 1;
+  margin-top: 2px;
+}
+.action-card h4 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-1);
+  margin-bottom: var(--gap-2);
+}
+.action-card p { font-size: 13px; color: var(--ink-3); line-height: 1.6; }
+.action-card .ac-tactic {
+  display: inline-block;
+  margin-top: var(--gap-3);
+  font-size: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--st-green-deep);
+  background: var(--st-green-soft);
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer {
+  background: var(--st-black);
+  color: var(--ink-4);
+  padding: var(--gap-6);
+  text-align: center;
+  font-size: 12px;
+}
+footer strong { color: var(--st-green); }
+
+/* ============================================================
+   UTILITY
+============================================================ */
+.accent-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.fn-hero-inner { max-width: var(--max); margin: 0 auto; padding: var(--gap-7) var(--gap-6); display: grid; grid-template-columns: 1fr auto; gap: var(--gap-6); align-items: center; }
+@media (max-width:700px) { .fn-hero-inner { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" style="display:block; padding: var(--gap-6);">
+  <div style="max-width:var(--max); margin:0 auto;">
+    <div class="wordmark">Supertails · Internal Research</div>
+    <h1>Bangalore Ethnographic Debrief</h1>
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-top:8px;">
+      <div class="subtitle">17 in-home interviews · Jan–Mar 2026 · <strong style="color:var(--st-green)">Function Cuts — V2</strong></div>
+      <div class="badge">9 Functions · Mapped to Consumer Reality</div>
+    </div>
+  </div>
+</header>
+
+<!-- FUNCTION TAB BAR -->
+<div class="fn-bar-wrap">
+  <div class="fn-bar" id="fnBar">
+    <div class="fn-tab active" data-fn="marketplace">🛍 Marketplace</div>
+    <div class="fn-tab" data-fn="healthcare">🩺 Healthcare</div>
+    <div class="fn-tab" data-fn="retention">📊 Retention &amp; Data</div>
+    <div class="fn-tab" data-fn="product">📱 Product · App</div>
+    <div class="fn-tab" data-fn="merch">🎁 Merch</div>
+    <div class="fn-tab" data-fn="digital">📣 Digital · Paid</div>
+    <div class="fn-tab" data-fn="brand">✦ Brand</div>
+    <div class="fn-tab" data-fn="cx">💬 CX &amp; Support</div>
+    <div class="fn-tab" data-fn="supply">📦 Inventory &amp; Supply</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PANELS
+============================================================ -->
+<div id="panels">
+
+<!-- ─────────────────────────────────────────
+     1. MARKETPLACE
+───────────────────────────────────────── -->
+<div class="fn-panel active" data-fn="marketplace">
+  <div class="fn-hero-inner">
+    <div>
+      <div class="fn-label" style="color:var(--fn-marketplace)"><span class="accent-dot" style="background:var(--fn-marketplace)"></span>Marketplace · Platform, Delivery &amp; Pharmacy</div>
+      <h2>Your cheapest competitor isn't HUFT.<br>It's Zepto.</h2>
+      <p class="hero-body">Pet parents don't switch platforms on dissatisfaction. They switch on price at the exact moment of reorder. Supertails wins acquisition. Zepto is eating the repeat. The only defensible ground is pharmacy — and it's being underplayed.</p>
+    </div>
+    <div class="fn-stat-block">
+      <div class="stat-num" style="color:var(--fn-marketplace)">6/17</div>
+      <div class="stat-label">respondents actively price-compare Supertails vs Zepto/Blinkit<br>before reordering food</div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What the transcripts say · 4 themes</div>
+    <div class="theme-grid" id="tc-marketplace"></div>
+  </div>
+
+  <div class="fn-section-full" style="background:var(--st-cream);">
+    <div style="max-width:var(--max);margin:0 auto;">
+      <div class="section-label">Verbatims · Direct from respondents</div>
+      <div class="brick-wall" id="bw-marketplace"></div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">Provocations · For your next planning meeting</div>
+    <div class="prov-grid" id="pv-marketplace"></div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What to do about it</div>
+    <div class="action-grid" id="ac-marketplace"></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────
+     2. HEALTHCARE
+───────────────────────────────────────── -->
+<div class="fn-panel" data-fn="healthcare">
+  <div class="fn-hero-inner">
+    <div>
+      <div class="fn-label" style="color:var(--fn-healthcare)"><span class="accent-dot" style="background:var(--fn-healthcare)"></span>Healthcare · Clinics &amp; At-Home Vet</div>
+      <h2>The first vet visit defines<br>everything. Forever.</h2>
+      <p class="hero-body">Vet loyalty is non-transferable. Pet parents who find a vet they trust will not switch — not for price, not for convenience, not for a shiny app. The first touchpoint is the highest-stakes moment in the entire customer lifetime. And cat parents are a completely different patient profile.</p>
+    </div>
+    <div class="fn-stat-block">
+      <div class="stat-num" style="color:var(--fn-healthcare)">11/17</div>
+      <div class="stat-label">respondents named a specific vet they trust and said they'd resist switching</div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What the transcripts say · 4 themes</div>
+    <div class="theme-grid" id="tc-healthcare"></div>
+  </div>
+
+  <div class="fn-section-full" style="background:var(--st-cream);">
+    <div style="max-width:var(--max);margin:0 auto;">
+      <div class="section-label">Verbatims · Direct from respondents</div>
+      <div class="brick-wall" id="bw-healthcare"></div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">Provocations</div>
+    <div class="prov-grid" id="pv-healthcare"></div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What to do about it</div>
+    <div class="action-grid" id="ac-healthcare"></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────
+     3. RETENTION & DATA
+───────────────────────────────────────── -->
+<div class="fn-panel" data-fn="retention">
+  <div class="fn-hero-inner">
+    <div>
+      <div class="fn-label" style="color:var(--fn-retention)"><span class="accent-dot" style="background:var(--fn-retention)"></span>Retention &amp; Data</div>
+      <h2>They're not lapsed.<br>They're cross-platform.</h2>
+      <p class="hero-body">The CRM view says "churned." The reality is they bought food on Zepto last Tuesday and booked a vet via your app this morning. Lifecycle moments are predictable and mostly unmissable — but you're not showing up at any of them proactively. ChatGPT is the first oracle. You should be the second.</p>
+    </div>
+    <div class="fn-stat-block">
+      <div class="stat-num" style="color:var(--fn-retention)">8/17</div>
+      <div class="stat-label">respondents used ChatGPT or Google before calling a vet or opening the app</div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What the transcripts say · 4 themes</div>
+    <div class="theme-grid" id="tc-retention"></div>
+  </div>
+
+  <div class="fn-section-full" style="background:var(--st-cream);">
+    <div style="max-width:var(--max);margin:0 auto;">
+      <div class="section-label">Verbatims</div>
+      <div class="brick-wall" id="bw-retention"></div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">Provocations</div>
+    <div class="prov-grid" id="pv-retention"></div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What to do about it</div>
+    <div class="action-grid" id="ac-retention"></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────
+     4. PRODUCT · APP
+───────────────────────────────────────── -->
+<div class="fn-panel" data-fn="product">
+  <div class="fn-hero-inner">
+    <div>
+      <div class="fn-label" style="color:var(--fn-product)"><span class="accent-dot" style="background:var(--fn-product)"></span>Product · App</div>
+      <h2>The app is losing customers<br>one lag-second at a time.</h2>
+      <p class="hero-body">A software engineer filed a proper bug report — screenshots, reproduction steps, expected vs actual behaviour. He received zero response. He's now a Zepto food buyer. The app doesn't know what pet you have. Every session starts from scratch. The bar is Zepto: zero friction, instant load.</p>
+    </div>
+    <div class="fn-stat-block">
+      <div class="stat-num" style="color:var(--fn-product)">5–10s</div>
+      <div class="stat-label">reported screen load time<br>on Supertails app · cited by<br>multiple respondents</div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What the transcripts say · 4 themes</div>
+    <div class="theme-grid" id="tc-product"></div>
+  </div>
+
+  <div class="fn-section-full" style="background:var(--st-cream);">
+    <div style="max-width:var(--max);margin:0 auto;">
+      <div class="section-label">Verbatims</div>
+      <div class="brick-wall" id="bw-product"></div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">Provocations</div>
+    <div class="prov-grid" id="pv-product"></div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What to do about it</div>
+    <div class="action-grid" id="ac-product"></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────
+     5. MERCH
+───────────────────────────────────────── -->
+<div class="fn-panel" data-fn="merch">
+  <div class="fn-hero-inner">
+    <div>
+      <div class="fn-label" style="color:var(--fn-merch)"><span class="accent-dot" style="background:var(--fn-merch)"></span>Merch on Platform</div>
+      <h2>Nobody browses for accessories.<br>They impulse-buy them.</h2>
+      <p class="hero-body">Accessories are never the primary search. They surface at the moment of first ownership (the "buy everything" phase), at vet visits (post-worry relief purchases), and at birthdays. The category is driven by triggers — not by catalogue browsing. Small gifts in every order are remembered years later.</p>
+    </div>
+    <div class="fn-stat-block">
+      <div class="stat-num" style="color:var(--fn-merch)">Day 0</div>
+      <div class="stat-label">highest merch spend window — the arrival week. Never re-engaged systematically.</div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What the transcripts say · 3 themes</div>
+    <div class="theme-grid" id="tc-merch"></div>
+  </div>
+
+  <div class="fn-section-full" style="background:var(--st-cream);">
+    <div style="max-width:var(--max);margin:0 auto;">
+      <div class="section-label">Verbatims</div>
+      <div class="brick-wall" id="bw-merch"></div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">Provocations</div>
+    <div class="prov-grid" id="pv-merch"></div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What to do about it</div>
+    <div class="action-grid" id="ac-merch"></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────
+     6. DIGITAL · PAID
+───────────────────────────────────────── -->
+<div class="fn-panel" data-fn="digital">
+  <div class="fn-hero-inner">
+    <div>
+      <div class="fn-label" style="color:var(--fn-digital)"><span class="accent-dot" style="background:var(--fn-digital)"></span>Digital · Paid Team</div>
+      <h2>They find you when they're scared.<br>Not when they're browsing.</h2>
+      <p class="hero-body">Supertails is discovered via Google search for medicine and symptoms — not brand campaigns. The intent signal is fear, not desire. Reorders go to whoever sends the right push notification at the right moment. Social content influences breed decisions 6–12 months upstream of any purchase. You're not in that conversation yet.</p>
+    </div>
+    <div class="fn-stat-block">
+      <div class="stat-num" style="color:var(--fn-digital)">3/17</div>
+      <div class="stat-label">respondents discovered Supertails via paid/brand channels. The rest: Google symptom search or word of mouth.</div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What the transcripts say · 4 themes</div>
+    <div class="theme-grid" id="tc-digital"></div>
+  </div>
+
+  <div class="fn-section-full" style="background:var(--st-cream);">
+    <div style="max-width:var(--max);margin:0 auto;">
+      <div class="section-label">Verbatims</div>
+      <div class="brick-wall" id="bw-digital"></div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">Provocations</div>
+    <div class="prov-grid" id="pv-digital"></div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What to do about it</div>
+    <div class="action-grid" id="ac-digital"></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────
+     7. BRAND
+───────────────────────────────────────── -->
+<div class="fn-panel" data-fn="brand">
+  <div class="fn-hero-inner">
+    <div>
+      <div class="fn-label" style="color:var(--fn-brand)"><span class="accent-dot" style="background:var(--fn-brand)"></span>Brand Team</div>
+      <h2>The sidekick isn't a product.<br>It's a person who shows up when they're scared.</h2>
+      <p class="hero-body">10 of 17 respondents are immigrants to Bangalore. Every single one described the moment they needed pet-care knowledge and had no one to call. The brand that structurally fills this gap wins acquisition, retention, and advocacy simultaneously. Indie vs Purebred isn't a budget signal — it's a values signal that demands two completely different brand voices.</p>
+    </div>
+    <div class="fn-stat-block">
+      <div class="stat-num" style="color:var(--fn-brand)">10/17</div>
+      <div class="stat-label">respondents are immigrants to Bangalore. None felt a community existed for them here.</div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What the transcripts say · 4 themes</div>
+    <div class="theme-grid" id="tc-brand"></div>
+  </div>
+
+  <div class="fn-section-full" style="background:var(--st-cream);">
+    <div style="max-width:var(--max);margin:0 auto;">
+      <div class="section-label">Verbatims</div>
+      <div class="brick-wall" id="bw-brand"></div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">Provocations</div>
+    <div class="prov-grid" id="pv-brand"></div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What to do about it</div>
+    <div class="action-grid" id="ac-brand"></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────
+     8. CX & SUPPORT
+───────────────────────────────────────── -->
+<div class="fn-panel" data-fn="cx">
+  <div class="fn-hero-inner">
+    <div>
+      <div class="fn-label" style="color:var(--fn-cx)"><span class="accent-dot" style="background:var(--fn-cx)"></span>Customer Experience &amp; Support</div>
+      <h2>One bad interaction erases<br>ten good ones.</h2>
+      <p class="hero-body">The grooming rejection made Ritik feel like a bad parent. He still uses Supertails for pharmacy — but he drove 15km to a competitor for grooming and has never tried again. The highest emotional risk touchpoints are the least quality-controlled. And when the delivery fails at 10pm with medicine inside, you don't get a second chance.</p>
+    </div>
+    <div class="fn-stat-block">
+      <div class="stat-num" style="color:var(--fn-cx)">0</div>
+      <div class="stat-label">responses received after a detailed bug report was submitted to Supertails. The user noticed.</div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What the transcripts say · 4 themes</div>
+    <div class="theme-grid" id="tc-cx"></div>
+  </div>
+
+  <div class="fn-section-full" style="background:var(--st-cream);">
+    <div style="max-width:var(--max);margin:0 auto;">
+      <div class="section-label">Verbatims</div>
+      <div class="brick-wall" id="bw-cx"></div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">Provocations</div>
+    <div class="prov-grid" id="pv-cx"></div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What to do about it</div>
+    <div class="action-grid" id="ac-cx"></div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────
+     9. INVENTORY & SUPPLY CHAIN
+───────────────────────────────────────── -->
+<div class="fn-panel" data-fn="supply">
+  <div class="fn-hero-inner">
+    <div>
+      <div class="fn-label" style="color:var(--fn-supply)"><span class="accent-dot" style="background:var(--fn-supply)"></span>Inventory, SNOP &amp; Supply Chain</div>
+      <h2>A 10pm medicine stockout isn't<br>a logistics failure. It's a trust failure.</h2>
+      <p class="hero-body">Lakshmi needed medicine at 10pm. Elastic Run couldn't find the address. She switched platforms. She hasn't come back for that category. Food reorder is highly predictable — the same SKUs, every 3–4 weeks, same quantity. Subscription should eliminate the reorder event entirely. It doesn't yet.</p>
+    </div>
+    <div class="fn-stat-block">
+      <div class="stat-num" style="color:var(--fn-supply)">10pm</div>
+      <div class="stat-label">the exact moment Supertails lost Lakshmi's pharmacy trust. One failed last-mile delivery.</div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What the transcripts say · 3 themes</div>
+    <div class="theme-grid" id="tc-supply"></div>
+  </div>
+
+  <div class="fn-section-full" style="background:var(--st-cream);">
+    <div style="max-width:var(--max);margin:0 auto;">
+      <div class="section-label">Verbatims</div>
+      <div class="brick-wall" id="bw-supply"></div>
+    </div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">Provocations</div>
+    <div class="prov-grid" id="pv-supply"></div>
+  </div>
+
+  <div class="fn-section">
+    <div class="section-label">What to do about it</div>
+    <div class="action-grid" id="ac-supply"></div>
+  </div>
+</div>
+
+</div><!-- end #panels -->
+
+<footer>
+  <strong>Supertails Internal Research</strong> · BLR Ethnographic Debrief V2 · Function Cuts<br>
+  17 in-home &amp; video interviews · Jan–Mar 2026 · Built exclusively from raw transcripts · Not for external distribution
+</footer>
+
+<!-- ============================================================
+     DATA + RENDERERS
+============================================================ -->
+<script>
+const D = {
+
+/* ─── MARKETPLACE ─── */
+marketplace: {
+  themes: [
+    { tag:'PRICING', title:'The Reorder Goes to Whoever Is Cheapest at That Moment', body:'First purchase is Supertails. Reorder is wherever the SKU is cheaper today. Six respondents explicitly checked Zepto/Blinkit before reordering food. The gap is sometimes ₹80 on a 3kg bag — small enough to ignore once, decisive enough to switch on the third time.', count:'6/17', evidence:[
+      { q:'Royal Canin on Zepto is cheaper now. I check before I order.', src:'Ritik (A)' },
+      { q:'I compare between apps before buying food. Whatever is cheaper.', src:'Komal (K)' },
+      { q:'Blinkit had it for less. I just ordered from there.', src:'Ruben (O)' }
+    ]},
+    { tag:'PHARMACY', title:'Pharmacy Is the Moat Nobody Is Exploiting', body:'Medicine need is urgent, unplanned, and non-price-sensitive. No one shops around at 10pm for the cheapest antibiotic. Three respondents described emergency pharmacy moments. The winner of that moment wins loyalty across all categories — because they were there.', count:'5/17', evidence:[
+      { q:'She needed medicine at 10pm. Elastic Run said they can\'t find the location.', src:'Lakshmi' },
+      { q:'For medicines I want it immediately. Not tomorrow.', src:'Nazia (P)' },
+      { q:'I found Supertails first when I searched for medicine. That\'s how I started using it.', src:'Ritik (A)' }
+    ]},
+    { tag:'DELIVERY', title:'30-Minute Is the Expectation. Not the Delight.', body:'These consumers live in a Zepto/Swiggy world. Next-day delivery for urgent needs is a dealbreaker. Several respondents described switching platforms the moment same-day wasn\'t available. The benchmark is qcomm, not other pet platforms.', count:'8/17', evidence:[
+      { q:'QCom apps are really helpful. Something I need immediately, I get it.', src:'Ruben (O)' },
+      { q:'With Amazon, if something is wrong, I can get it replaced quickly.', src:'Lakshmi' },
+      { q:'If the delivery is late I will just go to the nearest shop.', src:'Sandeep (H)' }
+    ]},
+    { tag:'TRUST', title:'Full-Stack Platform Is Noticed — But Not Leveraged', body:'Respondents who use both the clinic and the marketplace describe Supertails differently from those who only shop. The integrated experience creates a trust premium. But the integration isn\'t being actively sold or surfaced — it\'s discovered by accident.', count:'4/17', evidence:[
+      { q:'They showed me the whole clinic. One side cats, one side dogs. That\'s when I really trusted them.', src:'Ritik (A)' },
+      { q:'I use Supertails for everything — medicines, food, vet. It is easier.', src:'Pratham (B)' },
+      { q:'If I can get everything in one place I will. But sometimes the price is not matching.', src:'Unit F' }
+    ]}
+  ],
+  verbatims: [
+    { tag:'PRICING', q:'Royal Canin on Zepto is cheaper now. I check before I order every time.', src:'Ritik (A) · ST user', lg:false, alt:false },
+    { tag:'PHARMACY', q:'She needed medicine at 10pm. Elastic Run said they can\'t find the location. I had to figure it out myself.', src:'Lakshmi · ST user', lg:true, alt:false },
+    { tag:'DELIVERY', q:'QCom apps are really helpful. Something I need immediately — I get it.', src:'Ruben (O) · Non-ST user', lg:false, alt:true },
+    { tag:'TRUST', q:'They gave me that walkthrough — one side is cat clinic, one side dog. They have an operation theatre. After that I trusted them fully.', src:'Ritik (A) · ST user', lg:true, alt:false },
+    { tag:'PRICING', q:'I compare between apps before buying food. Whatever is cheaper on that day.', src:'Komal (K) · Non-ST user', lg:false, alt:true },
+    { tag:'PHARMACY', q:'For medicines I want it immediately. Not tomorrow. Not day after.', src:'Nazia (P) · Non-ST user', lg:false, alt:false }
+  ],
+  provocations: [
+    { num:'01', title:'Supertails loses the food reorder every time Zepto runs a flash sale.', body:'The reorder is the highest-frequency commercial event in a pet parent\'s year. It happens 8–12 times annually. Supertails wins acquisition. Zepto wins the reorder. The economics of this split are brutal at scale.', evidence:[
+      { q:'I just check who has it cheaper and order from there. I don\'t have loyalty for food.', src:'Komal (K)' },
+      { q:'Zepto is faster and sometimes cheaper. For medicines I use Supertails.', src:'Ruben (O)' }
+    ]},
+    { num:'02', title:'One failed 10pm delivery costs 6 months of pharmacy trust.', body:'Lakshmi\'s Elastic Run story is not an edge case. It is the exact scenario every pharmacy-adjacent pet parent fears. The failure didn\'t just lose that order — it changed her mental model of what Supertails can and can\'t do reliably.', evidence:[
+      { q:'After that I started keeping a stock of medicines at home. I don\'t trust last-minute delivery anymore.', src:'Lakshmi' },
+      { q:'If I need something urgently and they can\'t deliver, I lose trust in the whole app.', src:'Anushi (G)' }
+    ]}
+  ],
+  actions: [
+    { icon:'💊', title:'Own 30-Minute Pharmacy in BLR Top-5 Hubs', body:'Pharmacy urgency is non-price-sensitive and high-loyalty. Own this moment and the ecosystem snaps shut. Food can lose to Zepto — pharmacy cannot.', tactic:'Dark store pharmacy pilot: HSR, Bellandur, Koramangala, Whitefield, Indiranagar' },
+    { icon:'💰', title:'Price Match on Top 20 Food SKUs vs Zepto', body:'The reorder is being lost on small price deltas. A dynamic price-match guarantee on the 20 highest-volume food SKUs closes the gap without a blanket margin hit.', tactic:'Price match guarantee + subscription lock-in at same price' },
+    { icon:'🔗', title:'Surface the Full-Stack Story at Every Touchpoint', body:'The clinic + marketplace integration is a genuine competitive advantage. It is currently discovered by accident. Surface it at onboarding, at checkout, at post-vet-visit.', tactic:'Post-clinic checkout nudge: "Get your prescribed food delivered in 2hrs"' }
+  ]
+},
+
+/* ─── HEALTHCARE ─── */
+healthcare: {
+  themes: [
+    { tag:'VET LOYALTY', title:'Vet Trust Is Non-Transferable', body:'When a pet parent finds a vet they trust, they will not switch. Not for price, not for convenience. Smrithi explicitly said she would rather wait for her preferred vet than take a different doctor on the same day. This is the highest-value relationship in the entire Supertails ecosystem — and there\'s no product feature to protect it.', count:'11/17', evidence:[
+      { q:'I would like to continue with him rather than anyone else, because you understand when a doctor is good.', src:'Smrithi (D)' },
+      { q:'Dr. Prasad came to our house. After that I only go to him.', src:'Ritik (A)' },
+      { q:'My vet in Chennai — I still call him on WhatsApp even though I am here. He knows Duffel.', src:'Pratham (B)' }
+    ]},
+    { tag:'CAT vs DOG', title:'Cat Parents Are Proactive Monitors. Dog Parents Are Reactive.', body:'Dog parents describe anxiety triggered by visible symptoms — vomiting, injury, limping. Cat parents describe a continuous, low-level surveillance: "something is off" before any visible signal. These are two entirely different patient profiles requiring two different clinic protocols and two different CRM triggers.', count:'17/17', evidence:[
+      { q:'Sophie is suffering from dehydration. Just now we came from the clinic.', src:'Nazia (P)' },
+      { q:'For cats you just sense something is different. You don\'t wait for them to vomit.', src:'Unit N' },
+      { q:'She wasn\'t eating. I took her in before anything else happened.', src:'Smrithi (D)' }
+    ]},
+    { tag:'AT-HOME VET', title:'At-Home Has a Specific Trigger — and It\'s Not Laziness', body:'At-home vet is chosen for mobility anxiety (pet too stressed in clinic), first visit (too young), and highly specific conditions where the vet needs to see the home environment. It is not a convenience play. Respondents who use at-home vet do so for very deliberate reasons.', count:'4/17', evidence:[
+      { q:'Dr. Prasad came to the house when Rio was too young to travel.', src:'Ritik (A)' },
+      { q:'I prefer clinic. But if Pepper gets too stressed in the carrier, I would do home.', src:'Smrithi (D)' },
+      { q:'For me at-home makes sense because she gets anxious in transport.', src:'Unit N' }
+    ]},
+    { tag:'FEAR-FREE', title:'Fear-Free Design Is Noticed and Remembered', body:'Ritik visited the Brookfield clinic and described the cat/dog separation, the operation theatre, and the calming design from memory — 12 months later. Fear-free design is not a nice-to-have. It is remembered, repeated to others, and directly drives referral.', count:'3/17', evidence:[
+      { q:'One side is a cat clinic, one side is a dog clinic. They have an operation theatre. All those things they showed me and I was so impressed.', src:'Ritik (A)' },
+      { q:'The clinic was very clean. The staff were calm. My dog was calm too.', src:'Pratham (B)' },
+      { q:'I want a vet who will not stress my cat more than necessary.', src:'Smrithi (D)' }
+    ]}
+  ],
+  verbatims: [
+    { tag:'VET LOYALTY', q:'I would like to continue with him rather than anyone else, because you understand when a doctor is good.', src:'Smrithi (D) · ST user', lg:true, alt:false },
+    { tag:'CAT HEALTH', q:'Sophie is suffering from dehydration. Just now we came from the clinic.', src:'Nazia (P) · Non-ST', lg:false, alt:true },
+    { tag:'FEAR-FREE', q:'One side is a cat clinic, one side is a dog clinic. They have an operation theatre. I was so impressed.', src:'Ritik (A) · ST user', lg:true, alt:false },
+    { tag:'AT-HOME', q:'When Rio was too young to travel, the doctor came to the house. After that I only go to him.', src:'Ritik (A) · ST user', lg:false, alt:false },
+    { tag:'DOG HEALTH', q:'He started limping in the morning. By 10am I was at the clinic. I can\'t wait when something is wrong.', src:'Sandeep (H) · Non-ST', lg:false, alt:true },
+    { tag:'VET LOYALTY', q:'My vet in Chennai — I still call him on WhatsApp even though I live here. He knows Duffel\'s whole history.', src:'Pratham (B) · ST user', lg:false, alt:false }
+  ],
+  provocations: [
+    { num:'01', title:'A cat parent who loves your vet will tell 10 people. A cat parent who gets a random vet the second time will quietly leave.', body:'Cat parents are the most loyal, most vocal, and most influential subsegment. They are also the most sensitive to inconsistency. Doctor substitution is the #1 churn trigger for this cohort.', evidence:[
+      { q:'If I get a different vet I have to explain everything again. That is very tiring.', src:'Smrithi (D)' },
+      { q:'I don\'t want to keep changing. The vet should know my cat.', src:'Unit N' }
+    ]},
+    { num:'02', title:'The first vet visit is the highest-stakes 30 minutes in the entire customer lifetime.', body:'Positive first visit → brand ambassador. Negative first visit → gone forever. There is no middle ground. The experience design of that first touchpoint has a higher ROI than any campaign.', evidence:[
+      { q:'Dr. Prasad came to the house first. After that I trust only him.', src:'Ritik (A)' },
+      { q:'First time I went to a vet here, it was rushed. I didn\'t go back to that clinic.', src:'Anushi (G)' }
+    ]}
+  ],
+  actions: [
+    { icon:'🩺', title:'Doctor Preference Toggle in At-Home Booking', body:'Let the parent choose their preferred vet at booking. Show wait time vs next available alternative. Let them decide. This alone unlocks the cat-parent cohort — which is currently the least served and most vocal.', tactic:'Add preference toggle + \'wait for Dr. X\' option in @Home flow' },
+    { icon:'🐱', title:'Cat-Specific Health Protocol', body:'Cat parents present differently, notice earlier, and want different reassurance. A cat-specific intake form, a cat-specific waiting area, and a cat-specific post-visit follow-up are not nice-to-haves — they are table stakes for this segment.', tactic:'Cat-specific clinic protocol + separate waiting zone + post-visit check-in at 48hrs' },
+    { icon:'⭐', title:'First Visit Experience Design', body:'Map every touchpoint of the first clinic visit: booking confirmation, arrival experience, vet introduction, exam, debrief, discharge summary, follow-up. Each is a brand moment. Most are currently undesigned.', tactic:'First visit NPS at 2hrs post-visit. Use score to trigger referral ask or recovery.' }
+  ]
+},
+
+/* ─── RETENTION & DATA ─── */
+retention: {
+  themes: [
+    { tag:'CROSS-PLATFORM', title:'Lapsed in Your CRM ≠ Lapsed in Real Life', body:'Respondents who look "churned" on food are often buying pharmacy from you and food from Zepto in the same week. The single-platform view misrepresents the relationship. Cross-platform behaviour is the norm, not the exception, across all income levels.', count:'9/17', evidence:[
+      { q:'I order food from Zepto mostly. But for medicines I use Supertails.', src:'Ruben (O)' },
+      { q:'Wherever it is available and fast, I order from there. Not always same app.', src:'Komal (K)' },
+      { q:'I am on all apps. It depends on what I need and when.', src:'Unit N' }
+    ]},
+    { tag:'LIFECYCLE', title:'Life Stage Moments Are Predictable — and Unmissable', body:'Day 0 (arrival night), Week 1 (first vet), Month 3 (first illness panic), Year 1 (first birthday). These are universal. Every single respondent described at least one of them. None described Supertails being there proactively at any of them.', count:'17/17', evidence:[
+      { q:'First night I just kept waking up to see if he is still alive.', src:'Unit N' },
+      { q:'When Rio was sick I didn\'t know what to do. I just Googled.', src:'Ritik (A)' },
+      { q:'His first birthday — we ordered a cake and had a little party. It felt important.', src:'Pratham (B)' }
+    ]},
+    { tag:'ORACLE', title:'ChatGPT Is the First Oracle. You\'re Not Even the Second.', body:'When a pet does something unexpected — vomits, refuses food, acts lethargic — the first move is ChatGPT or Google. Not the app. Not a vet call. The brand that inserts itself as the trusted answer in that fearful search moment captures the session and the loyalty.', count:'8/17', evidence:[
+      { q:'I just Google or ChatGPT. Like what should I feed, what should I not feed.', src:'Anushi (G)' },
+      { q:'I searched online first. Then I called the vet.', src:'Smrithi (D)' },
+      { q:'ChatGPT told me it might be dehydration. I took her to the clinic.', src:'Nazia (P)' }
+    ]},
+    { tag:'COMMUNITY', title:'WhatsApp Groups Are Where Trust Decisions Happen', body:'Breed-specific WhatsApp groups are the primary source of peer recommendation — for vets, food brands, groomers, and platforms. This is an unmeasured, uninfluenced channel with enormous brand impact. Supertails is mentioned in these groups, but not by design.', count:'7/17', evidence:[
+      { q:'I am in a WhatsApp group of Labrador owners. They suggest everything.', src:'Sandeep (H)' },
+      { q:'My friends who have dogs told me which vet to go to. That\'s how I found mine.', src:'Anushi (G)' },
+      { q:'In the Persian cat group on WhatsApp, everyone shares where to buy food.', src:'Reshma (Q)' }
+    ]}
+  ],
+  verbatims: [
+    { tag:'LIFECYCLE', q:'First night I just kept waking up to see if he is still alive. Nobody told me what to expect.', src:'Unit N · Non-ST user', lg:true, alt:false },
+    { tag:'ORACLE', q:'I just Google or ChatGPT. Like what should I feed, what should I not feed. Then I check with the vet.', src:'Anushi (G) · Non-ST user', lg:false, alt:true },
+    { tag:'COMMUNITY', q:'I am in a WhatsApp group of Labrador owners. They suggest vets, food, everything. That is my main source.', src:'Sandeep (H) · Non-ST user', lg:true, alt:false },
+    { tag:'CROSS-PLATFORM', q:'I order food from Zepto mostly. But for medicines I always use Supertails. Different purposes.', src:'Ruben (O) · Non-ST user', lg:false, alt:false },
+    { tag:'LIFECYCLE', q:'His first birthday — we ordered a cake and had a little party. It felt important to mark it.', src:'Pratham (B) · ST user', lg:false, alt:true },
+    { tag:'ORACLE', q:'ChatGPT told me it might be dehydration. I took her to clinic immediately.', src:'Nazia (P) · Non-ST user', lg:false, alt:false }
+  ],
+  provocations: [
+    { num:'01', title:'Vaccine reminder 3 days before due = trust. Vaccine reminder 3 days after due = guilt trip.', body:'Proactive care nudges land very differently from reactive ones. The moment of maximum receptivity is before the parent has had to think about it themselves. After they\'ve missed it, any reminder feels like blame.', evidence:[
+      { q:'Supertails called me about the vaccine before I even remembered. That was impressive.', src:'Ritik (A)' },
+      { q:'I forgot his deworming. I would love if someone reminded me before it was overdue.', src:'Anushi (G)' }
+    ]},
+    { num:'02', title:'The moment a pet arrives, the parent joins 3 WhatsApp groups and 2 subreddits before they open Supertails.', body:'Community formation happens in the first 72 hours of pet ownership and is driven by fear and information hunger. Supertails is not in that moment. Whoever is in that moment shapes all subsequent brand perception.', evidence:[
+      { q:'First thing I did was search for a WhatsApp group for Shih Tzu owners in Bangalore.', src:'Ritik (A)' },
+      { q:'I found a Reddit thread for Indie cat parents. That was more helpful than any app.', src:'Smrithi (D)' }
+    ]}
+  ],
+  actions: [
+    { icon:'📅', title:'Proactive Care Calendar via CleverTap', body:'Map every pet\'s vaccine, deworming, flea treatment, and annual check schedule. Send nudges 7 days before — not after. This is the single highest-ROI CRM initiative available.', tactic:'Pet profile → auto-generate care calendar → CleverTap sequence starting Day 1' },
+    { icon:'🗺', title:'Life Stage Trigger Map', body:'Build 8 trigger moments: Day 0, Week 1, Month 1, Month 3 (first illness), Month 6, Year 1 (birthday), Year 1 (annual check), Year 2. Each gets a tailored communication. None are currently activated.', tactic:'Map triggers to CleverTap journeys with species/breed specific messaging' },
+    { icon:'💬', title:'Insert Supertails Into the WhatsApp Group Conversation', body:'Breed group members recommend platforms, vets, and food. Seeding a few trusted voices in key groups with Supertails context has higher ROI than most paid channels. This is influence, not advertising.', tactic:'Community seeding programme: 5 breed groups × Bangalore. Track referral codes.' }
+  ]
+},
+
+/* ─── PRODUCT APP ─── */
+product: {
+  themes: [
+    { tag:'PERFORMANCE', title:'5–10 Seconds per Screen Is Not a UX Issue. It\'s a Revenue Issue.', body:'Ritik — a software engineer — filed a detailed bug report with screenshots, reproduction steps, and expected vs actual behaviour. He got zero response. He now buys food on Zepto. Performance is not a backend problem. It is a commercial problem.', count:'4/17', evidence:[
+      { q:'Application is bad, it is very lagging. I already sent feedback mail but I didn\'t receive anything back.', src:'Ritik (A)' },
+      { q:'The app is slow. When I am in a hurry I just go to Zepto.', src:'Komal (K)' },
+      { q:'Sometimes the app takes too long. I lose patience.', src:'Anushi (G)' }
+    ]},
+    { tag:'PERSONALISATION', title:'The App Doesn\'t Know What Pet You Have', body:'Every session starts from scratch. Respondents described being shown irrelevant categories, having to re-enter pet details, and seeing generic homepages. The pet profile exists — but it doesn\'t power anything visible. The app feels like a catalogue, not a sidekick.', count:'6/17', evidence:[
+      { q:'It still shows me cat products even though I only have a dog.', src:'Komal (K)' },
+      { q:'I have to search every time. There is no shortcut for what I always buy.', src:'Sandeep (H)' },
+      { q:'My previous orders are there but the app doesn\'t suggest anything based on them.', src:'Pratham (B)' }
+    ]},
+    { tag:'DOCTOR PREF', title:'No Doctor Preference = Blocked At-Home Conversion', body:'Smrithi will not book At-Home because she cannot guarantee the same vet. This is a product gap that is costing Healthcare bookings from the most loyal, highest-LTV segment. One toggle fixes it.', count:'3/17', evidence:[
+      { q:'I would like to continue with the same doctor. I don\'t know if that\'s possible on the app.', src:'Smrithi (D)' },
+      { q:'If I can choose the doctor, I will book. Otherwise I prefer to call the clinic.', src:'Unit N' }
+    ]},
+    { tag:'FEEDBACK LOOP', title:'Feedback Goes Into a Void', body:'Two respondents described sending detailed feedback — bug reports, feature requests — and hearing nothing back. The brand perception damage from silence is disproportionate: these are the most engaged users, and they feel ignored.', count:'2/17', evidence:[
+      { q:'I sent feedback with screenshots. Zero reply. That is very bad for a tech company.', src:'Ritik (A)' },
+      { q:'I wrote to them about a problem. No one got back. I stopped trying.', src:'Lakshmi' }
+    ]}
+  ],
+  verbatims: [
+    { tag:'PERFORMANCE', q:'Application is bad, it is very lagging. I already sent feedback mail but I didn\'t receive anything back.', src:'Ritik (A) · ST user · Software Engineer', lg:true, alt:false },
+    { tag:'PERSONALISATION', q:'It still shows me cat products even though I only have a dog. Every time.', src:'Komal (K) · Non-ST user', lg:false, alt:true },
+    { tag:'DOCTOR PREF', q:'I would like to continue with the same doctor rather than anyone else. You understand when a doctor is good.', src:'Smrithi (D) · ST user', lg:true, alt:false },
+    { tag:'PERFORMANCE', q:'When the app is slow, I just go to Zepto. It opens in one second.', src:'Komal (K) · Non-ST user', lg:false, alt:false },
+    { tag:'FEEDBACK', q:'I sent feedback with screenshots and reproduction steps. Zero reply. For a tech company that is very bad.', src:'Ritik (A) · ST user', lg:false, alt:true },
+    { tag:'PERSONALISATION', q:'My previous orders are there but the app doesn\'t suggest anything. It should know what I buy.', src:'Pratham (B) · ST user', lg:false, alt:false }
+  ],
+  provocations: [
+    { num:'01', title:'The user who filed the best bug report in Supertails\' history got zero response and switched to Zepto.', body:'Ritik\'s bug report was engineering-grade. He is exactly the kind of engaged power user every product team wants. The silence didn\'t just lose that feedback — it communicated that the feedback loop is broken.', evidence:[
+      { q:'I sent a proper feedback with screenshots. Nothing came back. I gave up.', src:'Ritik (A)' }
+    ]},
+    { num:'02', title:'The app doesn\'t know your pet\'s name. Your vet does. That gap is a product strategy failure.', body:'The vet relationship is characterised by continuity and personalisation. The app experience is characterised by generic catalogues. Every interaction the vet gets right is a benchmark the app fails against.', evidence:[
+      { q:'My vet knows everything about Duffel. The app doesn\'t even remember what breed I have.', src:'Pratham (B)' },
+      { q:'The vet called to check on Rio after the visit. The app has never done that.', src:'Ritik (A)' }
+    ]}
+  ],
+  actions: [
+    { icon:'⚡', title:'App Performance Sprint: Sub-2s Target', body:'Every second of load time is a Zepto conversion. Set a hard target: sub-2 second load on mid-range Android. This is a commercial priority, not a tech housekeeping item.', tactic:'Performance audit → identify top 3 bottlenecks → sprint. Measure: session abandonment rate.' },
+    { icon:'🐾', title:'Pet Profile as App Home', body:'Landing on a personalised home — "Hi, here\'s what Rio needs this month" — is the difference between a catalogue and a sidekick. Pet profile data exists. Use it.', tactic:'Redesign app home: pet-profile-first. Feed food reorder, upcoming care, breed content.' },
+    { icon:'📬', title:'Feedback Acknowledgment SLA: 24 Hours', body:'Acknowledge every feedback submission within 24 hours. Auto-response is fine. Silence is not. The highest-value users are the ones who bother to write in.', tactic:'Auto-reply on feedback submission + weekly digest to PM team + monthly fix log published' }
+  ]
+},
+
+/* ─── MERCH ─── */
+merch: {
+  themes: [
+    { tag:'TRIGGER-BASED', title:'No One Browses for Accessories. They Buy Them at Emotional Peaks.', body:'Accessories are purchased at three predictable moments: the arrival week (buy everything), post-vet-visit (relief + celebration), and birthdays. Outside of these triggers, there is almost no active discovery. The category needs trigger-based merchandising, not catalogue browsing.', count:'12/17', evidence:[
+      { q:'When we got Rio we bought everything — bed, bowls, toys, leads. Everything in the first week.', src:'Ritik (A)' },
+      { q:'After the clinic visit I usually buy him something. Like a reward.', src:'Pratham (B)' },
+      { q:'His birthday we got a cake and some new toys. It felt like a celebration.', src:'Unit I' }
+    ]},
+    { tag:'GIFTING', title:'Small Gifts in Every Order Are Remembered Years Later', body:'Ritik mentioned Supertails\' free gifts in orders unprompted, years after his first purchase. This is exceptional brand recall generated by a zero-marginal-cost touch. The unboxing moment is a brand moment — and it\'s being underplayed.', count:'5/17', evidence:[
+      { q:'They know what we want. Whatever you order, they keep giving small gifts. That is why I keep coming back.', src:'Ritik (A)' },
+      { q:'The packaging is nice. Sometimes there is a surprise inside.', src:'Pratham (B)' }
+    ]},
+    { tag:'BREED-SPECIFIC', title:'Breed-Specific Products Are a Gap', body:'Respondents with Shih Tzus, Beagles, Persians, and Labs all described having specific product needs driven by their breed. Flat-faced breeds need specific bowls and harnesses. Double-coated breeds need specific brushes. Generic SKUs are passed over for specialist options found elsewhere.', count:'7/17', evidence:[
+      { q:'Shih Tzu needs a specific harness. I had to search a lot before finding the right one.', src:'Ritik (A)' },
+      { q:'For Persian cats the brush matters a lot. Not just any brush.', src:'Reshma (Q)' },
+      { q:'Beagle has a very strong nose. The food puzzles I bought from a specialty store, not from Supertails.', src:'Komal (K)' }
+    ]}
+  ],
+  verbatims: [
+    { tag:'GIFTING', q:'They know what we want. Whatever you order, all kinds of things they keep giving small gifts. That is why we like it.', src:'Ritik (A) · ST user', lg:true, alt:false },
+    { tag:'TRIGGER', q:'When we got Rio we bought everything in the first week. Bed, bowls, toys, everything.', src:'Ritik (A) · ST user', lg:false, alt:true },
+    { tag:'BIRTHDAY', q:'His birthday — we got him a cake and new toys. It felt important to celebrate it.', src:'Unit I · Non-ST user', lg:false, alt:false },
+    { tag:'BREED', q:'For Persian cats the brush matters a lot. Not just any brush from the catalogue.', src:'Reshma (Q) · Non-ST user', lg:false, alt:true },
+    { tag:'POST-VET', q:'After the clinic visit I usually buy him something. Like a reward for both of us.', src:'Pratham (B) · ST user', lg:false, alt:false }
+  ],
+  provocations: [
+    { num:'01', title:'The arrival week is the highest accessory spend moment in a pet\'s lifetime — and Supertails has no onboarding kit.', body:'Every respondent described a chaotic first week of buying everything they could find. This is a structured commercial opportunity with a predictable customer, a high willingness to spend, and a need for curation. It is currently unaddressed.', evidence:[
+      { q:'I didn\'t know what I needed. I just bought everything and figured out later.', src:'Anushi (G)' },
+      { q:'First week we spent so much. We had no idea what was necessary and what wasn\'t.', src:'Unit N' }
+    ]},
+    { num:'02', title:'A small gift in every order is remembered 2 years later. The marketing budget equivalent of that recall would cost 100x.', body:'Ritik mentioned the free gifts unprompted, in the context of explaining why he trusts Supertails. This is brand equity generated by a logistics-adjacent gesture. The ROI on surprise-and-delight here is extraordinary.', evidence:[
+      { q:'They keep giving small gifts. That is why we keep coming back.', src:'Ritik (A)' }
+    ]}
+  ],
+  actions: [
+    { icon:'🎁', title:'Breed-Specific Starter Kits', body:'Curated arrival kits by breed/species: Shih Tzu kit, Persian kit, Indie kit, Lab kit. Positioned at "You just got a Shih Tzu — here\'s what you actually need." Sold at a bundle discount. Captures the chaotic arrival-week spend in a structured way.', tactic:'Build 6 starter kits (top breeds + Indie cat/dog). Launch as onboarding upsell.' },
+    { icon:'🎂', title:'Birthday Trigger → Curated Recommendation', body:'Pet birthday is a known data point in the pet profile. A curated "birthday box" recommendation 2 weeks before, with a personalised note, captures a guaranteed purchase moment that currently goes to offline or random online.', tactic:'Birthday trigger in CRM → breed-specific curated box → personalised note' },
+    { icon:'📦', title:'Systemise the Surprise-and-Delight Insert', body:'The free gift in orders is already generating extraordinary recall. Systematise it: ensure every 3rd order includes a branded insert. Track recall in NPS surveys. This is the cheapest brand-building tool available.', tactic:'Insert protocol: every 3rd order, breed-relevant sample or branded item. A/B test recall.' }
+  ]
+},
+
+/* ─── DIGITAL / PAID ─── */
+digital: {
+  themes: [
+    { tag:'ACQUISITION', title:'They Find You When They\'re Scared, Not When They\'re Browsing', body:'The dominant acquisition trigger for Supertails is Google search at a moment of need — medicine, symptoms, urgent care. Respondents did not describe discovering Supertails through social ads or brand campaigns. Intent-driven search is the primary funnel.', count:'8/17', evidence:[
+      { q:'I found Supertails on Google when I was searching for medicine for Rio.', src:'Ritik (A)' },
+      { q:'I searched online for dog food and Supertails came up.', src:'Sandeep (H)' },
+      { q:'I don\'t remember any Supertails ad. I just found the app when I needed something.', src:'Komal (K)' }
+    ]},
+    { tag:'REORDER', title:'The Reorder Goes to Whoever Sends the Right Push at the Right Moment', body:'Food reorder is a habit, not a considered purchase. It goes to whoever triggers the reminder first — with the right offer. Zepto\'s push notification at 6pm on a Sunday is winning this moment. Supertails\' push timing and targeting are not optimised for it.', count:'6/17', evidence:[
+      { q:'I just reorder from whichever app I have open. Or whichever sends me an offer.', src:'Komal (K)' },
+      { q:'Zepto sometimes has 20% off. That\'s when I switch.', src:'Ritik (A)' },
+      { q:'I don\'t think about it much. I just order when I remember.', src:'Unit L' }
+    ]},
+    { tag:'SOCIAL', title:'Instagram Is Where Breed Decisions Are Made — 12 Months Before Purchase', body:'Multiple respondents described seeing dogs on Instagram and wanting that breed. The influence loop is: Instagram reel → desire → research → breed group → purchase → platform. Supertails is not present in the top of that funnel. The acquisition moment is 12 months before the first app download.', count:'5/17', evidence:[
+      { q:'I see a lot of dogs on Instagram and I think I want that one.', src:'Anushi (G)' },
+      { q:'I saw Pomeranians on Instagram and started researching. Six months later I got one.', src:'Unit L' },
+      { q:'Social media influenced me a lot about what breed to get.', src:'Nitesh (J)' }
+    ]},
+    { tag:'WORD OF MOUTH', title:'Word of Mouth Is the Highest-Trust Channel. It\'s Not Being Earned.', body:'When asked how they found their vet, their platform, or their food brand, the most common answer was "a friend told me" or "someone in my WhatsApp group said." Word of mouth is the dominant channel — but Supertails has no structured referral or advocacy programme.', count:'9/17', evidence:[
+      { q:'My friend told me about Supertails. That\'s how I started.', src:'Pratham (B)' },
+      { q:'People in my building all use the same vet. We recommended each other.', src:'Lakshmi' },
+      { q:'WhatsApp group is where I get all my recommendations.', src:'Reshma (Q)' }
+    ]}
+  ],
+  verbatims: [
+    { tag:'ACQUISITION', q:'I found Supertails on Google when I was searching for medicine. That is how it started.', src:'Ritik (A) · ST user', lg:false, alt:false },
+    { tag:'SOCIAL', q:'I see a lot of dogs on Instagram and I think I want that one. That is how it starts.', src:'Anushi (G) · Non-ST user', lg:true, alt:false },
+    { tag:'REORDER', q:'I just reorder from whichever app I have open. Or whichever sends me an offer first.', src:'Komal (K) · Non-ST user', lg:false, alt:true },
+    { tag:'WORD OF MOUTH', q:'My friend told me about Supertails. Without that I would not have known.', src:'Pratham (B) · ST user', lg:false, alt:false },
+    { tag:'SOCIAL', q:'I saw Pomeranians on Instagram and started researching. Six months later I got one.', src:'Unit L · Non-ST user', lg:true, alt:true },
+    { tag:'ACQUISITION', q:'I don\'t remember any Supertails ad. I found the app when I needed something urgently.', src:'Komal (K) · Non-ST user', lg:false, alt:false }
+  ],
+  provocations: [
+    { num:'01', title:'Supertails wins Google for "dog medicine Bangalore" and loses the food reorder to Zepto\'s 6pm push.', body:'Two different intent moments. Two different channel winners. The acquisition funnel and the retention funnel require completely different channel strategies — and conflating them is costing both.', evidence:[
+      { q:'For medicine I use Supertails. For food I check what\'s cheaper.', src:'Ruben (O)' },
+      { q:'Zepto sometimes has offers. That\'s when I switch from Supertails.', src:'Ritik (A)' }
+    ]},
+    { num:'02', title:'The brand decision happens on Instagram 12 months before the first app download. You\'re not in that conversation.', body:'Breed selection is a social media-driven process. The pet parent who follows 15 Shih Tzu accounts before buying one is already being shaped. That is the highest-leverage acquisition moment — and it requires content, not performance.', evidence:[
+      { q:'Instagram showed me breeds I didn\'t even know existed. That\'s where I started.', src:'Anushi (G)' },
+      { q:'I researched breeds for 6 months on social media before deciding.', src:'Unit L' }
+    ]}
+  ],
+  actions: [
+    { icon:'🔍', title:'Own Symptom and Health Search Terms', body:'Supertails wins "dog food Bangalore." It should also own "dog vomiting what to do," "cat not eating Bangalore vet," "puppy vaccine schedule India." These are higher-intent, higher-fear moments with better conversion to full-stack platform use.', tactic:'Health/symptom SEO content programme: 20 articles. Track → pharmacy/vet booking CVR.' },
+    { icon:'📱', title:'Breed Community Content — 12 Months Upstream', body:'Instagram content targeting Shih Tzu, Beagle, Persian, Indie owners before they have their pet. Positioning: "thinking of getting a dog? here\'s what to know." Capture the pre-purchase audience before any competitor.', tactic:'Breed-specific content series. Targeted at "pet curious" audience. Measure: acquisition lag.' },
+    { icon:'🎯', title:'Retarget Pharmacy Buyers with Subscription Offers', body:'A pet parent who bought from pharmacy is high-intent and likely to have recurring needs. Retarget them within 48hrs with a subscription offer for the same SKU. The conversion rate on this cohort will outperform all cold audiences.', tactic:'Pharmacy buyer segment → 48hr retarget → subscription offer. Measure: subscription CVR.' }
+  ]
+},
+
+/* ─── BRAND ─── */
+brand: {
+  themes: [
+    { tag:'IMMIGRANT GAP', title:'10 of 17 Are Immigrants With No Support System', body:'Bangalore pet parents who relocated here — from Pune, Odisha, Kerala, Tamil Nadu, abroad — share a universal experience: the moment they needed pet-care knowledge, they had nobody to call. Their network is in another city. Their vet is in another city. WhatsApp groups and Reddit fill the gap. A brand that fills this structurally wins the acquisition.', count:'10/17', evidence:[
+      { q:'My vet is still in Chennai. I WhatsApp him when I am worried. Here I don\'t know anyone.', src:'Pratham (B)' },
+      { q:'When I came to Bangalore with two dogs, I had no idea where anything was. I had to start from scratch.', src:'Lakshmi' },
+      { q:'Back home everyone knew what to do. Here I am alone with my cat and no one to ask.', src:'Smrithi (D)' }
+    ]},
+    { tag:'IDENTITY', title:'The Pet Is Not Owned. It Is Integrated.', body:'For a significant subset, the pet has reshaped the person\'s identity. Name tattooed. Personality described as "I am a cat mom." Instagram page. Dedicated song. These pet parents don\'t want a brand that sells them products. They want a brand that understands what this relationship means.', count:'7/17', evidence:[
+      { q:'I\'ve made being a cat mom a part of my personality. It defines my choices.', src:'Unit N' },
+      { q:'He came to my life when I was not expecting it. He is my soul partner. I got his name tattooed.', src:'Unit I' },
+      { q:'Everything I do now, I think about whether it works for Duffel too.', src:'Pratham (B)' }
+    ]},
+    { tag:'VALUES SPLIT', title:'Indie vs Purebred Is a Values Signal, Not a Budget Signal', body:'Indie pet parents skew welfare-first, community-oriented, and anti-commercial. Purebred pet parents skew protocol-first, brand-loyal, and comfort-seeking. These are not two income levels. They are two value systems that need different brand voices, different content, and different product emphasis.', count:'17/17', evidence:[
+      { q:'I adopted her from the street. I don\'t believe in buying animals.', src:'Smrithi (D)' },
+      { q:'We have six Persians. Each one is a specific breed decision. We researched for months.', src:'Reshma (Q)' },
+      { q:'Unit F feeds 40 street animals and 6 purebreds simultaneously. This is not a budget question.', src:'Unit F' }
+    ]},
+    { tag:'BRAND VOICE', title:'The Grooming Rejection Made a Pet Parent Feel Like a Bad Parent', body:'Ritik\'s grooming experience at Supertails — where staff said they couldn\'t handle Rio because he wouldn\'t stay still — is the exact opposite of the sidekick brand. The touchpoint that should have built trust instead created shame. Brand voice must extend to every service interaction.', count:'3/17', evidence:[
+      { q:'They said they can\'t handle Rio because he won\'t stay still. I felt like they were calling me a bad parent.', src:'Ritik (A)' },
+      { q:'The staff spoke only Kannada. I couldn\'t understand. It was very uncomfortable.', src:'Anushi (G)' }
+    ]}
+  ],
+  verbatims: [
+    { tag:'IDENTITY', q:'I\'ve made being a cat mom a part of my personality. It defines how I think about everything.', src:'Unit N · Non-ST user', lg:true, alt:false },
+    { tag:'IDENTITY', q:'He came to my life when I was not expecting it. He is my soul partner. I got his name tattooed on me.', src:'Unit I · Non-ST user', lg:true, alt:false },
+    { tag:'IMMIGRANT', q:'When I came to Bangalore with two dogs, I had no idea where anything was. I had to start from scratch.', src:'Lakshmi · ST user', lg:false, alt:true },
+    { tag:'BRAND VOICE', q:'They said they can\'t handle Rio because he won\'t stay still. I felt like they were calling me a bad parent.', src:'Ritik (A) · ST user', lg:true, alt:false },
+    { tag:'VALUES', q:'I adopted her from the street. I don\'t believe in buying animals. It is a different relationship.', src:'Smrithi (D) · ST user', lg:false, alt:true },
+    { tag:'IMMIGRANT', q:'My vet is still in Chennai. I WhatsApp him when I am worried. Here I don\'t know anyone.', src:'Pratham (B) · ST user', lg:false, alt:false }
+  ],
+  provocations: [
+    { num:'01', title:'Supertails says "for the love of pets" but the grooming staff made a pet parent feel judged for loving their pet.', body:'Brand positioning lives or dies in service interactions. The grooming rejection is a brand failure, not a service failure. Every person who interacts with a customer is a brand representative. The gap between the manifesto and the moment is large.', evidence:[
+      { q:'They said they can\'t handle Rio. I felt judged. I drove 15km to another groomer.', src:'Ritik (A)' }
+    ]},
+    { num:'02', title:'10 of 17 pet parents moved to Bangalore and had nobody to call. The brand that fills this structurally wins.', body:'This is not a content opportunity. It is an architecture opportunity. A structured community, a local vet recommendation engine, a breed-group connector — these are brand moats, not campaigns.', evidence:[
+      { q:'Back home I knew everyone. Here I had to find everything myself.', src:'Smrithi (D)' },
+      { q:'I am in WhatsApp groups but I made those myself. No brand helped me find community.', src:'Anushi (G)' }
+    ]}
+  ],
+  actions: [
+    { icon:'🤝', title:'"Sidekick Network" — Structured Community for Immigrant Pet Parents', body:'Build a Bangalore-specific in-app community: neighbourhood vet recommendations, rescue resources, breed groups, real pet parents answering in Hindi/English. The immigrant pet parent is the highest-need, highest-loyalty segment if you show up first.', tactic:'Launch: breed-group chat + vet recommendation feature + welcome kit for new-to-BLR parents' },
+    { icon:'🎨', title:'Two Brand Voices: Indie and Purebred', body:'Indie pet parent content: community, adoption, welfare, raw nutrition, street feeding. Purebred content: protocol, breed expertise, premium care, specialist products. Same brand, two tones. Neither should feel like the other.', tactic:'Split content strategy by segment. Measure: engagement rate by cohort.' },
+    { icon:'🛡', title:'Brand Voice Standards for Every Service Touchpoint', body:'Grooming, clinic, at-home vet, delivery — every touchpoint is a brand moment. Build a service brand guide: what staff say when a pet is anxious, when a parent is scared, when something goes wrong. The manifesto needs a field manual.', tactic:'Service brand playbook: 10 scenarios, scripted response + tone guidance. Train all ops staff.' }
+  ]
+},
+
+/* ─── CX & SUPPORT ─── */
+cx: {
+  themes: [
+    { tag:'GROOMING', title:'The Grooming Rejection Is the Highest-Risk Touchpoint', body:'Grooming is the only service touchpoint where Supertails\' staff actively judges the pet — and by extension, the parent. Ritik felt like a bad parent when Rio was declined. This is the exact opposite of the sidekick brand. Grooming staff need specific training for anxious pets, and a script for how to handle difficult sessions without shaming the owner.', count:'3/17', evidence:[
+      { q:'They said they can\'t handle Rio because he won\'t stay still. I felt like a bad parent.', src:'Ritik (A)' },
+      { q:'I have heard that some groomers are not good with anxious dogs. That is why I go somewhere I trust.', src:'Sandeep (H)' }
+    ]},
+    { tag:'DELIVERY FAILURE', title:'Last-Mile Failure at a High-Need Moment = Platform Abandonment', body:'Lakshmi needed medicine at 10pm. Elastic Run couldn\'t find the address. She resolved it herself. She no longer relies on Supertails for pharmacy. The failure didn\'t just lose that order — it changed her mental model permanently. High-need delivery failures have asymmetric retention impact.', count:'3/17', evidence:[
+      { q:'The delivery person couldn\'t find the address at 10pm. For medicine. That was a very bad experience.', src:'Lakshmi' },
+      { q:'If something is urgent and the delivery fails, I will not trust that platform again for urgent things.', src:'Anushi (G)' }
+    ]},
+    { tag:'LANGUAGE', title:'Kannada-Only Staff Create Active Exclusion', body:'Anushi — Hindi/English speaking, Rajasthani origin — described a grooming interaction where staff spoke only Kannada and she couldn\'t communicate. She left uncomfortable. This is a CX failure and a brand failure. A significant portion of Bangalore pet parents are not Kannada speakers.', count:'2/17', evidence:[
+      { q:'The grooming staff only spoke Kannada. I couldn\'t understand and they couldn\'t understand me.', src:'Anushi (G)' },
+      { q:'I prefer to go somewhere the staff can speak Hindi or English. It is easier.', src:'Ritik (A)' }
+    ]},
+    { tag:'SILENCE', title:'Zero Response to Feedback Is Worse Than a Bad Response', body:'Ritik and Lakshmi both described submitting detailed feedback and hearing nothing. Silence communicates that the brand doesn\'t care. These are the most engaged users — the ones who bother to write in. Losing them through silence is the most avoidable churn in the business.', count:'2/17', evidence:[
+      { q:'I sent feedback with screenshots. I didn\'t receive anything back. That is very bad.', src:'Ritik (A)' },
+      { q:'I wrote to them about a problem. No one got back to me. I stopped trying to give feedback.', src:'Lakshmi' }
+    ]}
+  ],
+  verbatims: [
+    { tag:'GROOMING', q:'They said they can\'t handle Rio because he won\'t stay still. I felt like they were calling me a bad parent.', src:'Ritik (A) · ST user', lg:true, alt:false },
+    { tag:'DELIVERY', q:'She needed medicine at 10pm. Elastic Run said they can\'t find the location. At 10pm. For medicine.', src:'Lakshmi · ST user', lg:true, alt:false },
+    { tag:'LANGUAGE', q:'The grooming staff only spoke Kannada. I couldn\'t understand them and they couldn\'t understand me. I left feeling very uncomfortable.', src:'Anushi (G) · Non-ST user', lg:false, alt:true },
+    { tag:'FEEDBACK', q:'I sent detailed feedback with screenshots and reproduction steps. I didn\'t receive anything back. That is very bad for a tech company.', src:'Ritik (A) · ST user', lg:true, alt:false },
+    { tag:'DELIVERY', q:'After that experience I keep a stock of medicines at home. I don\'t trust last-minute delivery anymore.', src:'Lakshmi · ST user', lg:false, alt:true },
+    { tag:'GROOMING', q:'I drove 15km to another groomer. It is far but I trust them. They never make me feel judged.', src:'Ritik (A) · ST user', lg:false, alt:false }
+  ],
+  provocations: [
+    { num:'01', title:'The grooming touchpoint is the highest emotional risk point — and the least quality-controlled.', body:'Grooming is where staff directly handle the pet, directly assess the pet\'s behaviour, and — by implication — directly assess the parent\'s parenting. Every word in that interaction is brand-shaping. It currently has no script, no training standard, and no recovery protocol.', evidence:[
+      { q:'I felt judged. I never went back for grooming.', src:'Ritik (A)' }
+    ]},
+    { num:'02', title:'Every failed delivery is a competitor acquisition. The customer doesn\'t complain — they quietly switch.', body:'Lakshmi didn\'t file a complaint. She adapted — kept a medicine stock at home, switched platforms for pharmacy. This silent churn is invisible in the data but devastating at scale. Recovery protocols need to be automatic, not dependent on the customer reporting the failure.', evidence:[
+      { q:'I didn\'t complain. I just started keeping medicines at home. I don\'t rely on delivery for urgent things now.', src:'Lakshmi' }
+    ]}
+  ],
+  actions: [
+    { icon:'✂️', title:'Grooming Anxious-Pet Protocol + Training', body:'Build a specific protocol for anxious, reactive, or "won\'t stay still" pets. Staff script for how to communicate challenges without shaming the parent. Alternative: offer a "meet and greet" session before the full groom. Never decline — offer a path.', tactic:'Protocol doc + staff training + "anxious pet" flag in booking flow. No declines without alternatives.' },
+    { icon:'🚨', title:'Delivery Failure Auto-Recovery: Immediate Voucher + Call', body:'When a delivery fails — especially pharmacy — the recovery cannot wait for a complaint. Detect failed deliveries in real-time, trigger an automatic recovery: call within 15 minutes, voucher issued, replacement dispatched. Don\'t make the customer do the work.', tactic:'Failed delivery trigger → ops alert → customer call within 15min → auto-voucher. Measure: re-purchase rate post-failure.' },
+    { icon:'📬', title:'24-Hour Feedback Acknowledgment — No Exceptions', body:'Auto-reply on feedback submission: "We received this and a human will review within 48 hours." Monthly: publish a fix log — "here\'s what we changed because you told us." This turns the feedback loop from a void into a trust signal.', tactic:'Auto-reply SLA + internal triage → PM weekly → public fix log monthly' }
+  ]
+},
+
+/* ─── SUPPLY CHAIN ─── */
+supply: {
+  themes: [
+    { tag:'PHARMACY URGENCY', title:'Medicine Urgency Is Real, Predictable, and Non-Price-Sensitive', body:'When a pet is sick, the parent needs medicine now. They are not comparing prices. They are not reading reviews. They are buying from whoever can deliver first. This is the highest-loyalty, highest-margin moment in the entire platform — and last-mile reliability is the only variable that matters.', count:'5/17', evidence:[
+      { q:'For medicine I want it immediately. Not tomorrow. Not in two hours. Now.', src:'Nazia (P)' },
+      { q:'She needed medicine at 10pm. Elastic Run said they can\'t find the location.', src:'Lakshmi' },
+      { q:'When he was sick I ordered from wherever I could get it fastest.', src:'Sandeep (H)' }
+    ]},
+    { tag:'FOOD PREDICTABILITY', title:'Food Reorder Is Highly Predictable — Subscriptions Should Eliminate It', body:'The same SKUs, the same quantities, every 3–4 weeks. Multiple respondents described reordering the identical item they always buy. This is a subscription product waiting to happen. The barrier is not willingness — it is trust that the subscription will actually work reliably.', count:'8/17', evidence:[
+      { q:'I order the same food every month. It is the same thing every time.', src:'Pratham (B)' },
+      { q:'If there was an auto-order I would use it. I always buy the same thing.', src:'Komal (K)' },
+      { q:'I know what I need. I just want it to arrive without me having to think about it.', src:'Lakshmi' }
+    ]},
+    { tag:'LAST MILE', title:'New Residential Areas Are a Consistent Gap', body:'HSR Layout, Bellandur, Whitefield — multiple respondents in newer residential corridors described delivery delays, address failures, and "serviceable area" gaps. These are exactly the high-income, pet-dense zones that represent the highest LTV customers.', count:'4/17', evidence:[
+      { q:'They couldn\'t find my address at 10pm. Elastic Run.', src:'Lakshmi · HSR Layout' },
+      { q:'Sometimes the delivery is late in my area. It is a new building.', src:'Ritik (A) · Bellandur' },
+      { q:'I have to give very detailed instructions for the delivery. The area is new.', src:'Anushi (G)' }
+    ]}
+  ],
+  verbatims: [
+    { tag:'URGENCY', q:'She needed medicine at 10pm. Elastic Run said they can\'t find the location. At 10pm. For medicine.', src:'Lakshmi · ST user · HSR Layout', lg:true, alt:false },
+    { tag:'PREDICTABILITY', q:'I order the same food every month. It is always the same thing. I just want it to arrive.', src:'Pratham (B) · ST user', lg:false, alt:true },
+    { tag:'LAST MILE', q:'Sometimes the delivery is late. My building is new. The map doesn\'t show it properly.', src:'Ritik (A) · ST user · Bellandur', lg:false, alt:false },
+    { tag:'URGENCY', q:'For medicine I want it immediately. Not tomorrow. Not in two hours. Now.', src:'Nazia (P) · Non-ST user', lg:false, alt:true },
+    { tag:'SUBSCRIPTION', q:'If there was an auto-order I would use it. I always buy the same thing every month anyway.', src:'Komal (K) · Non-ST user', lg:true, alt:false }
+  ],
+  provocations: [
+    { num:'01', title:'Lakshmi switched platforms after one 10pm delivery failure. She hasn\'t come back for pharmacy.', body:'This is not an outlier. It is the template for how high-value customers silently churn on last-mile failure. They don\'t complain. They adapt. They keep a medicine stock at home and stop relying on delivery for urgent needs.', evidence:[
+      { q:'After that I started keeping a stock. I don\'t trust last-minute delivery for medicines anymore.', src:'Lakshmi' }
+    ]},
+    { num:'02', title:'The highest-LTV customers live in the newest buildings that the delivery map hasn\'t caught up with yet.', body:'New residential corridors — HSR, Bellandur, Whitefield — skew young, high-income, and pet-dense. These are exactly the customers worth the most over a lifetime. They are also the hardest to serve with current last-mile infrastructure.', evidence:[
+      { q:'My building is new. Delivery always has trouble finding it.', src:'Ritik (A) · Bellandur' },
+      { q:'I have to send the location pin every time. The address system doesn\'t work here.', src:'Anushi (G)' }
+    ]}
+  ],
+  actions: [
+    { icon:'⚡', title:'Dark Store Pharmacy Pilot: Top-5 Pet-Parent Hubs', body:'Identify the 5 highest pet-parent density zones in Bangalore (HSR, Bellandur, Koramangala, Whitefield, Indiranagar). Place pharmacy inventory within 3km of each. 30-minute pharmacy delivery becomes a structural moat.', tactic:'Density analysis → dark store pilot → 30-min pharmacy SLA. Measure: pharmacy reorder rate.' },
+    { icon:'🔄', title:'Subscription Auto-Fulfillment: Eliminate the Reorder Event', body:'For the top 30 food SKUs, offer subscription auto-fulfillment at a 5% discount. The reorder event is a churn moment — every time a parent has to manually reorder, they might check Zepto\'s price. Eliminate the event.', tactic:'Subscription launch: top 30 SKUs. Price: -5% vs one-time. Measure: churn rate vs non-sub.' },
+    { icon:'🗺', title:'Last-Mile Address Audit: New Residential Corridors', body:'Map Supertails\' delivery success rate by pin code against new residential development. HSR, Bellandur, and Whitefield have known address resolution failures. Fix these proactively — these are the highest-value customers in the city.', tactic:'Pin code delivery success audit → partner with Google Maps / Locate In for new addresses' }
+  ]
+}
+
+}; // end DATA
+
+/* ============================================================
+   RENDERERS
+============================================================ */
+function renderThemes(fn) {
+  const el = document.getElementById('tc-' + fn);
+  if (!el) return;
+  el.innerHTML = D[fn].themes.map(t => `
+    <div class="theme-card" onclick="this.classList.toggle('open')">
+      <div class="tc-tag">${t.tag}</div>
+      <h3>${t.title}</h3>
+      <p>${t.body}</p>
+      <span class="tc-count">${t.count} respondents</span>
+      <div class="tc-evidence">
+        ${t.evidence.map(e => `
+          <div class="tc-quote">
+            <p>"${e.q}"</p>
+            <span>— ${e.src}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderBricks(fn) {
+  const el = document.getElementById('bw-' + fn);
+  if (!el) return;
+  el.innerHTML = D[fn].verbatims.map(v => `
+    <div class="brick${v.alt ? ' alt' : ''}${v.lg ? ' lg' : ''}">
+      <div class="btag">${v.tag}</div>
+      <div class="bq">"${v.q}"</div>
+      <div class="bs">— ${v.src}</div>
+    </div>
+  `).join('');
+}
+
+function renderProvocations(fn) {
+  const el = document.getElementById('pv-' + fn);
+  if (!el) return;
+  el.innerHTML = D[fn].provocations.map((p, i) => `
+    <div class="prov-tile" onclick="this.classList.toggle('open')">
+      <div class="prov-num">PROVOCATION ${String(i+1).padStart(2,'0')}</div>
+      <h3>${p.title}</h3>
+      <p>${p.body}</p>
+      <div class="prov-more">
+        ${p.evidence.map(e => `
+          <div class="prov-evidence">
+            <p>"${e.q}"</p>
+            <span>— ${e.src}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderActions(fn) {
+  const el = document.getElementById('ac-' + fn);
+  if (!el) return;
+  el.innerHTML = D[fn].actions.map(a => `
+    <div class="action-card">
+      <div class="ac-icon">${a.icon}</div>
+      <div>
+        <h4>${a.title}</h4>
+        <p>${a.body}</p>
+        <span class="ac-tactic">→ ${a.tactic}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function boot() {
+  const fns = ['marketplace','healthcare','retention','product','merch','digital','brand','cx','supply'];
+  fns.forEach(fn => {
+    renderThemes(fn);
+    renderBricks(fn);
+    renderProvocations(fn);
+    renderActions(fn);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.fn-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.fn-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.fn-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const fn = tab.dataset.fn;
+      document.querySelector(`.fn-panel[data-fn="${fn}"]`).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', boot);
+</script>
+</body>
+</html>
