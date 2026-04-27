@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLR Research — Brand-First Leadership View | Supertails</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Design tokens ───────────────────────────────────────── */
+  :root {
+    --st-green:       #2ECC71;
+    --st-green-deep:  #1A7A44;
+    --st-green-soft:  #E8F8EF;
+    --st-black:       #0F0F0F;
+    --st-white:       #FAFAF8;
+    --st-cream:       #F5F3EE;
+    --ink-1:          #0F0F0F;
+    --ink-2:          #2C2C2C;
+    --ink-3:          #5E5E5E;
+    --ink-4:          #9A9A9A;
+    --line:           #E2E2DC;
+    --amber:          #F59E0B;
+    --red:            #EF4444;
+    --font-display:   'Poppins', sans-serif;
+    --font-body:      'Nunito Sans', sans-serif;
+  }
+
+  /* ── Reset ───────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--st-cream);
+    color: var(--ink-1);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── Utility ─────────────────────────────────────────────── */
+  .section-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 64px 0; }
+  .section + .section { border-top: 1px solid var(--line); }
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--st-green-deep);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 800;
+    color: var(--ink-1);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .section-intro {
+    color: var(--ink-3);
+    max-width: 720px;
+    margin-bottom: 36px;
+    font-size: 14px;
+  }
+  .so-what {
+    background: var(--st-green-soft);
+    border-left: 4px solid var(--st-green);
+    padding: 14px 20px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--st-green-deep);
+    margin-top: 32px;
+  }
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .pill-green  { background: var(--st-green-soft); color: var(--st-green-deep); }
+  .pill-amber  { background: #FEF3C7; color: #92400E; }
+  .pill-red    { background: #FEE2E2; color: #991B1B; }
+  .pill-blue   { background: #DBEAFE; color: #1E40AF; }
+  .pill-purple { background: #EDE9FE; color: #5B21B6; }
+  .pill-pink   { background: #FCE7F3; color: #9D174D; }
+  .pill-orange { background: #FFEDD5; color: #9A3412; }
+  .pill-gray   { background: #F3F4F6; color: #374151; }
+
+  /* ── Nav ─────────────────────────────────────────────────── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--st-black);
+    border-bottom: 1px solid #222;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 48px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--st-green);
+    white-space: nowrap;
+    margin-right: 12px;
+  }
+  nav a {
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+  }
+  nav a:hover { color: #fff; background: #1a1a1a; }
+
+  /* ── Executive Summary Bar ───────────────────────────────── */
+  #exec-bar {
+    background: var(--st-black);
+    color: var(--st-white);
+    padding: 40px 0 36px;
+  }
+  .exec-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .exec-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--st-green);
+    margin-bottom: 6px;
+  }
+  .exec-headline {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 32px;
+  }
+  .exec-headline span { color: var(--st-green); }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #222;
+    border: 1px solid #222;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .stat-cell {
+    background: #161616;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--st-green);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.4;
+  }
+  .exec-tagline {
+    font-size: 15px;
+    color: #ccc;
+    border-left: 3px solid var(--st-green);
+    padding-left: 16px;
+    font-style: italic;
+  }
+  .exec-tagline strong { color: #fff; font-style: normal; }
+
+  /* ── Section 1: Scorecard ────────────────────────────────── */
+  #scorecard { background: var(--st-white); }
+
+  .scorecard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .scorecard-table thead tr {
+    background: var(--st-black);
+    color: var(--st-white);
+  }
+  .scorecard-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .scorecard-table tbody tr {
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+    cursor: default;
+  }
+  .scorecard-table tbody tr:hover { background: var(--st-cream); }
+  .scorecard-table td {
+    padding: 16px;
+    vertical-align: top;
+  }
+  .attr-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-1);
+  }
+  .score-cell { width: 120px; }
+  .score-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .score-bar-bg {
+    width: 64px;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+  .score-num {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 800;
+  }
+  .score-green { background: var(--st-green); color: var(--st-green-deep); }
+  .score-amber { background: var(--amber); color: #92400E; }
+  .score-red   { background: var(--red); color: #991B1B; }
+  .evidence-text { font-size: 13px; color: var(--ink-3); line-height: 1.5; }
+  .evidence-text .good { color: var(--st-green-deep); font-weight: 600; }
+  .evidence-text .bad  { color: #B91C1C; font-weight: 600; }
+  .overall-score-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: var(--st-black);
+    border-radius: 12px;
+    color: var(--st-white);
+  }
+  .overall-score-num {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--amber);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .overall-score-label {
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.5;
+  }
+  .overall-score-label strong { color: #fff; display: block; font-size: 16px; margin-bottom: 2px; }
+
+  /* ── Section 2: Persona Cards ────────────────────────────── */
+  #personas { background: var(--st-cream); }
+
+  .persona-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .persona-card {
+    background: var(--st-white);
+    border-radius: 16px;
+    border: 2px solid var(--line);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .persona-card:hover {
+    border-color: #ccc;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .persona-card.expanded { border-color: var(--persona-accent); }
+  .persona-header {
+    padding: 24px 24px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .persona-name-block { flex: 1; }
+  .persona-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--ink-1);
+  }
+  .persona-meta { font-size: 12px; color: var(--ink-4); margin-top: 2px; }
+  .persona-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 900;
+    flex-shrink: 0;
+    color: #fff;
+  }
+  .persona-position {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-2);
+    padding: 12px 24px 0;
+  }
+  .persona-preview {
+    padding: 12px 24px 20px;
+  }
+  .persona-risk-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 4px;
+  }
+  .persona-risk-text {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .persona-expand-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-4);
+    padding: 0 24px 16px;
+  }
+  .persona-expand-hint .chevron { transition: transform 0.25s; display: inline-block; }
+  .persona-card.expanded .chevron { transform: rotate(180deg); }
+  .persona-detail {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--line);
+    margin-top: 4px;
+  }
+  .persona-card.expanded .persona-detail { display: block; }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .detail-block-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-4);
+    margin-bottom: 6px;
+  }
+  .detail-block-text { font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+  .priority-action-bar {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .risk-tag {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-3);
+  }
+
+  /* ── Section 3: Gap Matrix ───────────────────────────────── */
+  #gaps { background: var(--st-white); }
+
+  .matrix-container {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+  .matrix-svg-wrap { position: relative; width: 100%; padding-top: 75%; }
+  .matrix-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  /* dot tooltip */
+  .gap-tooltip {
+    position: fixed;
+    background: var(--st-black);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 999;
+    max-width: 200px;
+    line-height: 1.4;
+  }
+  .gap-tooltip.visible { opacity: 1; }
+
+  .gap-table-wrap { overflow-x: auto; }
+  .gap-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .gap-table thead tr { background: var(--st-black); color: #fff; }
+  .gap-table th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .gap-table th:hover { background: #222; }
+  .gap-table th .sort-icon { margin-left: 4px; color: #666; font-size: 10px; }
+  .gap-table th.sorted .sort-icon { color: var(--st-green); }
+  .gap-table tbody tr { border-bottom: 1px solid var(--line); transition: background 0.12s; }
+  .gap-table tbody tr:hover { background: var(--st-cream); }
+  .gap-table td { padding: 12px 14px; vertical-align: middle; }
+  .gap-name { font-weight: 600; color: var(--ink-1); }
+
+  /* ── Section 4: Decision Cards ───────────────────────────── */
+  #decisions { background: var(--st-black); }
+  #decisions .section-label { color: var(--st-green); }
+  #decisions .section-title { color: var(--st-white); }
+  #decisions .section-intro { color: #888; }
+
+  .decisions-grid { display: grid; gap: 20px; }
+  .decision-card {
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .decision-card:hover { border-color: #444; }
+  .decision-card.expanded { border-color: var(--st-green); }
+  .decision-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 28px;
+  }
+  .decision-num {
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 900;
+    color: #2a2a2a;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 64px;
+    text-align: center;
+  }
+  .decision-card.expanded .decision-num { color: var(--st-green); }
+  .decision-body { flex: 1; }
+  .decision-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--st-white);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .decision-why {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+  }
+  .decision-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .decision-expand-hint {
+    font-size: 12px;
+    color: #555;
+    padding: 0 28px 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .decision-card.expanded .decision-expand-hint { color: #777; }
+  .decision-evidence {
+    display: none;
+    border-top: 1px solid #222;
+    padding: 20px 28px 24px;
+  }
+  .decision-card.expanded .decision-evidence { display: block; }
+  .evidence-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #555;
+    margin-bottom: 12px;
+  }
+  .evidence-quotes { display: flex; flex-direction: column; gap: 10px; }
+  .evidence-quote {
+    background: #1d1d1d;
+    border-left: 3px solid var(--st-green);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #ccc;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .evidence-quote cite {
+    display: block;
+    font-style: normal;
+    font-size: 11px;
+    color: #555;
+    margin-top: 4px;
+  }
+  .pill-urgency-now  { background: #2ECC7122; color: var(--st-green); border: 1px solid #2ECC7144; }
+  .pill-urgency-next { background: #F59E0B22; color: var(--amber); border: 1px solid #F59E0B44; }
+
+  /* ── Section 5: Ownership Table ─────────────────────────── */
+  #ownership { background: var(--st-cream); }
+
+  .ownership-table-wrap { overflow-x: auto; }
+  .ownership-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 820px;
+  }
+  .ownership-table thead tr { background: var(--st-black); color: #fff; }
+  .ownership-table th {
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .ownership-table th:hover { background: #222; }
+  .ownership-table th.sorted { color: var(--st-green); }
+  .ownership-table tbody tr { border-bottom: 1px solid var(--line); transition: background 0.12s; }
+  .ownership-table tbody tr:hover { background: #ece9e4; }
+  .ownership-table td { padding: 12px 14px; vertical-align: top; }
+  .gap-gap { font-weight: 700; color: var(--ink-1); }
+  .horizon-cell { font-size: 12px; color: var(--ink-3); line-height: 1.45; }
+
+  /* ── Footer ──────────────────────────────────────────────── */
+  footer {
+    background: var(--st-black);
+    color: #444;
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 12px;
+  }
+  footer span { color: #666; }
+
+  /* ── Responsive ──────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .persona-grid { grid-template-columns: 1fr; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .scorecard-table th:nth-child(3),
+    .scorecard-table td:nth-child(3) { display: none; }
+  }
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .decision-num { font-size: 36px; width: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Nav ───────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Supertails × BLR</div>
+    <a href="#exec-bar">Summary</a>
+    <a href="#scorecard">Scorecard</a>
+    <a href="#personas">Personas</a>
+    <a href="#gaps">Gap Matrix</a>
+    <a href="#decisions">Decisions</a>
+    <a href="#ownership">Ownership</a>
+  </div>
+</nav>
+
+<!-- ── Executive Summary Bar ─────────────────────────────────── -->
+<section id="exec-bar">
+  <div class="exec-inner">
+    <div class="exec-eyebrow">BLR Ethnographic Research — Leadership View · 17 Respondents · April 2026</div>
+    <div class="exec-headline">Brand-First Lens on<br><span>Bangalore Pet Parents</span></div>
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-number">10/17</div>
+        <div class="stat-label">immigrants with no local support system — Supertails' biggest acquisition opening</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">4/5</div>
+        <div class="stat-label">Ashok-type parents are NOT Supertails users — highest-LTV segment, largely unacquired</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">0</div>
+        <div class="stat-label">responses to detailed user feedback submitted — the silence is the brand signal</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">1</div>
+        <div class="stat-label">failed 10pm delivery = category trust lost for 6 months — no recovery protocol exists</div>
+      </div>
+    </div>
+    <div class="exec-tagline">
+      <strong>"The research is clear. The brand promise is strong. The gap is in execution."</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ── Section 1: Sidekick Scorecard ─────────────────────────── -->
+<section id="scorecard" class="section">
+  <div class="section-wrap">
+    <div class="section-label">Section 01</div>
+    <div class="section-title">How well is Supertails being the sidekick?<br>Scored against 17 real BLR interactions.</div>
+    <div class="section-intro">The manifesto defines 5 brand attributes every persona needs: Reliable, Friendly, Resilient, Capable, Empathetic. Below is an honest score for each, grounded in transcript evidence.</div>
+
+    <div style="overflow-x:auto;">
+    <table class="scorecard-table">
+      <thead>
+        <tr>
+          <th>Brand Attribute</th>
+          <th>Score</th>
+          <th>Getting Right</th>
+          <th>Failing On</th>
+          <th>Primary Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="attr-name">Reliable</div></td>
+          <td class="score-cell">
+            <div class="score-bar-wrap">
+              <div class="score-bar-bg"><div class="score-bar-fill score-red" style="width:40%"></div></div>
+              <span class="score-num" style="color:#EF4444">2/5</span>
+            </div>
+          </td>
+          <td><div class="evidence-text"><span class="good">Proactive vaccine call. Clinic quality.</span></div></td>
+          <td><div class="evidence-text"><span class="bad">10pm pharmacy failure. App lag (5–10s). Elastic Run handoffs.</span></div></td>
+          <td><span class="pill pill-gray">Operations</span> <span class="pill pill-blue">Product</span></td>
+        </tr>
+        <tr>
+          <td><div class="attr-name">Friendly</div></td>
+          <td class="score-cell">
+            <div class="score-bar-wrap">
+              <div class="score-bar-bg"><div class="score-bar-fill score-amber" style="width:60%"></div></div>
+              <span class="score-num" style="color:#F59E0B">3/5</span>
+            </div>
+          </td>
+          <td><div class="evidence-text"><span class="good">Gifts in orders. Clinic walkthrough experience. Brand warmth online.</span></div></td>
+          <td><div class="evidence-text"><span class="bad">Kannada-only grooming staff. Anxious-pet rejection at grooming.</span></div></td>
+          <td><span class="pill pill-gray">CX</span> <span class="pill pill-gray">HR</span></td>
+        </tr>
+        <tr>
+          <td><div class="attr-name">Resilient</div></td>
+          <td class="score-cell">
+            <div class="score-bar-wrap">
+              <div class="score-bar-bg"><div class="score-bar-fill score-red" style="width:20%"></div></div>
+              <span class="score-num" style="color:#EF4444">1/5</span>
+            </div>
+          </td>
+          <td><div class="evidence-text"><span style="color:var(--ink-4)">— Nothing evidenced.</span></div></td>
+          <td><div class="evidence-text"><span class="bad">Zero response to bug reports. No delivery failure recovery protocol.</span></div></td>
+          <td><span class="pill pill-blue">Product</span> <span class="pill pill-gray">CX</span></td>
+        </tr>
+        <tr>
+          <td><div class="attr-name">Capable</div></td>
+          <td class="score-cell">
+            <div class="score-bar-wrap">
+              <div class="score-bar-bg"><div class="score-bar-fill score-green" style="width:80%"></div></div>
+              <span class="score-num" style="color:var(--st-green-deep)">4/5</span>
+            </div>
+          </td>
+          <td><div class="evidence-text"><span class="good">Vet expertise. Fear-free, species-separated clinic design. Full-stack offer.</span></div></td>
+          <td><div class="evidence-text"><span class="bad">At-home preference without doctor involvement. App doesn't know your pet.</span></div></td>
+          <td><span class="pill pill-green">Healthcare</span> <span class="pill pill-blue">Product</span></td>
+        </tr>
+        <tr>
+          <td><div class="attr-name">Empathetic</div></td>
+          <td class="score-cell">
+            <div class="score-bar-wrap">
+              <div class="score-bar-bg"><div class="score-bar-fill score-red" style="width:40%"></div></div>
+              <span class="score-num" style="color:#EF4444">2/5</span>
+            </div>
+          </td>
+          <td><div class="evidence-text"><span class="good">Welfare-first positioning resonates. Free gifts remembered weeks later.</span></div></td>
+          <td><div class="evidence-text"><span class="bad">Grooming rejection of anxious pets. Feedback void. Language exclusion.</span></div></td>
+          <td><span class="pill pill-purple">Brand</span> <span class="pill pill-gray">CX</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="overall-score-bar">
+      <div class="overall-score-num">2.4<span style="font-size:24px;color:#666">/5</span></div>
+      <div class="overall-score-label">
+        <strong>Overall Sidekick Score</strong>
+        Across 17 BLR interactions, 5 brand attributes. Capability is real and differentiated. Reliability and Empathy gaps are driving silent churn in Shalaka and blocking Ashok acquisition entirely.
+      </div>
+    </div>
+
+    <div class="so-what">The capability is real. The reliability and empathy gaps are what's costing us the Ashok segment and creating silent churn in Shalaka.</div>
+  </div>
+</section>
+
+<!-- ── Section 2: Persona Business Impact ────────────────────── -->
+<section id="personas" class="section">
+  <div class="section-wrap">
+    <div class="section-label">Section 02</div>
+    <div class="section-title">Which persona represents the biggest commercial risk right now?</div>
+    <div class="section-intro">4 persona cards with commercial framing — position, risk, opportunity, and priority action. Click any card to expand.</div>
+
+    <div class="persona-grid">
+
+      <!-- Aarav -->
+      <div class="persona-card" onclick="togglePersona(this)" style="--persona-accent:#F97316;">
+        <div class="persona-header">
+          <div class="persona-name-block">
+            <div class="persona-name">Aarav</div>
+            <div class="persona-meta">5 of 17 · 29% of sample · <strong>Calming Coach</strong></div>
+          </div>
+          <div class="persona-badge" style="background:#F97316;">A</div>
+        </div>
+        <div class="persona-position"><span class="pill pill-orange">Acquisition stage</span></div>
+        <div class="persona-preview">
+          <div class="persona-risk-label">Primary Risk</div>
+          <div class="persona-risk-text">Arrives via Google search. First touchpoint is app speed (5–10s lag) and grooming (rejection). Converts initially, bleeds to Zepto on food reorders.</div>
+        </div>
+        <div class="persona-expand-hint">
+          <span class="chevron">▼</span> Click to expand full detail
+        </div>
+        <div class="persona-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-block-label">Opportunity</div>
+              <div class="detail-block-text">Highest responsiveness to proactive coaching. The Calming Coach who shows up at arrival night, first vet visit, first illness — captures this cohort for 10+ years.</div>
+            </div>
+            <div>
+              <div class="detail-block-label">Revenue Risk if Unaddressed</div>
+              <div class="detail-block-text"><strong style="color:#F97316;">High.</strong> First-timer cohort = long lifetime if retained early. Every Aarav lost at month 1 is a decade of LTV gone.</div>
+            </div>
+          </div>
+          <div class="priority-action-bar" style="background:#FFEDD5;border-left:3px solid #F97316;">
+            <div class="detail-block-label" style="margin-bottom:4px;">Priority Action</div>
+            <div style="font-size:13px;color:#9A3412;font-weight:600;">Arrival-night onboarding sequence + App performance sprint to sub-2s</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shalaka -->
+      <div class="persona-card" onclick="togglePersona(this)" style="--persona-accent:#8B5CF6;">
+        <div class="persona-header">
+          <div class="persona-name-block">
+            <div class="persona-name">Shalaka</div>
+            <div class="persona-meta">4 of 17 · 24% of sample · <strong>Thoughtful Friend</strong></div>
+          </div>
+          <div class="persona-badge" style="background:#8B5CF6;">S</div>
+        </div>
+        <div class="persona-position"><span class="pill pill-purple">Loyal — but narrowly</span></div>
+        <div class="persona-preview">
+          <div class="persona-risk-label">Primary Risk</div>
+          <div class="persona-risk-text">Loyalty is to the vet, not the brand. Will switch platforms for food (Zepto), grooming (competitor), accessories (anywhere). The relationship is narrower than it appears.</div>
+        </div>
+        <div class="persona-expand-hint">
+          <span class="chevron">▼</span> Click to expand full detail
+        </div>
+        <div class="persona-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-block-label">Opportunity</div>
+              <div class="detail-block-text">Shalaka has made the pet her identity. One piece of content that names her bond correctly is worth 10 performance ads. The brand relationship can widen if we earn it.</div>
+            </div>
+            <div>
+              <div class="detail-block-label">Revenue Risk if Unaddressed</div>
+              <div class="detail-block-text"><strong style="color:#8B5CF6;">Medium.</strong> Loyal on healthcare. At risk on all other categories — food, accessories, grooming. Category breadth is thin.</div>
+            </div>
+          </div>
+          <div class="priority-action-bar" style="background:#EDE9FE;border-left:3px solid #8B5CF6;">
+            <div class="detail-block-label" style="margin-bottom:4px;">Priority Action</div>
+            <div style="font-size:13px;color:#5B21B6;font-weight:600;">Doctor preference toggle + identity-bond content series</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Akanksha -->
+      <div class="persona-card" onclick="togglePersona(this)" style="--persona-accent:#EC4899;">
+        <div class="persona-header">
+          <div class="persona-name-block">
+            <div class="persona-name">Akanksha</div>
+            <div class="persona-meta">3 of 17 · 18% of sample · <strong>Soft-spoken Expert</strong></div>
+          </div>
+          <div class="persona-badge" style="background:#EC4899;">A</div>
+        </div>
+        <div class="persona-position"><span class="pill pill-pink">Values-led, advocacy-driven</span></div>
+        <div class="persona-preview">
+          <div class="persona-risk-label">Primary Risk</div>
+          <div class="persona-risk-text">Buys on values alignment. If welfare positioning is thin or performative, she notices and disengages. Most likely to advocate negatively if disappointed.</div>
+        </div>
+        <div class="persona-expand-hint">
+          <span class="chevron">▼</span> Click to expand full detail
+        </div>
+        <div class="persona-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-block-label">Opportunity</div>
+              <div class="detail-block-text">Specific, verifiable welfare commitments (rescue meals funded, vet visits supported) create the strongest Akanksha loyalty. She doesn't want feel-good. She wants facts.</div>
+            </div>
+            <div>
+              <div class="detail-block-label">Revenue Risk if Unaddressed</div>
+              <div class="detail-block-text"><strong style="color:#EC4899;">Low-medium.</strong> Smaller cohort, but highest advocacy multiplier in the room. Negative word-of-mouth risk is real.</div>
+            </div>
+          </div>
+          <div class="priority-action-bar" style="background:#FCE7F3;border-left:3px solid #EC4899;">
+            <div class="detail-block-label" style="margin-bottom:4px;">Priority Action</div>
+            <div style="font-size:13px;color:#9D174D;font-weight:600;">Welfare impact reporting + indie pet content programme</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ashok -->
+      <div class="persona-card" onclick="togglePersona(this)" style="--persona-accent:#3B82F6;">
+        <div class="persona-header">
+          <div class="persona-name-block">
+            <div class="persona-name">Ashok</div>
+            <div class="persona-meta">5 of 17 · 29% of sample · <strong>Expert Executor</strong></div>
+          </div>
+          <div class="persona-badge" style="background:#3B82F6;">A</div>
+        </div>
+        <div class="persona-position"><span class="pill pill-red">HIGHEST COMMERCIAL RISK</span></div>
+        <div class="persona-preview">
+          <div class="persona-risk-label">Primary Risk</div>
+          <div class="persona-risk-text">Has a system. Trusts a vet (not Supertails). Food via Zepto/Amazon. Groomer elsewhere. Supertails is not in his system. 4 of 5 are NOT Supertails users.</div>
+        </div>
+        <div class="persona-expand-hint">
+          <span class="chevron">▼</span> Click to expand full detail
+        </div>
+        <div class="persona-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-block-label">Opportunity</div>
+              <div class="detail-block-text">If Supertails enters the Ashok system once — pharmacy emergency, vet recommendation, single frictionless order — and performs, he converts. He doesn't switch lightly. When he does, he stays.</div>
+            </div>
+            <div>
+              <div class="detail-block-label">Revenue Risk if Unaddressed</div>
+              <div class="detail-block-text"><strong style="color:#3B82F6;">Critical.</strong> Highest LTV segment, largely unacquired. Every month of inaction = cohort of high-value customers acquired by competitors by default. Evidence: Sandeep (H), Nitesh (J), Komal (K), Reshma (Q).</div>
+            </div>
+          </div>
+          <div class="priority-action-bar" style="background:#DBEAFE;border-left:3px solid #3B82F6;">
+            <div class="detail-block-label" style="margin-bottom:4px;">Priority Action</div>
+            <div style="font-size:13px;color:#1E40AF;font-weight:600;">Pharmacy 30-min launch · Seamless app experience · Vet referral programme</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="so-what">Ashok is the priority commercial problem. Aarav is the priority retention problem. Shalaka is the category-breadth problem. All three are solvable with the right product + CRM moves.</div>
+  </div>
+</section>
+
+<!-- ── Section 3: Gap × Priority Matrix ──────────────────────── -->
+<section id="gaps" class="section">
+  <div class="section-wrap">
+    <div class="section-label">Section 03</div>
+    <div class="section-title">9 gaps. Ranked by impact and effort.</div>
+    <div class="section-intro">Plotted on a 2×2. Hover on any dot for gap detail. Sortable table below.</div>
+
+    <div class="matrix-container">
+      <div class="matrix-svg-wrap">
+        <canvas class="matrix-canvas" id="matrixCanvas"></canvas>
+      </div>
+    </div>
+    <div id="gapTooltip" class="gap-tooltip"></div>
+
+    <div class="gap-table-wrap">
+      <table class="gap-table" id="gapTable">
+        <thead>
+          <tr>
+            <th onclick="sortTable('gapTable',0)" data-col="0">Gap <span class="sort-icon">↕</span></th>
+            <th onclick="sortTable('gapTable',1)" data-col="1">Impact <span class="sort-icon">↕</span></th>
+            <th onclick="sortTable('gapTable',2)" data-col="2">Effort <span class="sort-icon">↕</span></th>
+            <th onclick="sortTable('gapTable',3)" data-col="3">Quadrant <span class="sort-icon">↕</span></th>
+            <th onclick="sortTable('gapTable',4)" data-col="4">Owner <span class="sort-icon">↕</span></th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="gapTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="so-what">5 of 9 gaps are Do Now / low-to-medium effort. There is no resource justification for waiting. Every week of delay on doctor preference toggle and feedback SLA is passive brand damage.</div>
+  </div>
+</section>
+
+<!-- ── Section 4: The 3 Decisions ────────────────────────────── -->
+<section id="decisions" class="section">
+  <div class="section-wrap">
+    <div class="section-label">Section 04</div>
+    <div class="section-title">If leadership takes 3 decisions from this research, these are the ones.</div>
+    <div class="section-intro">Infrastructure, go-to-market, and strategy. All grounded in transcript evidence. Click to expand evidence quotes.</div>
+
+    <div class="decisions-grid">
+
+      <!-- Decision 1 -->
+      <div class="decision-card" onclick="toggleDecision(this)">
+        <div class="decision-header">
+          <div class="decision-num">01</div>
+          <div class="decision-body">
+            <div class="decision-title">Launch 30-minute pharmacy in BLR's top-5 pet-parent hubs.</div>
+            <div class="decision-why">Pharmacy urgency is the highest-loyalty, highest-margin, non-price-sensitive moment on the platform. One failed delivery costs 6 months of category trust. Winning this moment creates a moat qcomm cannot replicate — they can do speed, but they cannot do vet-recommended dispensing at 10pm.</div>
+            <div class="decision-meta">
+              <span class="pill" style="background:#2ECC7122;color:var(--st-green);border:1px solid #2ECC7144;">Operations + Product</span>
+              <span class="pill" style="background:#2ECC7122;color:var(--st-green);border:1px solid #2ECC7144;">Infrastructure investment</span>
+              <span class="pill pill-urgency-now">This quarter</span>
+            </div>
+          </div>
+        </div>
+        <div class="decision-expand-hint"><span class="chevron" style="transition:transform 0.25s;display:inline-block;">▼</span> Expand evidence</div>
+        <div class="decision-evidence">
+          <div class="evidence-label">Transcript Evidence</div>
+          <div class="evidence-quotes">
+            <div class="evidence-quote">"I ordered at 10pm. The delivery never came. I had to manage my dog through the night without the medication." <cite>— Lakshmi, Respondent</cite></div>
+            <div class="evidence-quote">"When my pet is sick, I want it now. Not tomorrow morning. Now." <cite>— Nazia, Respondent</cite></div>
+            <div class="evidence-quote">5 of 17 respondents described pharmacy urgency as a primary pain point. None described a satisfactory resolution from the platform.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision 2 -->
+      <div class="decision-card" onclick="toggleDecision(this)">
+        <div class="decision-header">
+          <div class="decision-num">02</div>
+          <div class="decision-body">
+            <div class="decision-title">Fix the Ashok acquisition problem.</div>
+            <div class="decision-why">5 of 17 respondents are Ashok-type — the highest-LTV, most protocol-driven, most efficient segment. 4 of 5 are not Supertails users. They have existing systems. Supertails is not in them. Every month this continues is a cohort of high-LTV customers being acquired by competitors by default.</div>
+            <div class="decision-meta">
+              <span class="pill" style="background:#2ECC7122;color:var(--st-green);border:1px solid #2ECC7144;">Product + Marketing + CX</span>
+              <span class="pill" style="background:#2ECC7122;color:var(--st-green);border:1px solid #2ECC7144;">Go-to-market + product</span>
+              <span class="pill pill-urgency-now">This quarter</span>
+            </div>
+          </div>
+        </div>
+        <div class="decision-expand-hint"><span class="chevron" style="transition:transform 0.25s;display:inline-block;">▼</span> Expand evidence</div>
+        <div class="decision-evidence">
+          <div class="evidence-label">Transcript Evidence</div>
+          <div class="evidence-quotes">
+            <div class="evidence-quote">"I order from Amazon. Same brand every time. I know what my dog needs and it just shows up." <cite>— Sandeep H, non-ST Ashok respondent</cite></div>
+            <div class="evidence-quote">"My vet gives me a list. I buy from wherever it's in stock and ships fast. I don't have brand loyalty to a platform." <cite>— Nitesh J, non-ST Ashok respondent</cite></div>
+            <div class="evidence-quote">Komal K and Reshma Q: both established routines with zero Supertails presence. Neither had been targeted or acquired by any Supertails channel.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision 3 -->
+      <div class="decision-card" onclick="toggleDecision(this)">
+        <div class="decision-header">
+          <div class="decision-num">03</div>
+          <div class="decision-body">
+            <div class="decision-title">Build the conviction parent into the brand strategy.</div>
+            <div class="decision-why">The manifesto has 4 personas. Bangalore has a 5th — the conviction-driven, welfare-first, high-knowledge parent who doesn't fit any archetype. This is Smrithi, Lakshmi, Unit F, Vihaar, Unit N. 5 of 17. They are the highest advocacy multiplier in the room and currently underserved by both content and positioning.</div>
+            <div class="decision-meta">
+              <span class="pill" style="background:#2ECC7122;color:var(--st-green);border:1px solid #2ECC7144;">Brand</span>
+              <span class="pill" style="background:#2ECC7122;color:var(--st-green);border:1px solid #2ECC7144;">Strategy / positioning</span>
+              <span class="pill pill-urgency-next">Next quarter</span>
+            </div>
+          </div>
+        </div>
+        <div class="decision-expand-hint"><span class="chevron" style="transition:transform 0.25s;display:inline-block;">▼</span> Expand evidence</div>
+        <div class="decision-evidence">
+          <div class="evidence-label">Transcript Evidence</div>
+          <div class="evidence-quotes">
+            <div class="evidence-quote">"I have 40 strays I feed and 6 Persians at home. My entire life is organised around what they need." <cite>— Unit F, high-knowledge multi-pet parent</cite></div>
+            <div class="evidence-quote">"I don't want to be told to love my pet. I already do. I want to be given the right tools." <cite>— Vihaar, conviction parent</cite></div>
+            <div class="evidence-quote">Smrithi and Lakshmi: both described the brand as warm but insufficient — the depth of their knowledge exceeded the depth of the content they were being served.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="so-what" style="background:#1d1d1d;border-left-color:var(--st-green);color:#ccc;">Two of three decisions are executable this quarter with existing teams. Decision 3 is strategy — it shapes the AOP, not a sprint ticket.</div>
+  </div>
+</section>
+
+<!-- ── Section 5: Cross-Functional Ownership ─────────────────── -->
+<section id="ownership" class="section">
+  <div class="section-wrap">
+    <div class="section-label">Section 05</div>
+    <div class="section-title">Who owns what. From this research.</div>
+    <div class="section-intro">9 gaps, named owners, 30/60/90 day horizon. Sortable by owner. Click column headers to sort.</div>
+
+    <div class="ownership-table-wrap">
+      <table class="ownership-table" id="ownerTable">
+        <thead>
+          <tr>
+            <th onclick="sortTable('ownerTable',0)" data-col="0">Gap <span class="sort-icon">↕</span></th>
+            <th onclick="sortTable('ownerTable',1)" data-col="1">Primary Owner <span class="sort-icon">↕</span></th>
+            <th>Support</th>
+            <th>30 Days</th>
+            <th>60 Days</th>
+            <th>90 Days</th>
+          </tr>
+        </thead>
+        <tbody id="ownerTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="so-what">Every gap has an owner. No gap requires cross-functional negotiation to start. The 30-day actions are unblocked today.</div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────── -->
+<footer>
+  <div>Supertails · BLR Ethnographic Research · Leadership View · <span>April 2026</span></div>
+  <div style="margin-top:6px;">17 respondents · 5 neighbourhoods · Koramangala, JP Nagar, HSR, Whitefield, Indiranagar</div>
+</footer>
+
+<!-- ── JS ─────────────────────────────────────────────────────── -->
+<script>
+// ── Data ─────────────────────────────────────────────────────────
+const gapData = [
+  { name: 'App performance (sub-2s)',        impact: 'High',   effort: 'Medium', quadrant: 'Do Now',        owner: 'Product',       status: 'Not started' },
+  { name: 'Doctor preference toggle',        impact: 'High',   effort: 'Low',    quadrant: 'Do Now',        owner: 'Product',       status: 'Not started' },
+  { name: '30-min pharmacy: BLR top-5 hubs', impact: 'High',   effort: 'High',   quadrant: 'Plan Now',      owner: 'Operations',    status: 'Not started' },
+  { name: 'Arrival-night onboarding',        impact: 'High',   effort: 'Low',    quadrant: 'Do Now',        owner: 'CRM/Retention', status: 'Not started' },
+  { name: 'Feedback acknowledgment SLA 24hr',impact: 'Medium', effort: 'Low',    quadrant: 'Do Now',        owner: 'CX',            status: 'Not started' },
+  { name: 'Bilingual CX: Hindi/English min', impact: 'Medium', effort: 'Medium', quadrant: 'Do Next',       owner: 'HR / CX',       status: 'Not started' },
+  { name: 'Grooming anxious-pet protocol',   impact: 'Medium', effort: 'Low',    quadrant: 'Do Next',       owner: 'CX / Ops',      status: 'Not started' },
+  { name: 'Welfare impact reporting',        impact: 'Medium', effort: 'Medium', quadrant: 'Do Next',       owner: 'Brand',         status: 'Not started' },
+  { name: 'Delivery failure auto-recovery',  impact: 'High',   effort: 'Medium', quadrant: 'Do Now',        owner: 'Operations',    status: 'Not started' },
+];
+
+const ownerData = [
+  { gap: 'App performance',          owner: 'Product',       support: 'Engineering',      d30: 'Audit + targets set',        d60: 'Sprint 1 complete',         d90: 'Sub-2s on top 3 screens' },
+  { gap: 'Doctor preference toggle', owner: 'Product',       support: 'Healthcare',       d30: 'Design spec',                d60: 'Build',                     d90: 'Live' },
+  { gap: '30-min pharmacy pilot',    owner: 'Operations',    support: 'Product',          d30: 'Location analysis',          d60: 'Dark store contracted',     d90: 'Pilot live (2 hubs)' },
+  { gap: 'Arrival-night onboarding', owner: 'CRM/Retention', support: 'Brand',            d30: 'Sequence designed',          d60: 'Live in CleverTap',         d90: 'First cohort complete' },
+  { gap: 'Feedback acknowledgment SLA', owner: 'CX',        support: 'Product',          d30: 'Auto-reply live',            d60: 'Triage process built',      d90: 'First monthly fix log' },
+  { gap: 'Bilingual CX',             owner: 'HR / CX',       support: 'Ops',              d30: 'Gap audit',                  d60: 'Hiring / training plan',    d90: 'Hindi/English min live' },
+  { gap: 'Grooming protocol',        owner: 'CX / Ops',      support: 'Brand',            d30: 'Protocol written',           d60: 'Training done',             d90: 'Live at all locations' },
+  { gap: 'Welfare impact reporting', owner: 'Brand',         support: 'Finance / Ops',    d30: 'Metric defined',             d60: 'First report drafted',      d90: 'Published' },
+  { gap: 'Delivery failure recovery',owner: 'Operations',    support: 'CX',               d30: 'Protocol designed',          d60: 'System triggered',          d90: 'Live + measured' },
+];
+
+// ── Render gap table ─────────────────────────────────────────────
+function impactOrder(v) { return {High:0, Medium:1, Low:2}[v] ?? 3; }
+function effortOrder(v) { return {Low:0, Medium:1, High:2}[v] ?? 3; }
+function quadrantOrder(v) { return {'Do Now':0,'Plan Now':1,'Do Next':2,'Deprioritise':3}[v] ?? 4; }
+
+function impactPill(v) {
+  if (v==='High')   return `<span class="pill pill-red">${v}</span>`;
+  if (v==='Medium') return `<span class="pill pill-amber">${v}</span>`;
+  return `<span class="pill pill-gray">${v}</span>`;
+}
+function effortPill(v) {
+  if (v==='Low')    return `<span class="pill pill-green">${v}</span>`;
+  if (v==='Medium') return `<span class="pill pill-amber">${v}</span>`;
+  return `<span class="pill pill-red">${v}</span>`;
+}
+function quadrantPill(v) {
+  const map = {
+    'Do Now':    'pill-red',
+    'Plan Now':  'pill-purple',
+    'Do Next':   'pill-amber',
+    'Deprioritise': 'pill-gray'
+  };
+  return `<span class="pill ${map[v]||'pill-gray'}">${v}</span>`;
+}
+
+function renderGapTable(data) {
+  const tbody = document.getElementById('gapTableBody');
+  tbody.innerHTML = data.map(g => `
+    <tr>
+      <td class="gap-name">${g.name}</td>
+      <td>${impactPill(g.impact)}</td>
+      <td>${effortPill(g.effort)}</td>
+      <td>${quadrantPill(g.quadrant)}</td>
+      <td><span class="pill pill-gray">${g.owner}</span></td>
+      <td><span class="pill pill-gray">${g.status}</span></td>
+    </tr>`).join('');
+}
+
+function renderOwnerTable(data) {
+  const tbody = document.getElementById('ownerTableBody');
+  tbody.innerHTML = data.map(r => `
+    <tr>
+      <td class="gap-gap">${r.gap}</td>
+      <td><span class="pill pill-blue">${r.owner}</span></td>
+      <td><span class="pill pill-gray">${r.support}</span></td>
+      <td class="horizon-cell">${r.d30}</td>
+      <td class="horizon-cell">${r.d60}</td>
+      <td class="horizon-cell">${r.d90}</td>
+    </tr>`).join('');
+}
+
+renderGapTable(gapData);
+renderOwnerTable(ownerData);
+
+// ── Sort tables ──────────────────────────────────────────────────
+const sortState = {};
+
+function sortTable(tableId, colIdx) {
+  const key = `${tableId}_${colIdx}`;
+  sortState[key] = sortState[key] === 'asc' ? 'desc' : 'asc';
+  const dir = sortState[key] === 'asc' ? 1 : -1;
+
+  // update header styling
+  const table = document.getElementById(tableId);
+  table.querySelectorAll('th').forEach((th,i) => {
+    th.classList.toggle('sorted', i === colIdx);
+    const icon = th.querySelector('.sort-icon');
+    if (icon) icon.textContent = i === colIdx ? (dir===1?'↑':'↓') : '↕';
+  });
+
+  if (tableId === 'gapTable') {
+    const sorters = [
+      (a,b) => a.name.localeCompare(b.name),
+      (a,b) => impactOrder(a.impact) - impactOrder(b.impact),
+      (a,b) => effortOrder(a.effort) - effortOrder(b.effort),
+      (a,b) => quadrantOrder(a.quadrant) - quadrantOrder(b.quadrant),
+      (a,b) => a.owner.localeCompare(b.owner),
+    ];
+    const sorted = [...gapData].sort((a,b) => dir * (sorters[colIdx]||sorters[0])(a,b));
+    renderGapTable(sorted);
+  } else if (tableId === 'ownerTable') {
+    const sorters = [
+      (a,b) => a.gap.localeCompare(b.gap),
+      (a,b) => a.owner.localeCompare(b.owner),
+    ];
+    const fn = sorters[colIdx] || sorters[0];
+    const sorted = [...ownerData].sort((a,b) => dir * fn(a,b));
+    renderOwnerTable(sorted);
+  }
+}
+
+// ── 2×2 Matrix Canvas ────────────────────────────────────────────
+// Map: effort Low=left, High=right; impact High=top, Low=bottom
+// Positions: [0..1] normalised
+
+const gapPositions = [
+  { idx:0, x:0.52, y:0.18 }, // App perf — High impact, Medium effort
+  { idx:1, x:0.18, y:0.18 }, // Doctor toggle — High impact, Low effort
+  { idx:2, x:0.82, y:0.18 }, // Pharmacy — High impact, High effort
+  { idx:3, x:0.18, y:0.25 }, // Arrival onboarding — High, Low (offset slightly)
+  { idx:4, x:0.22, y:0.62 }, // Feedback SLA — Medium, Low
+  { idx:5, x:0.52, y:0.62 }, // Bilingual CX — Medium, Medium
+  { idx:6, x:0.28, y:0.68 }, // Grooming protocol — Medium, Low (offset)
+  { idx:7, x:0.56, y:0.68 }, // Welfare reporting — Medium, Medium (offset)
+  { idx:8, x:0.46, y:0.24 }, // Delivery recovery — High, Medium (offset)
+];
+
+const dotColors = ['#3B82F6','#2ECC71','#8B5CF6','#F97316','#EC4899','#F59E0B','#14B8A6','#EF4444','#6366F1'];
+
+function drawMatrix() {
+  const canvas = document.getElementById('matrixCanvas');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const W = rect.width;
+  const H = rect.height || W * 0.75;
+
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const PAD = { top: 36, right: 24, bottom: 48, left: 56 };
+  const cW = W - PAD.left - PAD.right;
+  const cH = H - PAD.top  - PAD.bottom;
+  const midX = PAD.left + cW / 2;
+  const midY = PAD.top  + cH / 2;
+
+  // Background quadrants
+  const quads = [
+    { x: PAD.left, y: PAD.top,  w: cW/2, h: cH/2, fill: '#FEE2E2', label: 'Do Now' },
+    { x: midX,     y: PAD.top,  w: cW/2, h: cH/2, fill: '#EDE9FE', label: 'Plan Now' },
+    { x: PAD.left, y: midY,     w: cW/2, h: cH/2, fill: '#FEF3C7', label: 'Do Next' },
+    { x: midX,     y: midY,     w: cW/2, h: cH/2, fill: '#F3F4F6', label: 'Deprioritise' },
+  ];
+  quads.forEach(q => {
+    ctx.fillStyle = q.fill;
+    ctx.fillRect(q.x, q.y, q.w, q.h);
+  });
+
+  // Grid lines
+  ctx.strokeStyle = '#ccc';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(midX, PAD.top); ctx.lineTo(midX, PAD.top+cH); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(PAD.left, midY); ctx.lineTo(PAD.left+cW, midY); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Border
+  ctx.strokeStyle = '#ccc';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(PAD.left, PAD.top, cW, cH);
+
+  // Quadrant labels
+  ctx.font = `bold 11px 'Nunito Sans', sans-serif`;
+  ctx.textAlign = 'left';
+  const qLabels = [
+    { text:'Do Now',       x: PAD.left+8,   y: PAD.top+14,   color:'#991B1B' },
+    { text:'Plan Now',     x: midX+8,       y: PAD.top+14,   color:'#5B21B6' },
+    { text:'Do Next',      x: PAD.left+8,   y: midY+14,      color:'#92400E' },
+    { text:'Deprioritise', x: midX+8,       y: midY+14,      color:'#6B7280' },
+  ];
+  qLabels.forEach(l => {
+    ctx.fillStyle = l.color;
+    ctx.fillText(l.text, l.x, l.y);
+  });
+
+  // Axis labels
+  ctx.font = `600 11px 'Nunito Sans', sans-serif`;
+  ctx.fillStyle = '#5E5E5E';
+  ctx.textAlign = 'center';
+  // X axis
+  ctx.fillText('Low Effort', PAD.left + cW*0.2, H - 10);
+  ctx.fillText('High Effort', PAD.left + cW*0.8, H - 10);
+  // Y axis — rotated
+  ctx.save();
+  ctx.translate(14, PAD.top + cH/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.textAlign = 'center';
+  ctx.fillText('High Impact  ↑  Low Impact', 0, 0);
+  ctx.restore();
+
+  // Dots
+  gapPositions.forEach((p, i) => {
+    const cx = PAD.left + p.x * cW;
+    const cy = PAD.top  + p.y * cH;
+    const r = 9;
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.fillStyle = dotColors[i];
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // dot number
+    ctx.font = `bold 9px 'Nunito Sans', sans-serif`;
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(i+1, cx, cy);
+    ctx.textBaseline = 'alphabetic';
+  });
+}
+
+// Tooltip on canvas hover
+(function() {
+  const canvas = document.getElementById('matrixCanvas');
+  const tooltip = document.getElementById('gapTooltip');
+
+  canvas.addEventListener('mousemove', function(e) {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const W = rect.width;
+    const H = rect.height;
+    const PAD = { top: 36, right: 24, bottom: 48, left: 56 };
+    const cW = W - PAD.left - PAD.right;
+    const cH = H - PAD.top  - PAD.bottom;
+
+    let found = null;
+    gapPositions.forEach((p,i) => {
+      const cx = PAD.left + p.x * cW;
+      const cy = PAD.top  + p.y * cH;
+      const dist = Math.hypot(mx-cx, my-cy);
+      if (dist < 14) found = i;
+    });
+
+    if (found !== null) {
+      const g = gapData[found];
+      tooltip.innerHTML = `<strong>${g.name}</strong><br>Impact: ${g.impact} · Effort: ${g.effort}<br>Owner: ${g.owner}`;
+      tooltip.style.left = (e.clientX + 12) + 'px';
+      tooltip.style.top  = (e.clientY - 10) + 'px';
+      tooltip.classList.add('visible');
+      canvas.style.cursor = 'pointer';
+    } else {
+      tooltip.classList.remove('visible');
+      canvas.style.cursor = 'default';
+    }
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    tooltip.classList.remove('visible');
+  });
+})();
+
+// Draw on load + resize
+window.addEventListener('load', drawMatrix);
+window.addEventListener('resize', drawMatrix);
+
+// ── Persona toggle ───────────────────────────────────────────────
+function togglePersona(card) {
+  card.classList.toggle('expanded');
+}
+
+// ── Decision toggle ──────────────────────────────────────────────
+function toggleDecision(card) {
+  const hint = card.querySelector('.decision-expand-hint .chevron');
+  card.classList.toggle('expanded');
+  if (hint) hint.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : '';
+}
+</script>
+</body>
+</html>
