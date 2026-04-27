@@ -1,0 +1,2228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Bangalore Pet Parents — A Field Decode · V1 · Supertails Internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300..900;1,300..900&family=Poppins:wght@300;400;500;600;700;800&family=Shantell+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   Supertails Brand Kit 2026 — Design Tokens
+============================================ */
+:root {
+  /* Brand colors (Supertails Now palette — Suggested) */
+  --st-green:        #19BE05;
+  --st-green-soft:   #C7EDC3;
+  --st-green-deep:   #0E3412;
+  --st-black:        #0B1215;
+  --st-white:        #F5F8FA;
+  --st-cream:        #FBF7F0;          /* legacy bridge */
+
+  /* Supertails+ accent — used sparingly */
+  --st-blue:         #2254F5;
+  --st-purple:       #A585FF;
+
+  /* Sub-brand pops */
+  --henlo-yellow:    #FFD646;
+  --henlo-red:       #db463a;
+  --henlo-pink:      #ed3694;
+  --cta-orange:      #FF6914;
+  --cta-orange-hover:#CA5310;
+
+  /* Utility */
+  --ink-1:           #0B1215;
+  --ink-2:           #1f2a25;
+  --ink-3:           #4a5450;
+  --ink-mute:        #8a8f8c;
+  --line:            rgba(11,18,21,0.10);
+  --line-strong:     rgba(11,18,21,0.18);
+  --bg:              #F5F8FA;
+  --bg-soft:         #ECF1ED;
+  --bg-card:         #ffffff;
+
+  /* Type */
+  --font-display:    'Poppins', system-ui, sans-serif;
+  --font-body:       'Nunito Sans', system-ui, sans-serif;
+  --font-accent:     'Shantell Sans', 'Comic Sans MS', cursive;
+
+  /* Scale (8pt) */
+  --gap-1: 4px;  --gap-2: 8px;  --gap-3: 12px; --gap-4: 16px;
+  --gap-5: 24px; --gap-6: 32px; --gap-7: 48px; --gap-8: 64px;
+  --gap-9: 96px;
+
+  /* Radii */
+  --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-xl: 32px; --r-pill: 999px;
+
+  --shadow-1: 0 1px 2px rgba(11,18,21,0.06), 0 1px 1px rgba(11,18,21,0.04);
+  --shadow-2: 0 4px 16px rgba(11,18,21,0.08), 0 2px 4px rgba(11,18,21,0.04);
+  --shadow-3: 0 16px 48px rgba(11,18,21,0.12), 0 4px 12px rgba(11,18,21,0.06);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink-1);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-display); margin: 0; line-height: 1.15; letter-spacing: -0.015em; font-weight: 700; }
+.accent { font-family: var(--font-accent); font-weight: 600; }
+a { color: inherit; }
+p { margin: 0 0 var(--gap-3); }
+em.q { font-style: italic; color: var(--ink-2); }
+small.muted { color: var(--ink-mute); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* ============================================
+   Layout
+============================================ */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 var(--gap-5); }
+section { padding: var(--gap-9) 0; border-top: 1px solid var(--line); }
+section:first-of-type { border-top: 0; }
+section.tight { padding: var(--gap-7) 0; }
+
+.kicker {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 12px; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--st-black);
+  color: var(--st-green);
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  margin-bottom: var(--gap-4);
+  font-weight: 600;
+}
+.kicker.green { background: var(--st-green); color: var(--st-black); }
+.kicker.mint { background: var(--st-green-soft); color: var(--st-green-deep); }
+.kicker.yellow { background: var(--henlo-yellow); color: var(--st-black); }
+.kicker.blue { background: var(--st-blue); color: white; }
+
+.h-eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); }
+.h-section { font-size: clamp(28px, 4vw, 48px); line-height: 1.05; max-width: 24ch; }
+.h-display { font-size: clamp(40px, 7vw, 92px); line-height: 1; letter-spacing: -0.03em; }
+.lead { font-size: clamp(18px, 2vw, 22px); color: var(--ink-2); max-width: 64ch; line-height: 1.45; }
+
+/* ============================================
+   Hero
+============================================ */
+.hero {
+  background:
+    radial-gradient(1200px 600px at 90% -10%, rgba(199,237,195,0.55), transparent 60%),
+    radial-gradient(900px 500px at -5% 110%, rgba(25,190,5,0.12), transparent 60%),
+    var(--st-white);
+  padding: var(--gap-7) 0 var(--gap-8);
+  border-top: 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero .top {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-display); font-size: 13px; font-weight: 500;
+  color: var(--ink-2); margin-bottom: var(--gap-7);
+}
+.hero .top .brand-mark {
+  display:inline-flex; align-items:center; gap: 8px;
+  font-weight: 700; letter-spacing: -0.02em; font-size: 18px; color: var(--st-black);
+}
+.hero .top .brand-mark .dot { width: 12px; height: 12px; background: var(--st-green); border-radius: 999px; box-shadow: 0 0 0 4px rgba(25,190,5,0.18);}
+.hero .top .meta { display: flex; gap: var(--gap-4); align-items: center; color: var(--ink-3); }
+.hero .top .meta b { color: var(--st-black); font-weight: 600; }
+
+.hero h1 {
+  font-size: clamp(44px, 8.5vw, 116px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  color: var(--st-black);
+}
+.hero h1 .accent { color: var(--st-green); font-family: var(--font-accent); font-weight: 700; font-size: 0.7em; letter-spacing: -0.01em; }
+.hero h1 .underline {
+  background-image: linear-gradient(transparent 60%, rgba(25,190,5,0.35) 60%);
+}
+.hero .sub {
+  margin-top: var(--gap-5);
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--ink-2);
+  max-width: 70ch;
+}
+
+.hero-stats {
+  margin-top: var(--gap-7);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-4);
+}
+.hero-stats .stat {
+  background: white; border: 1px solid var(--line);
+  border-radius: var(--r-md); padding: var(--gap-5);
+}
+.hero-stats .stat .v { font-family: var(--font-display); font-size: 38px; font-weight: 700; letter-spacing: -0.025em; color: var(--st-black); line-height: 1; }
+.hero-stats .stat .v small { font-size: 16px; color: var(--ink-mute); font-weight: 500; }
+.hero-stats .stat .l { margin-top: 8px; font-size: 13px; color: var(--ink-3); line-height: 1.4; }
+
+@media (max-width: 800px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================
+   Lens / Cuts navigation (sticky)
+============================================ */
+.lens-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(245,248,250,0.92);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding: var(--gap-3) 0;
+}
+.lens-bar .inner { display: flex; align-items: center; gap: var(--gap-4); flex-wrap: wrap; }
+.lens-bar .label {
+  font-family: var(--font-display);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-right: var(--gap-2);
+}
+.lens-bar .group { display: flex; align-items: center; gap: 4px; padding: 3px; background: white; border: 1px solid var(--line); border-radius: var(--r-pill); }
+.lens-bar .chip {
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  border: 0; background: transparent;
+  color: var(--ink-2);
+  transition: background 120ms ease, color 120ms ease;
+  white-space: nowrap;
+}
+.lens-bar .chip:hover { background: var(--bg-soft); }
+.lens-bar .chip[aria-pressed="true"] {
+  background: var(--st-black); color: var(--st-white);
+}
+.lens-bar .chip[aria-pressed="true"].green { background: var(--st-green); color: var(--st-black); }
+.lens-readout {
+  font-size: 12px; color: var(--ink-3);
+  font-family: var(--font-display); font-weight: 500;
+  margin-left: auto; padding: 6px 12px;
+  background: var(--bg-soft); border-radius: var(--r-pill);
+}
+.lens-readout b { color: var(--st-black); font-weight: 700; }
+
+/* ============================================
+   Persona / face wall
+============================================ */
+.face-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: var(--gap-4);
+  margin-top: var(--gap-6);
+}
+.face {
+  cursor: pointer;
+  background: white; border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--gap-4);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  display: flex; flex-direction: column; gap: var(--gap-3);
+  position: relative;
+}
+.face:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); border-color: var(--line-strong); }
+.face[hidden] { display: none; }
+.face .avatar {
+  width: 56px; height: 56px;
+  border-radius: 999px;
+  background: var(--st-green-soft);
+  color: var(--st-green-deep);
+  font-family: var(--font-display); font-weight: 700; font-size: 22px;
+  display: grid; place-items: center;
+  letter-spacing: -0.01em;
+  box-shadow: 0 0 0 1px rgba(11,18,21,0.04);
+}
+.face[data-species="cat"] .avatar { background: #E8D9FF; color: #3A1F7A; }
+.face[data-species="dog"] .avatar { background: var(--st-green-soft); color: var(--st-green-deep); }
+.face .name { font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+.face .meta { font-size: 12px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 6px; }
+.face .meta span {
+  background: var(--bg-soft); padding: 2px 8px; border-radius: var(--r-pill); font-weight: 500;
+}
+.face .meta span.species-cat { background: #F1E9FF; color: #3A1F7A; }
+.face .meta span.species-dog { background: #E5F6E0; color: var(--st-green-deep); }
+.face .pet-name { font-family: var(--font-accent); color: var(--st-green); font-size: 14px; font-weight: 600; }
+.face .quote-tease { font-size: 13px; color: var(--ink-2); line-height: 1.4; font-style: italic; min-height: 3.5em; }
+.face .open-cue { font-size: 11px; color: var(--ink-mute); font-family: var(--font-display); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px; }
+.face .open-cue::after { content: " →"; color: var(--st-green); }
+
+/* ============================================
+   Drawer (persona detail)
+============================================ */
+.drawer-backdrop {
+  position: fixed; inset: 0; background: rgba(11,18,21,0.55);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  z-index: 90;
+  opacity: 0; visibility: hidden; transition: opacity 200ms ease, visibility 200ms ease;
+}
+.drawer-backdrop.open { opacity: 1; visibility: visible; }
+.drawer {
+  position: fixed; top: 0; right: 0; height: 100vh;
+  width: min(720px, 96vw);
+  background: var(--st-white);
+  z-index: 100;
+  transform: translateX(105%);
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex; flex-direction: column;
+  box-shadow: -16px 0 40px rgba(11,18,21,0.18);
+}
+.drawer.open { transform: translateX(0); }
+.drawer header {
+  padding: var(--gap-5);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: flex-start; gap: var(--gap-4);
+  background: white;
+}
+.drawer header .avatar { width: 64px; height: 64px; font-size: 24px; flex: 0 0 auto; }
+.drawer header h3 { font-size: 24px; }
+.drawer header .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.drawer header .meta span { background: var(--bg-soft); padding: 2px 8px; border-radius: var(--r-pill); font-size: 12px; color: var(--ink-3); font-weight: 500; }
+.drawer .close {
+  margin-left: auto; background: var(--bg-soft); border: 0; cursor: pointer;
+  width: 36px; height: 36px; border-radius: 999px;
+  font-size: 20px; line-height: 1; display: grid; place-items: center;
+  color: var(--ink-2);
+}
+.drawer .close:hover { background: var(--st-black); color: white; }
+.drawer .body { padding: var(--gap-5); overflow-y: auto; flex: 1; }
+.drawer h4 { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--ink-mute); margin: var(--gap-5) 0 var(--gap-2); }
+.drawer h4:first-child { margin-top: 0; }
+.drawer .pull-quote {
+  background: var(--st-black); color: var(--st-white);
+  padding: var(--gap-5);
+  border-radius: var(--r-md);
+  font-family: var(--font-display);
+  font-size: 18px; line-height: 1.4; font-weight: 500;
+  margin: var(--gap-3) 0 var(--gap-4);
+  position: relative;
+}
+.drawer .pull-quote::before {
+  content: '"'; position: absolute; left: 12px; top: 0;
+  font-size: 80px; color: var(--st-green); font-family: serif; line-height: 1;
+}
+.drawer .pull-quote .src { display: block; font-size: 12px; color: var(--st-green); margin-top: 8px; font-weight: 500; }
+.drawer ul.bullets { padding-left: 18px; }
+.drawer ul.bullets li { margin-bottom: 8px; }
+.drawer .kv { display: grid; grid-template-columns: 110px 1fr; gap: 8px 16px; font-size: 14px; }
+.drawer .kv dt { color: var(--ink-mute); font-weight: 600; }
+.drawer .kv dd { margin: 0; }
+.drawer .verbatim {
+  border-left: 3px solid var(--st-green);
+  padding: 8px 14px;
+  background: white;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  margin: 8px 0;
+  font-style: italic; color: var(--ink-2);
+}
+.drawer .verbatim .ctx { font-style: normal; display: block; font-size: 11px; color: var(--ink-mute); margin-top: 6px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; }
+
+/* ============================================
+   Provocations / "what we found"
+============================================ */
+.provocations {
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  gap: var(--gap-4); margin-top: var(--gap-6);
+}
+.prov {
+  border-radius: var(--r-lg);
+  padding: var(--gap-6);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 200ms ease;
+  display: flex; flex-direction: column; justify-content: space-between; min-height: 240px;
+}
+.prov:hover { transform: translateY(-3px); }
+.prov.span-12 { grid-column: span 12; min-height: 220px; }
+.prov.span-8 { grid-column: span 8; }
+.prov.span-6 { grid-column: span 6; }
+.prov.span-4 { grid-column: span 4; }
+@media (max-width: 980px) {
+  .prov.span-8, .prov.span-6, .prov.span-4 { grid-column: span 12; }
+}
+.prov.dark { background: var(--st-black); color: var(--st-white); }
+.prov.green { background: var(--st-green); color: var(--st-black); }
+.prov.mint { background: var(--st-green-soft); color: var(--st-green-deep); }
+.prov.cream { background: var(--st-cream); color: var(--st-black); }
+.prov.yellow { background: var(--henlo-yellow); color: var(--st-black); }
+.prov.blue { background: var(--st-blue); color: white; }
+.prov.white { background: white; border: 1px solid var(--line); color: var(--st-black); }
+.prov .num {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(60px, 9vw, 110px);
+  line-height: 0.9; letter-spacing: -0.04em;
+  opacity: 0.9;
+}
+.prov.dark .num { color: var(--st-green); }
+.prov.green .num { color: var(--st-black); }
+.prov h3 {
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.15; letter-spacing: -0.015em;
+  margin-top: var(--gap-3);
+  max-width: 24ch;
+}
+.prov p { font-size: 14px; line-height: 1.5; margin-top: 8px; opacity: 0.9; max-width: 50ch; }
+.prov .cue { margin-top: var(--gap-4); font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.75; }
+.prov .cue::after { content: " ↗"; }
+
+/* Expandable provocation detail */
+.prov-detail {
+  display: none;
+  margin-top: var(--gap-4);
+  background: rgba(255,255,255,0.12);
+  padding: var(--gap-4);
+  border-radius: var(--r-md);
+  font-size: 14px;
+}
+.prov.dark .prov-detail { background: rgba(255,255,255,0.08); }
+.prov.green .prov-detail, .prov.mint .prov-detail, .prov.yellow .prov-detail, .prov.cream .prov-detail, .prov.white .prov-detail { background: rgba(11,18,21,0.06); }
+.prov.expanded .prov-detail { display: block; }
+.prov-detail .vbatim { font-style: italic; padding: 6px 0; border-left: 2px solid currentColor; padding-left: 10px; margin: 6px 0; opacity: 0.95; }
+.prov-detail .vbatim small { display: block; font-style: normal; opacity: 0.7; font-size: 11px; margin-top: 4px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; }
+
+/* ============================================
+   Theme tiles + drill-down
+============================================ */
+.theme-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--gap-4); margin-top: var(--gap-6);
+}
+.theme {
+  background: white; border: 1px solid var(--line); border-radius: var(--r-md);
+  padding: var(--gap-5); cursor: pointer;
+  transition: box-shadow 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.theme:hover { border-color: var(--st-green); box-shadow: var(--shadow-2); }
+.theme .badge {
+  display: inline-block; background: var(--st-green); color: var(--st-black);
+  padding: 2px 10px; border-radius: var(--r-pill);
+  font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.theme h4 { font-size: 19px; margin: var(--gap-3) 0; line-height: 1.25; }
+.theme p { font-size: 14px; color: var(--ink-3); }
+.theme .count { font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--ink-mute); }
+.theme .open { display: none; margin-top: var(--gap-4); padding-top: var(--gap-4); border-top: 1px solid var(--line); }
+.theme.expanded .open { display: block; }
+.theme .v {
+  font-style: italic; color: var(--ink-2);
+  border-left: 3px solid var(--st-green);
+  padding: 6px 12px; margin: 8px 0; font-size: 14px;
+}
+.theme .v small { display: block; font-style: normal; font-size: 11px; color: var(--ink-mute); margin-top: 4px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; }
+
+/* ============================================
+   Verbatim wall — bricks of quotes
+============================================ */
+.brick-wall {
+  margin-top: var(--gap-6);
+  columns: 3 320px; column-gap: var(--gap-4);
+}
+.brick {
+  break-inside: avoid;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--gap-4);
+  margin: 0 0 var(--gap-4);
+  display: flex; flex-direction: column; gap: 8px;
+  cursor: pointer;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.brick:hover { border-color: var(--st-green); transform: translateY(-2px); }
+.brick.color-green { background: var(--st-green); color: var(--st-black); border-color: var(--st-green); }
+.brick.color-dark { background: var(--st-black); color: var(--st-white); border-color: var(--st-black); }
+.brick.color-mint { background: var(--st-green-soft); color: var(--st-green-deep); border-color: var(--st-green-soft); }
+.brick.color-yellow { background: var(--henlo-yellow); color: var(--st-black); border-color: var(--henlo-yellow); }
+.brick.color-cream { background: var(--st-cream); color: var(--st-black); border-color: var(--st-cream); }
+.brick .q { font-family: var(--font-display); font-size: 17px; line-height: 1.3; font-weight: 500; letter-spacing: -0.005em; }
+.brick.large .q { font-size: 22px; line-height: 1.25; }
+.brick .src { font-size: 12px; opacity: 0.75; font-family: var(--font-display); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+.brick .tag { font-size: 11px; padding: 2px 8px; border-radius: var(--r-pill); background: rgba(11,18,21,0.08); color: inherit; align-self: flex-start; font-family: var(--font-display); font-weight: 600; }
+.brick.color-dark .tag { background: rgba(255,255,255,0.15); color: var(--st-green); }
+
+/* ============================================
+   Category strip — Food / Health / Grooming / Services
+============================================ */
+.cats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-4);
+  margin-top: var(--gap-6);
+}
+@media (max-width: 900px) { .cats { grid-template-columns: repeat(2, 1fr);} }
+@media (max-width: 540px) { .cats { grid-template-columns: 1fr;} }
+
+.cat {
+  background: white; border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: var(--gap-5); display: flex; flex-direction: column; gap: var(--gap-3);
+  position: relative; overflow: hidden;
+}
+.cat .icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--st-green-soft); display: grid; place-items: center;
+  font-size: 22px;
+}
+.cat.food .icon { background: #E5F6E0; }
+.cat.health .icon { background: #DDE6FF; }
+.cat.groom .icon { background: #FFE6D6; }
+.cat.svc .icon { background: #F2E6FF; }
+.cat h3 { font-size: 22px; }
+.cat .one-liner { font-size: 14px; color: var(--ink-3); }
+.cat .stat-row { display: flex; gap: var(--gap-3); margin-top: var(--gap-3); flex-wrap: wrap;}
+.cat .pill { font-size: 12px; background: var(--bg-soft); padding: 4px 10px; border-radius: var(--r-pill); font-family: var(--font-display); font-weight: 600; color: var(--ink-2); }
+.cat .key { font-size: 14px; color: var(--ink-2); margin-top: var(--gap-3); padding: var(--gap-3); background: var(--bg-soft); border-radius: var(--r-sm); border-left: 3px solid var(--st-green);}
+.cat .key b { color: var(--st-green-deep); }
+
+/* ============================================
+   Channel matrix
+============================================ */
+.matrix {
+  margin-top: var(--gap-6);
+  border: 1px solid var(--line); border-radius: var(--r-md); background: white; overflow: hidden;
+}
+.matrix table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.matrix th { text-align: left; padding: var(--gap-3) var(--gap-4); font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); background: var(--bg-soft); border-bottom: 1px solid var(--line); }
+.matrix td { padding: var(--gap-3) var(--gap-4); vertical-align: top; border-bottom: 1px solid var(--line); }
+.matrix tr:last-child td { border-bottom: 0; }
+.matrix .channel { font-family: var(--font-display); font-weight: 700; color: var(--st-black); font-size: 15px; }
+.matrix .role { font-size: 13px; color: var(--ink-2); }
+.matrix .heat { display: inline-block; padding: 2px 8px; border-radius: var(--r-pill); font-size: 11px; font-family: var(--font-display); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.matrix .heat.h-high { background: var(--st-green); color: var(--st-black);}
+.matrix .heat.h-mid { background: var(--henlo-yellow); color: var(--st-black);}
+.matrix .heat.h-low { background: var(--st-cream); color: var(--ink-2); border: 1px solid var(--line);}
+
+/* ============================================
+   Wishlist sticky-notes
+============================================ */
+.notes {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--gap-4); margin-top: var(--gap-6);
+}
+.note {
+  border-radius: 14px;
+  padding: var(--gap-5);
+  font-family: var(--font-accent);
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--st-black);
+  box-shadow: 0 8px 24px rgba(11,18,21,0.08);
+  transform: rotate(-1deg);
+  position: relative;
+  cursor: default;
+  transition: transform 200ms ease;
+}
+.note:nth-child(2n) { transform: rotate(1.2deg); }
+.note:nth-child(3n) { transform: rotate(-0.6deg); }
+.note:nth-child(4n) { transform: rotate(2deg); }
+.note:hover { transform: rotate(0) scale(1.03); z-index: 2; }
+.note.c1 { background: var(--henlo-yellow); }
+.note.c2 { background: var(--st-green-soft); }
+.note.c3 { background: #FFD2DD; }
+.note.c4 { background: #DDE9FF; }
+.note.c5 { background: #FFE5C7; }
+.note small { display: block; margin-top: 10px; font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7;}
+
+/* ============================================
+   Operational so-what
+============================================ */
+.sowhat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-4); margin-top: var(--gap-6); }
+@media (max-width: 800px) { .sowhat-grid { grid-template-columns: 1fr; } }
+.sowhat {
+  background: white; border: 1px solid var(--line); border-radius: var(--r-md);
+  padding: var(--gap-5); display: flex; gap: var(--gap-4);
+}
+.sowhat .who { flex: 0 0 100px; }
+.sowhat .who .pill {
+  font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  background: var(--st-black); color: var(--st-green); padding: 4px 10px; border-radius: var(--r-pill);
+}
+.sowhat .body h4 { font-size: 16px; margin-bottom: 6px; line-height: 1.3; color: var(--st-black); }
+.sowhat .body p { font-size: 14px; color: var(--ink-3); }
+.sowhat .body .tactic { font-size: 13px; color: var(--st-green-deep); margin-top: 8px; padding: 6px 10px; background: var(--st-green-soft); border-radius: var(--r-sm); display: inline-block; font-family: var(--font-display); font-weight: 500; }
+
+/* ============================================
+   Footer
+============================================ */
+footer.deep {
+  background: var(--st-black); color: var(--st-white);
+  padding: var(--gap-7) 0;
+}
+footer.deep h2 { color: var(--st-green); }
+footer.deep .small { font-size: 13px; opacity: 0.65; }
+footer.deep .meta-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-5);
+  margin-top: var(--gap-5);
+}
+@media (max-width: 800px) { footer.deep .meta-grid { grid-template-columns: repeat(2, 1fr);}}
+footer.deep .meta-grid b { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--st-green); display: block; margin-bottom: 6px;}
+
+/* ============================================
+   Filter hidden state
+============================================ */
+[data-hidden-by-filter="true"] { display: none !important; }
+
+/* ============================================
+   Two-Bangalores callout
+============================================ */
+.split {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: var(--gap-6);
+  border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line);
+}
+@media (max-width: 800px) { .split { grid-template-columns: 1fr; }}
+.split .side { padding: var(--gap-6); }
+.split .a { background: var(--st-green-soft); color: var(--st-green-deep); }
+.split .b { background: var(--st-black); color: var(--st-white); }
+.split h4 { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; opacity: 0.7; margin-bottom: var(--gap-3);}
+.split h3 { font-size: clamp(22px, 3vw, 32px); line-height: 1.15; letter-spacing: -0.015em;}
+.split p { margin-top: var(--gap-3); font-size: 15px; line-height: 1.5; opacity: 0.92; }
+.split ul { margin-top: var(--gap-3); padding-left: 18px; font-size: 14px; line-height: 1.5; }
+.split ul li { margin-bottom: 6px; }
+.split .b ul li { color: var(--st-green-soft); }
+
+/* ============================================
+   Moments timeline
+============================================ */
+.timeline {
+  margin-top: var(--gap-6); position: relative;
+  padding-left: var(--gap-6);
+}
+.timeline::before {
+  content: ''; position: absolute; left: 12px; top: 8px; bottom: 8px;
+  width: 2px; background: var(--line-strong);
+}
+.tl-item { position: relative; padding-bottom: var(--gap-5); }
+.tl-item::before {
+  content: ''; position: absolute; left: -23px; top: 6px;
+  width: 14px; height: 14px; border-radius: 999px;
+  background: var(--st-green);
+  box-shadow: 0 0 0 3px white, 0 0 0 4px var(--st-green);
+}
+.tl-item h4 { font-size: 18px; margin-bottom: 4px;}
+.tl-item .when { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--st-green-deep); font-family: var(--font-display); font-weight: 700; }
+.tl-item p { font-size: 14px; color: var(--ink-3); margin-top: 6px;}
+.tl-item .v { border-left: 2px solid var(--st-green); padding: 4px 12px; font-style: italic; font-size: 13px; color: var(--ink-2); margin-top: 8px;}
+.tl-item .v small { display: block; font-style: normal; font-size: 11px; opacity: 0.7; margin-top: 4px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; }
+
+/* ============================================
+   Misc / utilities
+============================================ */
+.divider-eyebrow {
+  display: flex; align-items: center; gap: var(--gap-3);
+  margin-bottom: var(--gap-3);
+}
+.divider-eyebrow .line { flex: 1; height: 1px; background: var(--line);}
+.divider-eyebrow .label { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--st-green); }
+.helper {
+  font-family: var(--font-accent); color: var(--st-green); font-size: 14px; font-weight: 600;
+  background: var(--st-green-soft); padding: 6px 12px; border-radius: var(--r-pill);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.helper::before { content: "✱"; }
+
+.tip-row { display: flex; gap: 8px; margin-top: var(--gap-4); flex-wrap: wrap; align-items: center;}
+.tip-row .tip {
+  font-size: 12px; color: var(--ink-3); padding: 4px 10px;
+  background: var(--bg-soft); border-radius: var(--r-pill); font-family: var(--font-display); font-weight: 500;
+}
+.tip-row .tip kbd { font-family: var(--font-display); background: white; border: 1px solid var(--line-strong); border-radius: 4px; padding: 1px 6px; font-size: 11px; color: var(--st-black); margin: 0 2px;}
+
+/* Small-screen readability */
+@media (max-width: 600px) {
+  .face-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));}
+  .face .quote-tease { display: none; }
+  .face .meta { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand-mark">
+        <span class="dot"></span>
+        Supertails · Brand &amp; Lifecycle
+      </div>
+      <div class="meta">
+        <span><b>V1</b> · 27 Apr 2026</span>
+        <span>Internal · Do not distribute</span>
+      </div>
+    </div>
+
+    <div class="kicker green">Ethnographic Field Decode · Bangalore</div>
+    <h1>
+      What we learned <br>
+      sitting on <span class="underline">17 living-room floors</span> <br>
+      with the people who feed <span class="accent">our brand</span>.
+    </h1>
+    <p class="sub">A first-person decode of Bangalore pet parents — across cats and dogs, first-timers and lifers, transplants and locals, breed-pedigree households and welfare-first homes. Not a deck. A walkable field guide to who they are, what they say, and what they actually buy.</p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="v">17</div>
+        <div class="l">In-home / video ethnographic interviews — Jan to Mar 2026, NCCS-A, ages 20–35</div>
+      </div>
+      <div class="stat">
+        <div class="v">~14<small> hrs</small></div>
+        <div class="l">Of recorded conversation. Hinglish. Verbatim transcribed.</div>
+      </div>
+      <div class="stat">
+        <div class="v">6</div>
+        <div class="l">Cuts you can move through — from species to single-vs-multi to immigrant-vs-local to welfare-first</div>
+      </div>
+      <div class="stat">
+        <div class="v">100%</div>
+        <div class="l">Of quotes here are <em>verbatim</em>. Click anything to see the source.</div>
+      </div>
+    </div>
+
+    <div class="tip-row">
+      <span class="helper">how to use this</span>
+      <span class="tip">Click any <kbd>face</kbd> to open the full decode</span>
+      <span class="tip">Click any <kbd>theme</kbd> to see the evidence</span>
+      <span class="tip">Use the <kbd>Lens</kbd> bar below to filter the page through a cut</span>
+      <span class="tip">Press <kbd>Esc</kbd> to close drawers</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== LENS BAR ===== -->
+<nav class="lens-bar" id="lensBar" role="navigation" aria-label="Filter the report through a lens">
+  <div class="wrap inner">
+    <span class="label">Lens</span>
+    <div class="group" role="group" aria-label="Species">
+      <button class="chip green" aria-pressed="true" data-lens="all">All Pet Parents</button>
+      <button class="chip" data-lens="cat">Cat</button>
+      <button class="chip" data-lens="dog">Dog</button>
+    </div>
+    <div class="group" role="group" aria-label="Household">
+      <button class="chip" data-lens="single">Single Pet</button>
+      <button class="chip" data-lens="multiple">Multi-Pet</button>
+    </div>
+    <div class="group" role="group" aria-label="Tenure">
+      <button class="chip" data-lens="firsttime">First-Time</button>
+      <button class="chip" data-lens="experienced">Experienced</button>
+    </div>
+    <div class="group" role="group" aria-label="Origin">
+      <button class="chip" data-lens="immigrant">Immigrant</button>
+      <button class="chip" data-lens="localite">Localite</button>
+    </div>
+    <div class="group" role="group" aria-label="Welfare">
+      <button class="chip" data-lens="welfare">Welfare-First</button>
+    </div>
+    <div class="lens-readout"><b id="lensCount">17</b> of 17 parents in this lens</div>
+  </div>
+</nav>
+
+<!-- ===== PROVOCATIONS ===== -->
+<section id="provocations">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label">01 · What we found</span><span class="line"></span></div>
+    <h2 class="h-section">Eight things the transcripts told us, that we did not expect.</h2>
+    <p class="lead" style="margin-top:var(--gap-3)">Each tile is a pattern that emerged across the 17 conversations — not borrowed from any prior deck. Click any tile to see the verbatim evidence underneath it.</p>
+
+    <div class="provocations" id="provGrid">
+      <!-- PROV TILES — populated by data scaffold below -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE 17 ===== -->
+<section id="people">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label">02 · The 17</span><span class="line"></span></div>
+    <h2 class="h-section">Meet them by name.</h2>
+    <p class="lead" style="margin-top:var(--gap-3)">Every face below is a real respondent. Click any one to read the full decode — profile, anxieties, category behaviour, channel map, brand recall, three best verbatims.</p>
+    <div class="face-grid" id="faceGrid">
+      <!-- FACES — populated below -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== VERBATIM WALL ===== -->
+<section id="quotes" style="background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label">03 · Their words, not ours</span><span class="line"></span></div>
+    <h2 class="h-section">A wall of verbatims.</h2>
+    <p class="lead" style="margin-top:var(--gap-3)">Pull from these directly into briefs, decks, ad copy. Every quote is from a transcript in this study — not stitched, not paraphrased. Click for context.</p>
+    <div class="brick-wall" id="brickWall"></div>
+  </div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section id="themes">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label">04 · Themes &amp; evidence</span><span class="line"></span></div>
+    <h2 class="h-section">The recurring patterns — and the proof.</h2>
+    <p class="lead" style="margin-top:var(--gap-3)">Each theme is a claim. Click to expand into the verbatim evidence and the count of respondents who showed it.</p>
+    <div class="theme-grid" id="themeGrid"></div>
+  </div>
+</section>
+
+<!-- ===== CATEGORY DEEP DIVES ===== -->
+<section id="categories" style="background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label">05 · Inside their carts &amp; clinics</span><span class="line"></span></div>
+    <h2 class="h-section">Category by category — what they buy, where, how often, and why.</h2>
+    <div class="cats" id="catGrid"></div>
+  </div>
+</section>
+
+<!-- ===== CHANNEL MATRIX ===== -->
+<section id="channels">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label">06 · Channel reality</span><span class="line"></span></div>
+    <h2 class="h-section">The Bangalore pet-parent stack.</h2>
+    <p class="lead" style="margin-top:var(--gap-3)">No one channel does it all. Each does a job. Heat = how dominant the channel is for that job in this sample.</p>
+    <div class="matrix" id="matrix"></div>
+  </div>
+</section>
+
+<!-- ===== TWO HOUSEHOLDS ===== -->
+<section id="two-blr">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label">07 · Persian household vs Indie household</span><span class="line"></span></div>
+    <h2 class="h-section">Two pet-parenting cultures, one NCCS-A income bucket.</h2>
+    <p class="lead" style="margin-top:var(--gap-3)">The biggest behavioural fault line in this dataset is not income or age — it's <strong>the kind of pet you have</strong>. Pedigree-breed and Persian households operate on completely different logic from Indie / rescue households. Same money. Different category.</p>
+    <div class="split" id="twoBLR"></div>
+  </div>
+</section>
+
+<!-- ===== MOMENTS / LIFECYCLE ===== -->
+<section id="moments" style="background: var(--bg-soft);">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label">08 · Moments that matter</span><span class="line"></span></div>
+    <h2 class="h-section">A year in a Bangalore pet parent's calendar.</h2>
+    <p class="lead" style="margin-top:var(--gap-3)">Where the brand can show up. Each beat is a real moment surfaced in the transcripts — and the trigger for a different kind of intervention.</p>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ===== WISHLIST ===== -->
+<section id="wishlist">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label">09 · The wishlist</span><span class="line"></span></div>
+    <h2 class="h-section">What they wished existed.</h2>
+    <p class="lead" style="margin-top:var(--gap-3)">Direct asks from the field. Most of these are buildable. Some are positioning. All of them are gold.</p>
+    <div class="notes" id="wishlist"></div>
+  </div>
+</section>
+
+<!-- ===== OPERATIONAL SO-WHAT ===== -->
+<section id="sowhat" style="background: var(--st-black); color: var(--st-white);">
+  <div class="wrap">
+    <div class="divider-eyebrow"><span class="label" style="color: var(--st-green);">10 · So what · operational</span><span class="line" style="background:rgba(255,255,255,0.15);"></span></div>
+    <h2 class="h-section" style="color: white; max-width: 28ch;">If you only do six things from this report — do these.</h2>
+    <p class="lead" style="margin-top:var(--gap-3); color:rgba(255,255,255,0.78);">Mapped to the function that owns the move. No fluff. No nice-to-haves.</p>
+    <div class="sowhat-grid" id="sowhatGrid"></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="deep">
+  <div class="wrap">
+    <h2 class="h-section">Methodology &amp; provenance.</h2>
+    <p class="lead" style="color:rgba(255,255,255,0.78);">17 in-home and video-call ethnographic interviews · Bangalore · Jan 28 – Mar 25, 2026 · NCCS-A · ages 20–35 · mix of Supertails and competition users · spans dog and cat parents, single and multi-pet, first-time and experienced, immigrants and locals, welfare-first and breed-led households. Run by Quantum, decoded by Mindcastle for Supertails Brand &amp; Lifecycle.</p>
+    <div class="meta-grid">
+      <div><b>Sample</b>17 parents · 26 pets</div>
+      <div><b>Format</b>Discussion-guide led, ~60–90 min each</div>
+      <div><b>Languages</b>English &amp; Hinglish (verbatim retained)</div>
+      <div><b>Use</b>Brand · Healthcare · Retention · Category · Marketing</div>
+    </div>
+    <p class="small" style="margin-top: var(--gap-5);">Built as a living document. Versioned in <code>/01_Research/ethnographic-blr/outputs/</code>. For a different cut, ask Krutika.</p>
+  </div>
+</footer>
+
+<!-- ===== DRAWER ===== -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerName">
+  <header>
+    <div class="avatar" id="drawerAvatar">A</div>
+    <div>
+      <h3 id="drawerName">Name</h3>
+      <div class="meta" id="drawerMeta"></div>
+    </div>
+    <button class="close" id="drawerClose" aria-label="Close">×</button>
+  </header>
+  <div class="body" id="drawerBody"></div>
+</aside>
+
+<script>
+/* ============================================
+   DATA — populated below from synthesised research payload
+   (placeholder: real content will be patched in next step)
+============================================ */
+window.__DATA__ = {
+  respondents: [],   // 17
+  themes: [],
+  provocations: [],
+  verbatims: [],
+  categories: [],
+  channels: [],
+  twoBLR: { a: {}, b: {} },
+  moments: [],
+  wishlist: [],
+  sowhat: []
+};
+
+/* ============================================
+   RENDERERS
+============================================ */
+function tag(el, attrs={}, html='') {
+  const e = document.createElement(el);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (html) e.innerHTML = html;
+  return e;
+}
+
+function renderFaces() {
+  const grid = document.getElementById('faceGrid');
+  grid.innerHTML = '';
+  window.__DATA__.respondents.forEach((r, idx) => {
+    const f = tag('div', {
+      class: 'face',
+      'data-id': r.id,
+      'data-species': r.species,
+      'data-petcount': r.petCount,
+      'data-tenure': r.tenure,
+      'data-origin': r.origin,
+      'data-welfare': r.welfareFirst ? 'yes' : 'no'
+    });
+    f.innerHTML = `
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div class="avatar">${r.initials}</div>
+        <div>
+          <div class="name">${r.name}</div>
+          <div class="pet-name">w/ ${r.petName}</div>
+        </div>
+      </div>
+      <div class="meta">
+        <span class="species-${r.species}">${r.species === 'cat' ? '🐈 Cat' : '🐕 Dog'} · ${r.breed||''}</span>
+        <span>${r.age}</span>
+        <span>${r.gender}</span>
+        ${r.userType ? `<span>${r.userType}</span>`:''}
+        ${r.welfareFirst ? `<span style="background:#FFE5C7; color: #6b3a00;">Welfare-first</span>`: ''}
+      </div>
+      <div class="quote-tease">"${r.tease}"</div>
+      <div class="open-cue">Open the decode</div>
+    `;
+    f.addEventListener('click', () => openDrawer(r.id));
+    grid.appendChild(f);
+  });
+}
+
+function renderProvocations() {
+  const grid = document.getElementById('provGrid');
+  grid.innerHTML = '';
+  window.__DATA__.provocations.forEach((p, i) => {
+    const card = tag('div', { class: `prov ${p.style} ${p.span||'span-4'}` });
+    card.innerHTML = `
+      <div>
+        ${p.num ? `<div class="num">${p.num}</div>` : ''}
+        <h3>${p.title}</h3>
+        ${p.body ? `<p>${p.body}</p>` : ''}
+      </div>
+      ${p.detail ? `
+        <div class="prov-detail">
+          ${p.detail.map(v => `
+            <div class="vbatim">"${v.q}"<small>— ${v.src}</small></div>
+          `).join('')}
+        </div>
+      ` : ''}
+      <div class="cue">${p.detail ? 'Tap for evidence' : ''}</div>
+    `;
+    if (p.detail) card.addEventListener('click', () => card.classList.toggle('expanded'));
+    grid.appendChild(card);
+  });
+}
+
+function renderThemes() {
+  const grid = document.getElementById('themeGrid');
+  grid.innerHTML = '';
+  window.__DATA__.themes.forEach(t => {
+    const el = tag('div', { class: 'theme' });
+    el.innerHTML = `
+      <span class="badge">${t.tag}</span>
+      <h4>${t.title}</h4>
+      <p>${t.summary}</p>
+      <div class="count">${t.count} of 17 · ${t.who||''}</div>
+      <div class="open">
+        ${t.evidence.map(v => `
+          <div class="v">"${v.q}"<small>${v.src}</small></div>
+        `).join('')}
+      </div>
+    `;
+    el.addEventListener('click', () => el.classList.toggle('expanded'));
+    grid.appendChild(el);
+  });
+}
+
+function renderBricks() {
+  const wall = document.getElementById('brickWall');
+  wall.innerHTML = '';
+  window.__DATA__.verbatims.forEach(v => {
+    const b = tag('div', { class: `brick ${v.color||''} ${v.large?'large':''}` });
+    b.innerHTML = `
+      <span class="tag">${v.tag}</span>
+      <div class="q">"${v.q}"</div>
+      <div class="src">— ${v.src}</div>
+    `;
+    wall.appendChild(b);
+  });
+}
+
+function renderCats() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = '';
+  window.__DATA__.categories.forEach(c => {
+    const el = tag('div', { class: `cat ${c.id}` });
+    el.innerHTML = `
+      <div class="icon">${c.icon}</div>
+      <h3>${c.name}</h3>
+      <div class="one-liner">${c.oneLiner}</div>
+      <div class="stat-row">
+        ${c.pills.map(p => `<span class="pill">${p}</span>`).join('')}
+      </div>
+      <div class="key"><b>Operative truth ·</b> ${c.truth}</div>
+    `;
+    grid.appendChild(el);
+  });
+}
+
+function renderMatrix() {
+  const m = document.getElementById('matrix');
+  m.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Channel</th>
+          <th>What it does (the job)</th>
+          <th>Food</th><th>Health</th><th>Groom</th><th>Treats / Toys</th>
+          <th>Verbatim signal</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${window.__DATA__.channels.map(ch => `
+          <tr>
+            <td><span class="channel">${ch.name}</span><div class="role">${ch.role}</div></td>
+            <td class="role">${ch.job}</td>
+            <td><span class="heat h-${ch.food}">${ch.food}</span></td>
+            <td><span class="heat h-${ch.health}">${ch.health}</span></td>
+            <td><span class="heat h-${ch.groom}">${ch.groom}</span></td>
+            <td><span class="heat h-${ch.treats}">${ch.treats}</span></td>
+            <td class="role" style="font-style:italic; color: var(--ink-2)">"${ch.signal}"</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderTwoBLR() {
+  const s = document.getElementById('twoBLR');
+  const d = window.__DATA__.twoBLR;
+  s.innerHTML = `
+    <div class="side a">
+      <h4>${d.a.label || 'Bubble Bangalore'}</h4>
+      <h3>${d.a.title || ''}</h3>
+      <p>${d.a.desc || ''}</p>
+      <ul>${(d.a.signals||[]).map(x => `<li>${x}</li>`).join('')}</ul>
+    </div>
+    <div class="side b">
+      <h4>${d.b.label || 'Real Bangalore'}</h4>
+      <h3>${d.b.title || ''}</h3>
+      <p>${d.b.desc || ''}</p>
+      <ul>${(d.b.signals||[]).map(x => `<li>${x}</li>`).join('')}</ul>
+    </div>
+  `;
+}
+
+function renderTimeline() {
+  const t = document.getElementById('timeline');
+  t.innerHTML = window.__DATA__.moments.map(m => `
+    <div class="tl-item">
+      <div class="when">${m.when}</div>
+      <h4>${m.title}</h4>
+      <p>${m.body}</p>
+      ${m.v ? `<div class="v">"${m.v.q}"<small>${m.v.src}</small></div>` : ''}
+    </div>
+  `).join('');
+}
+
+function renderWishlist() {
+  const w = document.getElementById('wishlist');
+  w.innerHTML = window.__DATA__.wishlist.map((wish, i) => `
+    <div class="note c${(i % 5) + 1}">
+      "${wish.q}"
+      <small>— ${wish.src}</small>
+    </div>
+  `).join('');
+}
+
+function renderSowhat() {
+  const g = document.getElementById('sowhatGrid');
+  g.innerHTML = window.__DATA__.sowhat.map(s => `
+    <div class="sowhat">
+      <div class="who"><span class="pill">${s.who}</span></div>
+      <div class="body">
+        <h4>${s.title}</h4>
+        <p>${s.body}</p>
+        ${s.tactic ? `<div class="tactic">${s.tactic}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================
+   DRAWER
+============================================ */
+function openDrawer(id) {
+  const r = window.__DATA__.respondents.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('drawerName').textContent = r.name;
+  document.getElementById('drawerAvatar').textContent = r.initials;
+  document.getElementById('drawerMeta').innerHTML = `
+    <span>${r.species === 'cat' ? '🐈' : '🐕'} ${r.petName} · ${r.breed||''}</span>
+    <span>${r.age} · ${r.gender}</span>
+    <span>${r.userType||''}</span>
+    <span>${r.origin === 'immigrant' ? 'Immigrant to BLR' : 'Localite'}</span>
+    ${r.welfareFirst ? '<span>Welfare-first</span>' : ''}
+  `;
+  document.getElementById('drawerBody').innerHTML = `
+    <h4>The headline</h4>
+    <div class="pull-quote">${r.headlineQuote.q}<span class="src">— ${r.headlineQuote.src}</span></div>
+
+    <h4>Profile</h4>
+    <dl class="kv">
+      <dt>Lives</dt><dd>${r.lives}</dd>
+      <dt>Works</dt><dd>${r.works}</dd>
+      <dt>Pet(s)</dt><dd>${r.petsDetail}</dd>
+      <dt>Got pet</dt><dd>${r.gotPet}</dd>
+      <dt>Tenure</dt><dd>${r.tenure === 'firsttime' ? 'First-time pet parent' : 'Experienced (multiple pets / years)'}</dd>
+    </dl>
+
+    <h4>A typical day</h4>
+    <p>${r.typicalDay}</p>
+
+    <h4>Top anxieties</h4>
+    <ul class="bullets">
+      ${r.anxieties.map(a => `<li><strong>${a.title}</strong> — ${a.body}</li>`).join('')}
+    </ul>
+
+    <h4>Category behaviour</h4>
+    <ul class="bullets">
+      ${r.categories.map(c => `<li><strong>${c.cat}:</strong> ${c.body}</li>`).join('')}
+    </ul>
+
+    <h4>Channel reality</h4>
+    <p>${r.channelReality}</p>
+
+    <h4>Brand recall</h4>
+    <p><strong>Supertails:</strong> ${r.stRecall}</p>
+    <p><strong>Competition:</strong> ${r.compRecall}</p>
+
+    <h4>Wishlist</h4>
+    <ul class="bullets">
+      ${r.wishlist.map(w => `<li>${w}</li>`).join('')}
+    </ul>
+
+    <h4>Best verbatims</h4>
+    ${r.verbatims.map(v => `<div class="verbatim">"${v}"<span class="ctx">${r.name}, transcript</span></div>`).join('')}
+
+    ${r.surprise ? `<h4>The surprise</h4><p style="background: var(--henlo-yellow); padding: 12px 14px; border-radius: 10px;">${r.surprise}</p>` : ''}
+  `;
+  document.getElementById('drawerBody').scrollTop = 0;
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerBackdrop').classList.add('open');
+}
+
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerBackdrop').classList.remove('open');
+}
+document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+document.getElementById('drawerBackdrop').addEventListener('click', closeDrawer);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+/* ============================================
+   LENS / FILTER
+============================================ */
+const lensBar = document.getElementById('lensBar');
+let activeLens = 'all';
+lensBar.addEventListener('click', e => {
+  const btn = e.target.closest('.chip');
+  if (!btn) return;
+  // Reset all chips
+  lensBar.querySelectorAll('.chip').forEach(c => {
+    c.setAttribute('aria-pressed', 'false');
+    c.classList.remove('green');
+  });
+  btn.setAttribute('aria-pressed', 'true');
+  if (btn.dataset.lens === 'all') btn.classList.add('green');
+  activeLens = btn.dataset.lens;
+  applyLens();
+});
+
+function applyLens() {
+  const faces = document.querySelectorAll('.face');
+  let n = 0;
+  faces.forEach(f => {
+    let show = true;
+    const sp = f.dataset.species, pc = f.dataset.petcount, te = f.dataset.tenure, or = f.dataset.origin, wf = f.dataset.welfare;
+    if (activeLens === 'cat' && sp !== 'cat') show = false;
+    if (activeLens === 'dog' && sp !== 'dog') show = false;
+    if (activeLens === 'single' && pc !== 'single') show = false;
+    if (activeLens === 'multiple' && pc !== 'multiple') show = false;
+    if (activeLens === 'firsttime' && te !== 'firsttime') show = false;
+    if (activeLens === 'experienced' && te !== 'experienced') show = false;
+    if (activeLens === 'immigrant' && or !== 'immigrant') show = false;
+    if (activeLens === 'localite' && or !== 'localite') show = false;
+    if (activeLens === 'welfare' && wf !== 'yes') show = false;
+    f.dataset.hiddenByFilter = !show;
+    if (show) n++;
+  });
+  document.getElementById('lensCount').textContent = n;
+}
+
+/* ============================================
+   BOOT
+============================================ */
+function boot() {
+  renderProvocations();
+  renderFaces();
+  renderBricks();
+  renderThemes();
+  renderCats();
+  renderMatrix();
+  renderTwoBLR();
+  renderTimeline();
+  renderWishlist();
+  renderSowhat();
+  applyLens();
+}
+
+// data is patched in by next step
+document.addEventListener('DOMContentLoaded', boot);
+</script>
+
+<!-- DATA PAYLOAD will be inlined below by the next build step -->
+<script id="data-payload">
+window.__DATA__ = {
+
+/* ─────────────────────────────────────────────
+   17 RESPONDENTS
+───────────────────────────────────────────── */
+respondents: [
+
+  /* ── A: Ritik / Rio ── */
+  {
+    id:'ritik', name:'Ritik', initials:'RI',
+    species:'dog', breed:'Shih Tzu', petName:'Rio',
+    age:'~25', gender:'Male', petCount:'single',
+    tenure:'firsttime', origin:'immigrant', welfareFirst:false,
+    userType:'Supertails User',
+    tease:'He responds when we talk through the camera. That\'s enough.',
+    headlineQuote:{ q:'They know what we want. Every order, they keep giving small gifts.', src:'Ritik, on Supertails' },
+    lives:'Odisha → Bangalore. 4 years. Rented flat with sister in Bellandur.',
+    works:'Software engineer. Office 7am–8pm daily, 6 days a week.',
+    petsDetail:'Rio, Shih Tzu, 1.5 years. First dog ever.',
+    gotPet:'Through a friend\'s breeder contact, 20km outside Bangalore. Visited for 1-2 hours. Love at first sight from the litter.',
+    typicalDay:'Both in office 7am–8pm. Rio alone. Camera streams live — he responds to voice on it. Friends rotate visiting when needed. Evening ball play on terrace. Weekends: badminton + Billy\'s Pet in Bellandur. Has taken Rio to Goa by car (8hrs).',
+    anxieties:[
+      { title:'Rio alone all day', body:'Work is 7am–8pm six days a week. Camera gives visibility but not presence. After 8pm Rio gets anxious.' },
+      { title:'App lag', body:'Supertails app takes 5–10 seconds per screen. Sent a detailed bug report with screenshots and reproduction steps. Never got a response.' },
+      { title:'Grooming rejection', body:'Supertails grooming said they couldn\'t handle Rio because he wouldn\'t stay still. Felt like being called a bad parent.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Started with Royal Canin via Supertails (prices were better then). Now Zepto is cheaper on most SKUs — splits purchases accordingly.' },
+      { cat:'Healthcare', body:'Dr. Prasad came to the house for vaccinations when Rio was too young to travel. Supertails clinic in Brookfield — got a personal tour, impressed by cat/dog separation and fear-free design.' },
+      { cat:'Grooming', body:'Tried Supertails — declined. Now uses Dr. Paw\'s in HSR (15km). It\'s far but trusted.' },
+      { cat:'Accessories', body:'Buys via app. Found Supertails on Google search for medicine.' }
+    ],
+    channelReality:'Supertails for vet-adjacent needs and pharmacy. Zepto for cheaper daily food. App for ordering when prices competitive. Physical clinic found by passing Brookfield on commute.',
+    stRecall:'Installed via Google search for medicine/food. First order Royal Canin. Supertails called proactively about vaccine schedule. Clinic visited in person — impressed.',
+    compRecall:'Zepto (cheaper food). Zigly and Dr. Paw\'s for grooming. Sees Supertails as the only full-stack option.',
+    wishlist:['App that opens in under 1 second','Grooming staff trained for anxious dogs','Response from product team when feedback is submitted'],
+    verbatims:['They know what we want. Whatever you order all kinds of things they will keep on giving small gifts.','Application is bad, it is very lagging. I already sent the feedback mail but I didn\'t receive anything back.','They gave me that walkthrough — one side is a cat clinic and one side is a dog clinic. They have an operation theatre. All those things they showed me.'],
+    surprise:'Sent a proper engineering bug report to Supertails — screenshots, reproduction steps, expected vs actual behaviour. Got no reply. A software engineer who genuinely invested in improving the product experience and was ignored.'
+  },
+
+  /* ── B: Pratham / Duffel ── */
+  {
+    id:'pratham', name:'Pratham', initials:'PR',
+    species:'dog', breed:'Cocker Spaniel', petName:'Duffel',
+    age:'27', gender:'Male', petCount:'single',
+    tenure:'experienced', origin:'localite', welfareFirst:true,
+    userType:'Supertails User',
+    tease:'Just a small house with a view, and him and me. That\'s all I want.',
+    headlineQuote:{ q:'Once we touch Dr. Pampapathi, we don\'t have to go anywhere else.', src:'Pratham, on vet loyalty' },
+    lives:'Born Rajasthan, raised Bangalore his whole life. Large family house in RR Nagar — parents, uncle, aunt, granny across 2 floors.',
+    works:'Business consultant, Global Business Outlook (London-based). Office daily.',
+    petsDetail:'Duffel, 5-year-old Cocker Spaniel. Adopted from kill-shelter risk. Previous dog Billu (Brown Lab) died of Parvo at age 8-9.',
+    gotPet:'Heard Duffel and his sister were headed to a kill shelter. Rescued him during COVID. Family opposed — mom was "red-hot." Now she handles most daytime care.',
+    typicalDay:'Office 10am–7pm. Family home always. Evening with Duffel. Saturdays at Maruthi Animal Shelter when possible. Solo travel to Sakleshpur, Hampi — has cut this down to spend more time with Duffel.',
+    anxieties:[
+      { title:'Health decline', body:'Duffel has health issues. "I tend to spend time with him a lot, because of what may happen in the future." Has quietly stopped traveling.' },
+      { title:'Kill shelter realities', body:'Was strict adoption-only. Saw the kill shelter situation. Every purchase decision goes through a welfare filter.' },
+      { title:'Not doing enough', body:'Wants to volunteer more at Maruthi Shelter but work gets in the way. Carries this quietly.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Not price-sensitive. Quality-first. Whatever Duffel needs.' },
+      { cat:'Healthcare', body:'Dr. Pampapathi, JP Nagar — absolute loyalty. Vet studied abroad. "If he touches a dog, the dog is cured." Has used since Billu.' },
+      { cat:'Welfare', body:'Active volunteer at Maruthi Animal Shelter. Has helped rescue 2-3 dogs near Kengeri and JP Nagar.' },
+      { cat:'Community', body:'Deep Jain community values of non-violence toward animals. Frames pet parenting as an extension of this.' }
+    ],
+    channelReality:'Supertails across food, products, clinic, pharmacy, grooming. Dr. Pampapathi for all healthcare. Community-trust driven decisions.',
+    stRecall:'Active user across all Supertails categories. Has recommended Supertails to friends who then started using it.',
+    compRecall:'Dr. Pampapathi for healthcare (not via any platform). Maruthi Shelter community. Local shops ad hoc.',
+    wishlist:['Sakleshpur trip with Duffel before it\'s too late','A welfare-oriented community feature on Supertails','More time to volunteer'],
+    verbatims:['He has eyes that no other dog has. It looks like a human is only looking at you.','He understands Marwadi mostly and semi-English.','He was the last dog to be picked up. The most scared one. That\'s why nobody took him.'],
+    surprise:'Has a Barfi song (Kyon) set as Duffel\'s Instagram page theme — the lyric is about two people who want to be together but can\'t. Pratham says it\'s about Duffel\'s eyes and how they look at him.'
+  },
+
+  /* ── D: Smrithi / Ghibli ── */
+  {
+    id:'smrithi', name:'Smrithi', initials:'SM',
+    species:'cat', breed:'Indie', petName:'Ghibli',
+    age:'~22', gender:'Female', petCount:'single',
+    tenure:'firsttime', origin:'immigrant', welfareFirst:true,
+    userType:'Supertails User',
+    tease:'Every time I come back home, he comes into my arms for 5-10 minutes. Non-negotiable.',
+    headlineQuote:{ q:'Whenever I get money, the first thing I do is order him food and everything that he needs.', src:'Smrithi, on priorities' },
+    lives:'Born Bangalore, raised Delhi. Back in Bangalore for college — 4 years. Lives alone in rented flat near work.',
+    works:'Design student, portfolio work. Commutes to work by Scooty.',
+    petsDetail:'Ghibli (thought to be female, named Jibdi, then discovered male at 2 months). 4.5-month Indie kitten. Adopted through Supertails-connected vet network.',
+    gotPet:'Texted friend Smita (Supertails employee) who connected her to foster network. Got Ghibli 2 months after moving. Boyfriend surprised her — her birthday.',
+    typicalDay:'8am to work. Ghibli home alone with window mesh open for bird-watching. Evening tea stall run by Scooty with Ghibli in sweater. Curd as daily treat. 11pm sleep. Has taken Ghibli to Gokarna via friend.',
+    anxieties:[
+      { title:'Ghibli alone all day', body:'"The first thing is him being home when I am not home, because I know he is going to be waiting for me."' },
+      { title:'Vaccination is non-negotiable', body:'Lost a foster kitten to cross-infection at an unvaccinated-cat vet visit. "I don\'t think there is any redo. What if he catches a virus?" Chose in-home vaccination specifically.' },
+      { title:'Finding a vet who actually knows cats', body:'First vet asked basic questions any cat owner would know. "I could know that he was just bullshitting." Switched immediately. Wants same doctor every time.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Wet + dry mix. Sheba, Meow. Zepto/Blinkit for speed (faster than Supertails). Curd as supplement. Student budget — his food takes priority over everything.' },
+      { cat:'Healthcare', body:'In-home vaccination via Supertails (Rs 200 booking fee). Wants same doctor for continuity. Leila Pet Clinic for walk-in check-ups.' },
+      { cat:'Grooming', body:'Handles nail clipping herself. Will bathe him herself. Cat grooming mostly self-managed.' },
+      { cat:'Accessories', body:'Pink harness (read cats see pink better). Cat house (he inspected and approved). Nail clippers from Blinkit. Crochets toys herself.' }
+    ],
+    channelReality:'Supertails for in-home vet booking. Zepto/Blinkit for food (faster). Local clinic for walk-in. Friend Balaji network for trusted cat-sitting.',
+    stRecall:'Connected through Supertails employee Smita. Uses Supertails for vet@home booking. Prefers Zepto for speed on food. Supertails clinic for neutering when time comes.',
+    compRecall:'Zepto/Blinkit for food. Leila Pet Clinic for walk-in. Friend network as primary trust layer.',
+    wishlist:['Same in-home vet every time — no lottery on doctor quality','Cat-proof flat instructions for house-sitters','Faster wet food delivery (same-hour)'],
+    verbatims:['No one asks me to hold Jiggy. I\'m like, no. No need to know.','I don\'t think there is any redo. Because what if he catches a virus?','Every time I come back home, he is extremely cuddly. He comes into my arms and gives me kisses for 5-10 minutes.'],
+    surprise:'Studies cat vision research to choose product colours — bought pink harness because she read cats see pink better. Also crochets his toys. On a student budget, he still gets the best of everything she can make.'
+  },
+
+  /* ── F: Unit F / Dolly + Cats ── */
+  {
+    id:'unitf', name:'Unit F', initials:'UF',
+    species:'dog', breed:'Golden Retriever + 6 Persians', petName:'Dolly & Cats',
+    age:'~36', gender:'Female', petCount:'multiple',
+    tenure:'experienced', origin:'localite', welfareFirst:true,
+    userType:'Supertails User',
+    tease:'The neighbour who used to hate dogs every day? She started feeding them too. That\'s the best thing.',
+    headlineQuote:{ q:'I don\'t take them to vet clinics at all. Once you feed them with high quality foods, it\'s not necessary.', src:'Unit F, on preventive nutrition' },
+    lives:'Bangalore, established family home. Has a live-in maid who handles daily feeding of pets and strays.',
+    works:'IT professional with strong self-taught nutrition knowledge.',
+    petsDetail:'Dolly (Golden Retriever, senior), Lily (Persian, 8yr, lead cat), 5 other Persian cats. Feeds 40+ neighbourhood strays daily — chicken rice with greens.',
+    gotPet:'Has always had pets. Life organised around animals.',
+    typicalDay:'Maid feeds strays twice daily (chicken rice + vegetables). Returns from work to personally check on cats. Elaborate cat tree setup. Dolly wiped with handmade neem spray before re-entering. Persian cats on strict protein-heavy diet.',
+    anxieties:[
+      { title:'Monsoon tick invasion', body:'Dolly catches ticks on every outdoor walk. Handmade neem spray as preventive. "Parasites cannot live in a dry environment." Rainy season = constant vigilance.' },
+      { title:'Stray puppy casualties', body:'40+ puppies near house. A few killed in accidents by drunk drivers from an illegal nearby club. Managed to relocate survivors to half-constructed building.' },
+      { title:'Over-vaccination risk', body:'"I believe Persian cats in a clean indoor environment don\'t need yearly vaccines — we are compromising their immune system." Self-manages most health interventions.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Protein-first philosophy derived from keto research applied to animals. 50-75% meat, 25% greens. Pedigree as backup only. Insists on no polyester bedding.' },
+      { cat:'Healthcare', body:'Vet visit once every 2-3 years. Nutrition as primary prevention. Handmade herbal spray for ticks. Manages deworming herself.' },
+      { cat:'Accessories', body:'No polyester — even mattress materials. Cat tree purchased from Dubai. Mat for Dolly sourced internationally. Quality over convenience at every turn.' },
+      { cat:'Community', body:'Informal rescue network. Converted a hate-dogs neighbour into a fellow feeder. Sees feeding strays as daily practice, not charity.' }
+    ],
+    channelReality:'Supertails for specific items. Zepto for urgent. International e-commerce for premium accessories. Largely self-sufficient system.',
+    stRecall:'Active Supertails user. Food and non-food. Clinic services known.',
+    compRecall:'Local pet shops for some items. Dubai sourcing for accessories. Direct from brand for specific supplements.',
+    wishlist:['Herbal tick prevention in mainstream retail','Better awareness of over-vaccination risk for indoor cats','Premium pet nutrition brand aligned with protein-first philosophy'],
+    verbatims:['I have 6 cats currently and we feed many stray dogs every day.','I don\'t use polyester. It is not really good for anyone — not only for animals, but even for human beings.','She used to hate dogs every time. One day she every day saw me feeding. Then she also started feeding.'],
+    surprise:'Makes her own neem-based tick spray at home from neem leaves and other herbal ingredients. Has a nutritional philosophy for her animals as rigorous as any certified pet nutritionist — derived entirely from personal keto research applied cross-species.'
+  },
+
+  /* ── G: Anushi / Scooby ── */
+  {
+    id:'anushi', name:'Anushi', initials:'AN',
+    species:'dog', breed:'Pug', petName:'Scooby',
+    age:'~34', gender:'Female', petCount:'single',
+    tenure:'firsttime', origin:'immigrant', welfareFirst:false,
+    userType:'Competition User',
+    tease:'We plan everything keeping Scooby in mind now. Everything.',
+    headlineQuote:{ q:'We go for brands because it is easy. Life is very busy and we are running.', src:'Anushi, on brand trust' },
+    lives:'Punjab origin. 10 years in Bangalore (South Goa area). Lives with husband (night-shift worker), two daughters (11 and 6), Scooby.',
+    works:'Homemaker, ex-computer professor (M.Tech). AI exploration and freelance projects.',
+    petsDetail:'Scooby, 11-month Pug. Family gift for younger daughter\'s birthday (Feb 26). Girls named her — youngest calls her "my sister."',
+    gotPet:'Wanted to give younger daughter a "baby sister." Friend referred a pet shop — pug chosen because daughters were scared of big dogs. Gifted in a basket as birthday surprise.',
+    typicalDay:'Wakes with Scooby at 6am. Scooby follows her everywhere including bathroom. Alexa on for music when alone at home. Kids to school. Husband returns at 5am from night shift — Scooby greets him at door. Has taken Scooby to Chikmaglur (120 steps cliff), Munnar.',
+    anxieties:[
+      { title:'She can\'t be alone', body:'Even 2 hours = depression, no eating, no sleeping. Camera monitoring every evening out. "Being family member, we too don\'t feel good." Always takes her along now.' },
+      { title:'Language barrier at local shops', body:'"If we go to Head and Tails, they talk to us nicely. But if we go to local, they see that we are not Kannadiga and they don\'t say anything." Brands are accessibility.' },
+      { title:'Pug health complexity', body:'Knows pugs can\'t exceed 9-9.5kg. Brachycephalic breathing. Kidney/lung risks. Chikmaglur broken nail emergency. Paw care is a daily intensive ritual.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Canine Creek. Homemade pumpkin, sweet potato, cucumber. Strict no salt/sugar. New foods only from hand — never bowl first. Egg from husband (vegetarian family exception). No citrus despite Scooby wanting oranges.' },
+      { cat:'Healthcare', body:'Dr. Prajana (Girinagar) found via Google reviews. Lady doctor near daughters\' school. Routine every 2 months. Emergency broken-nail clinic at Chikmaglur resort.' },
+      { cat:'Grooming', body:'Paw massage with coconut oil daily. Paw cream. Careful floor protocols — paw washed every time she comes inside. Tried grooming salon, language barrier.' },
+      { cat:'Accessories', body:'Heads Up for Tails online. Ordered bed before getting Scooby. Pet-friendly Rapido and resort research now standard.' }
+    ],
+    channelReality:'Online-first. Heads Up for Tails for pet accessories. DMart for Pedigree/Drools staples. Dog bakery (Koramangala) for birthday. Doctor\'s pet shop for vet-recommended items.',
+    stRecall:'Receives Supertails WhatsApp messages. Not an active purchaser. Daughters on Instagram/Facebook for pug reels and communities.',
+    compRecall:'Heads Up for Tails (primary), DMart, Drools, Pedigree. Local pet shop Dr. Prajana for vet-recommended products.',
+    wishlist:['Pet-friendly cabs as a standard Rapido/Ola option','Grooming service trained for anxious and brachycephalic dogs','Hindi/English explanation at local pet shops'],
+    verbatims:['In Chikmaglur, there was a cliff with 120 steps and she was with us.','We go for brands. Not that we love brands. Brands are for you, we are not for brands.','If we go to Head and Tails, they talk to us nicely and explain things. But if we go to local, they see that we are not Kannadiga and they don\'t say anything.'],
+    surprise:'Has a paw care routine more intensive than most humans\' skincare regimens — daily coconut oil massages, dedicated paw cream, strict no-floor protocols for the building corridor. Pugs need "royal treatment," she says, and she means it literally.'
+  },
+
+  /* ── Lakshmi / Nico & Zola ── */
+  {
+    id:'lakshmi', name:'Lakshmi', initials:'LA',
+    species:'dog', breed:'Indie Mix', petName:'Nico & Zola',
+    age:'31', gender:'Female', petCount:'multiple',
+    tenure:'experienced', origin:'immigrant', welfareFirst:true,
+    userType:'Supertails User',
+    tease:'Indie dogs are a personality roulette. You do not know what you are going to get.',
+    headlineQuote:{ q:'She stood on the counter and eaten 500g of chicken, all by herself. And she was sitting there like nothing happened.', src:'Lakshmi, on Zola\'s birthday' },
+    lives:'Mumbai → Bangalore (2018 for Headout job). Married to Pranav. Hybrid-remote lifestyle.',
+    works:'Content marketing, Get Your Guide (Berlin-based). Fully remote. Travel industry 8 years.',
+    petsDetail:'Nico (2020, Indie, adopted via Facebook rescue during lockdown — most scared of litter, delivered by animal volunteer truck) and Zola (2022, found alone outside KFC in Doddballapur on a highway).',
+    gotPet:'Nico: lockdown pandemic, last puppy adopted. Zola: "Pranav was like, I am not leaving without taking that dog." Lone survivor outside KFC. KFC staff confirmed she just chilled there all day eating crumbs.',
+    typicalDay:'Wake when ready. 8:30am walk (Pranav). Kibble breakfast. Nico at 1:58pm comes for treat (has shifted treat time from 5pm to 2pm over 6 months by systematic persistence). 5pm walk. 8pm dinner — Nico starts reminding at 7:45. 8:30pm walk. 10:30pm bed — Nico in between them, Zola horizontal across their legs.',
+    anxieties:[
+      { title:'Back issues from co-sleeping', body:'Nico between them, Zola across legs horizontally. Has developed back problems. Cannot change this arrangement.' },
+      { title:'Zola\'s battle scars', body:'Returns from boarding with wounds every time — picks fights. Worried she\'ll get banned from Keith\'s Bower House, their only trusted boarding.' },
+      { title:'Supertails delivery at 10pm', body:'Three consecutive nights of delivery agent calling at 10:24pm asking for live location, then marking her unavailable. Used unknown courier Elastic Run. Trust gone for urgent orders.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Grain Zero kibble — found after 5-6 failed brand trials. K9 Craving dehydrated treats direct from brand website. Homemade chicken keema for birthdays.' },
+      { cat:'Healthcare', body:'Regular vet. Tried multiple kibble brands on vet recommendation. Aware of breed-specific issues for Indies.' },
+      { cat:'Accessories', body:'Amazon primary (Amazon Pay cashback reinvested into next order). HUfT for specific quality items. Zola destroys everything — moved to cheaper harnesses. Lost count of name tags Zola has chewed.' },
+      { cat:'Boarding', body:'Keith\'s Bower House — chose for proximity (emergencies), Tarun who handles anxious dogs correctly, energy-level-based dog separation system. Brother also stays over for shorter trips.' }
+    ],
+    channelReality:'Amazon as primary (cashback + reliable delivery + easy returns). K9 Craving direct. HUfT for specific items. Supertails for collars/shampoo — but delivery reliability concern now. Keith\'s Bower House for boarding.',
+    stRecall:'Has used Supertails for collars and shampoo. Good product experience. Bad delivery experience. "I wouldn\'t order anything I need immediately delivered on Supertails now."',
+    compRecall:'Amazon (dominant). K9 Craving direct. Heads Up for Tails. Local boarding. K9 Craving direct from brand.',
+    wishlist:['Fix last-mile delivery — no unknown couriers at 10pm','Boarding specifically for anxious/anti-social dogs','European toy/treat range available in India'],
+    verbatims:['Indie dogs are a personality roulette. You do not know what you are going to get.','He is doing all the hard work, taking one for the team. Every day at 7:45, like clockwork, he will come and start reminding me.','I wouldn\'t order anything I need immediately delivered on Supertails now because of this experience.'],
+    surprise:'Nico systematically shifted his treat time from 5pm to 2pm over 6 months — showing up at 2pm, acting hungry, getting treats, until 5pm became irrelevant. Lakshmi is convinced this was deliberate. "I don\'t know if he was asking for something else and I ended up giving him treats, but now he\'s like — oh great, if I ask at 2 o\'clock, I\'ll get it."'
+  },
+
+  /* ── H: Sandeep / Cooper ── */
+  {
+    id:'sandeep', name:'Sandeep', initials:'SA',
+    species:'dog', breed:'Labrador', petName:'Cooper',
+    age:'23', gender:'Male', petCount:'single',
+    tenure:'experienced', origin:'localite', welfareFirst:true,
+    userType:'Competition User',
+    tease:'He has a high temperament with strangers. With us, he is very playful, very nice.',
+    headlineQuote:{ q:'Bangalore has the highest nightlife in India. No other city can even match them closely. That much pubs and nightlife they have.', src:'Sandeep, on his city' },
+    lives:'Born and raised in Bangalore. Lives with mom, dad, sister, grandmother, and Cooper.',
+    works:'Accenture operations analyst, US project night shift (7:30pm–5am). Work from home.',
+    petsDetail:'Cooper, 4-year-old Labrador. Family dog — Sandeep is primary caretaker and most attached.',
+    gotPet:'Family dog acquired when Sandeep was a teenager.',
+    typicalDay:'Finish work 5am. Run + gym till 6am (parks near home). Sleep 8am–4:30pm. Cooper walks, Cubbon Park dog park, friend\'s house with another dog. Weekends: out by 8pm, pub/party till 2-3am, Sunday family time.',
+    anxieties:[
+      { title:'Cooper\'s anxiety with strangers', body:'"He will pounce on people directly when they come." Ties him outside until he settles. High-energy Lab + unfamiliar people = stress.' },
+      { title:'Night shift vs dog schedule', body:'Works 7:30pm–5am. Standard dog park time falls during his sleep hours. Manages with family backup — always someone home.' },
+      { title:'Immigrant attitude in Bangalore', body:'"They come here and feel it is their city. Nobody questions them." Localite frustration — but connects it to understanding they are away from parents.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Standard branded dog food. Family-involved in feeding. Sandeep oversees quality.' },
+      { cat:'Healthcare', body:'Regular vet visits. Cubbon Park dog park for socialization — key part of Cooper\'s social health.' },
+      { cat:'Grooming', body:'Sandeep handles bathing, cleaning, grooming himself.' },
+      { cat:'Social', body:'Cubbon Park dog park is the primary social venue. Friend\'s house with dog for playdates.' }
+    ],
+    channelReality:'Local pet stores and clinics. Physical-first. Not active on digital pet platforms.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Local pet stores, clinics, grooming in Bangalore area. Competition platforms for food and pharmacy.',
+    wishlist:['Night-shift-friendly dog park hours','Cooper dog park better maintained','Grooming service for high-energy Labs without stress'],
+    verbatims:['He will pounce on people directly when they come. That is why sometimes we tie him outside.','Even though good or bad, let\'s just check what is out there. I like exploring basically.','Bangalore for pet care — I would say it is a Golden Retriever. Popular, known for unique things. But lots of traffic.'],
+    surprise:'After a full night shift until 5am, Sandeep goes directly for a run and gym session with Cooper before sleeping. Every single day. The discipline of the schedule is remarkable — and Cooper is baked into it.'
+  },
+
+  /* ── I: Unit I / Louis ── */
+  {
+    id:'uniti', name:'Unit I', initials:'UI',
+    species:'dog', breed:'Mixed', petName:'Louis',
+    age:'~32', gender:'Female', petCount:'single',
+    tenure:'experienced', origin:'localite', welfareFirst:false,
+    userType:'Competition User',
+    tease:'He can talk through eyes. He knows when I am not well.',
+    headlineQuote:{ q:'I cannot imagine a day without him. It is like it tears away a part of me.', src:'Unit I, on Louis' },
+    lives:'Born and raised in Bangalore. Lives with husband. Parents nearby but separate.',
+    works:'HR consultant. Hybrid — 2 days office. Has Louis\'s name tattooed.',
+    petsDetail:'Louis, mixed breed, 12 years old. Got him at 1 year from foster home (Prakash, HSR). Has been with him for 11 years — longer than her marriage.',
+    gotPet:'Got Louis before meeting husband. Was alone in Bangalore. Louis came from Prakash\'s foster home in HSR — had anxiety and trust issues from early maternal separation.',
+    typicalDay:'Either she or husband always home now — growing anxiety about Louis aging. Before leaving, she tells him: "I have a meeting, I will be back in one hour." He waits calmly. Camera on when both out. Curd before every walk (good for gut).',
+    anxieties:[
+      { title:'Louis is 12', body:'"We are little more conscious about it." Actively reduces travel. Manages schedules to ensure someone always home. "I cannot imagine how I will be without him. It will be difficult."' },
+      { title:'Soul partner dependency', body:'"He is my soul partner. Those ups were with him and downs were with him. He handles me." This is not hyperbole — it is literal.' },
+      { title:'Louis\'s trust issues', body:'Separated from mother at 1 year. Has anxiety. Takes time with new people. Trusts only Prakash for boarding — "he keeps his dog in his bedroom. There is no boundary."' }
+    ],
+    categories:[
+      { cat:'Food', body:'Curd before every walk — practiced for 11 years. High-quality, experience-based nutrition.' },
+      { cat:'Healthcare', body:'Prakash (HSR) for behavioral and diet guidance. Only trusted boarding. Growing focus on aging dog health.' },
+      { cat:'Emotional', body:'Louis trained to understand verbal departure explanations. Camera when out. Gradually limiting how long both are away simultaneously.' },
+      { cat:'Boarding', body:'Prakash\'s place in HSR — home-like, no boundaries, dog in bedroom. Found through friend network.' }
+    ],
+    channelReality:'Friend-network driven. Years of experience reduce platform dependency. Physical, local relationships for all services.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Prakash (HSR) for behavior and boarding. Trusted local vet. Competition platforms for food.',
+    wishlist:['A senior-dog companion programme','Boarding that truly replicates home — no cages, bedroom access','Transparent aging dog health tracking and vet guidance'],
+    verbatims:['He can talk through eyes. He knows when I am not well, he knows when I am down. He will give me my space and sit next to me.','He came to my life when I was not expecting it but when he came, things got changed in a different and better way.','It is like it tears away a part of me. I cannot imagine.'],
+    surprise:'Has Louis\'s name tattooed. Has been with Louis for 11 of his 12 years — longer than she has been with her husband. Louis was her Bangalore companion through every chapter of her adult life.'
+  },
+
+  /* ── J: Nitesh / Shiroh ── */
+  {
+    id:'nitesh', name:'Nitesh', initials:'NI',
+    species:'dog', breed:'Shih Tzu', petName:'Shiroh',
+    age:'29', gender:'Male', petCount:'single',
+    tenure:'experienced', origin:'localite', welfareFirst:false,
+    userType:'Competition User',
+    tease:'I am scared of dogs. But also a dog lover. That\'s a weird combination.',
+    headlineQuote:{ q:'The day we got him, he was little sick. Doctors were surprised he lived 2.5 years. But I am glad he could spend time with us.', src:'Nitesh, on Taco' },
+    lives:'Born and raised in Bangalore. Lives with parents, wife, and two sisters (one in Netherlands).',
+    works:'IT professional. Married last year. Got Shiroh 2 months after Taco died.',
+    petsDetail:'Shiroh, 11-month Shih Tzu, pure breed. Previous dog Taco (Shih Tzu mix, inherent health issues from day 1) passed away Christmas Eve.',
+    gotPet:'Bought Shiroh 2 months after Taco\'s death. Decision made post-grief.',
+    typicalDay:'Mom feeds Shiroh — he follows her all day. Joint vet trips (Nitesh drives, wife or mom accompanies). Shiroh hyperactive vs typical Shih Tzu — vet has also noted this.',
+    anxieties:[
+      { title:'Love and fear coexisting', body:'"I have been chased and bitten many times by stray dogs. Has happened with pet dogs also. That built fear. But when I see the furriness, I get attracted and I started liking them more and more."' },
+      { title:'Grief from Taco', body:'Taco died Christmas Eve. Still raw. Shiroh is both a fresh start and a reminder.' },
+      { title:'Vegetarian household meets dog nutrition', body:'Vegetarian family. Previously gave egg on vet\'s advice. Now "we prefer veg only." Working around this.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Vegetarian-only. Biscuits, specific vet-approved brands. Mom decides daily. Nitesh decides purchase.' },
+      { cat:'Healthcare', body:'Learning from Taco — more alert to early signs now. Shiroh hyperactivity flagged with vet. Training from previous experience.' },
+      { cat:'Family', body:'Distributed care model. Mom for daily. Wife for bathing sometimes. Nitesh for vet transport and decisions.' },
+      { cat:'Research', body:'Online research for anything new. Word of mouth locally.' }
+    ],
+    channelReality:'Local stores and clinics. Not active on digital pet platforms.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Local Bangalore pet stores. Vet recommendations. Word of mouth in local network.',
+    wishlist:['Vegetarian-certified dog food range','Support resources for households grieving a pet loss','Guidance for hyperactive Shih Tzus — vet referral network'],
+    verbatims:['I am scared of dogs but also a dog lover. That\'s a weird combination.','He is little hyperactive. Even doctors say he is hyper active compared to other Shih Tzus.','We got him after getting married. Actually we had another dog. It passed away on 24th December.'],
+    surprise:'Has been bitten by stray dogs multiple times — yet continues to choose dogs. The fear and the love do not cancel each other. They are simply both present, simultaneously, permanently.'
+  },
+
+  /* ── K: Komal / Bingo ── */
+  {
+    id:'komal', name:'Komal', initials:'KO',
+    species:'dog', breed:'Beagle', petName:'Bingo',
+    age:'~32', gender:'Female', petCount:'single',
+    tenure:'experienced', origin:'localite', welfareFirst:false,
+    userType:'Competition User',
+    tease:'If I open the gate, he will go for a walk and come back. He is just that way.',
+    headlineQuote:{ q:'I like to keep the child alive in me. No matter what stress I have, I don\'t take it home.', src:'Komal, on herself' },
+    lives:'Born and raised in Bangalore. Married 3 years. Large joint family: husband, in-laws, brother-in-law + family.',
+    works:'Senior manager at Better Half. Hybrid — HSR office 2-3 times weekly. 3-hour commute each way.',
+    petsDetail:'Bingo, Beagle. Joint-family dog. Komal primary carer except walks (Bingo too strong to leash).',
+    gotPet:'Pre-marriage family dog.',
+    typicalDay:'Long commute days. Husband in event management — unpredictable nights. India Chai with friends every alternate day. Bingo to Snubby Posse pet café. Bingo goes on solo gate-open walks.',
+    anxieties:[
+      { title:'Bingo too strong to leash', body:'"If I take him with a leash, he will pull me and I can\'t balance that. Also very bad street dogs attack him." Brother-in-law handles official walks.' },
+      { title:'Work-pet-life stack', body:'3-hour commute. Unpredictable husband schedule. Joint family provides coverage but she wants to do more herself.' },
+      { title:'Carrying stress silently', body:'"I have family clashes. But what is the point of sharing — they cannot give a solution. I just want people around me to be happy."' }
+    ],
+    categories:[
+      { cat:'Food', body:'Handles all food procurement and feeding. Bingo food-motivated — primary bond is through feeding.' },
+      { cat:'Healthcare', body:'Takes him to clinic, spa, all health-related — everything except walks.' },
+      { cat:'Grooming', body:'Spa visits handled entirely by her.' },
+      { cat:'Social', body:'Snubby Posse pet café: pool, open space, friendly dogs. Komal chills, Bingo runs free.' }
+    ],
+    channelReality:'Local pet stores and clinics. Not digital-platform active for pet care.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Local shops, clinics, grooming salons. Snubby Posse for social.',
+    wishlist:['Working women with dogs community / group','More pet cafés close to home in Bangalore','Flexible weekend grooming slots that work with event-management husband schedules'],
+    verbatims:['If I open the gate, he will go for a walk and come back. He is that way.','I give him food. I take him for spa. I do everything other than taking him for a walk.','I like to keep the child alive in me. No matter what stress I have, I don\'t take it home.'],
+    surprise:'Bingo has solo-walk trust. Gate opens — he leaves alone, roams the colony, comes back. In a city where dogs are leashed, cameraed, and never left, this is genuinely unusual. It was earned through 8 years in a joint-family home with eyes always on the street.'
+  },
+
+  /* ── L: Unit L / Roxy ── */
+  {
+    id:'unitl', name:'Unit L', initials:'UL',
+    species:'dog', breed:'Boxer', petName:'Roxy',
+    age:'21', gender:'Male', petCount:'single',
+    tenure:'experienced', origin:'immigrant', welfareFirst:true,
+    userType:'Competition User',
+    tease:'She loves the car ride to Cubbon Park. Not even the park — just the journey there.',
+    headlineQuote:{ q:'She is really obedient. She just acts tough. She has been everywhere since she was a puppy.', src:'Unit L, on Roxy' },
+    lives:'Kerala (Tripunithura) → Bangalore 10-12 years ago. Lives with mom, dad, older brother.',
+    works:'BBA final year at SJPU. No income.',
+    petsDetail:'Roxy, Boxer, 8 years old. Family dog since he was in school. She has been with him for 8 of his 12 Bangalore years.',
+    gotPet:'"I got her when I was in school, so she\'s been here since she was a puppy." Family decision.',
+    typicalDay:'College weekdays. Saturdays: Roxy in the car, Cubbon Park. Sports: squash at Catholic Club, pickleball at Jai Mahal. Weekends with friends.',
+    anxieties:[
+      { title:'Student budget + ageing Boxer', body:'No income. Roxy is 8 — Boxer lifespan means significant health costs are coming. Relies entirely on family.' },
+      { title:'Roxy in a city not built for big dogs', body:'Boxer is a large active breed in Bangalore apartments. Cubbon Park is her primary space.' },
+      { title:'Missing Courtyard Café', body:'Previously took Roxy to Courtyard Café on Doppel Road — "she has very good manners in public." It closed. Now Cubbon Park is the main venue.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Standard packaged food. Family handles provisioning.' },
+      { cat:'Healthcare', body:'Regular vet. Competition clinics.' },
+      { cat:'Social', body:'Cubbon Park every Saturday. Previously Courtyard Café (now closed). Well-behaved off-leash in public settings.' },
+      { cat:'Travel', body:'Car transport for all outings. Roxy\'s favourite part of any outing is the car ride itself.' }
+    ],
+    channelReality:'Family manages expenses. Local pet stores, competition clinics.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Local pet stores and clinics in Bangalore.',
+    wishlist:['More pet cafés to replace Courtyard Café (it closed)','Larger dog-specific play areas in Bangalore','Trusted vet support for ageing Boxer care when he\'s earning'],
+    verbatims:['She loves it. Mainly I think she loves the part of how we get there because we go by car.','She is very well-behaved. Very good manners in all public places.','She has been everywhere since she was a puppy.'],
+    surprise:'Roxy has been with him for exactly as long as he\'s been in Bangalore — 8 of his 12 years. She arrived with him. The city and the dog are the same memory.'
+  },
+
+  /* ── M: Abhishek / Gippy ── */
+  {
+    id:'abhishek', name:'Abhishek', initials:'AB',
+    species:'cat', breed:'Indie', petName:'Gippy',
+    age:'33', gender:'Male', petCount:'single',
+    tenure:'firsttime', origin:'immigrant', welfareFirst:true,
+    userType:'Competition User',
+    tease:'It was raining. He was drenched and alone on the road. I felt bad and I brought him home.',
+    headlineQuote:{ q:'It was not a quick decision but yes. He is like a family member — one of the youngest and most pampered kind.', src:'Abhishek, on Gippy' },
+    lives:'Pune → Bangalore, 6 years. Lives with mom, dad, wife.',
+    works:'Data analyst, hybrid (3 days office). Likes hikes, food exploration, badminton.',
+    petsDetail:'Gippy, Indie rescue cat. Found few weeks old, drenched in rain on a main road near their house.',
+    gotPet:'Found on the road during rain. Emergency dry food from local pet store that night. Vet visit next day. Unanimous family decision to keep.',
+    typicalDay:'Parents home during day. Hybrid days: Gippy time at home. Wife manages community groups for cat info. Gippy is family member — everyone attached, parents included.',
+    anxieties:[
+      { title:'Finding a vet who isn\'t expensive', body:'First vet \'Precise\' felt expensive after 3 visits. Discovered colony WhatsApp group — crowd-sourced next vet recommendation.' },
+      { title:'First-time cat parent information gap', body:'"We didn\'t know how to feed him. We went to ChatGPT and Google." Tried to figure out his age, nutritional needs, everything from scratch.' },
+      { title:'Who cares when both out', body:'Maid comes. Parents are home. But still thinks about it — has built a network of trusted contacts.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Dry food emergency from local pet store first. Now vet-advised mix of packaged and home food. Price-sensitive after \'Precise\' experience.' },
+      { cat:'Healthcare', body:'Went to Precise first (Google: nearest clinic). 3 visits, felt expensive. Colony WhatsApp group gave better-value referral. Wife active in Facebook cat parent groups.' },
+      { cat:'Research', body:'ChatGPT for kitten age and nutritional needs. Google for vet reviews. Instagram for product discovery. Triangulates before deciding.' },
+      { cat:'Community', body:'Colony WhatsApp pet parent group. Facebook cat groups (wife). Crowd-sourced as primary research tool.' }
+    ],
+    channelReality:'Google for finding vets. ChatGPT for first-time care Q&A. Local pet store for emergency. Community groups for trusted recommendations.',
+    stRecall:'Competition user. Not on Supertails. Open to trying based on recommendation.',
+    compRecall:'Precise clinic (first, expensive). Local pet store. Colony WhatsApp group as informal sourcing layer.',
+    wishlist:['Transparent vet pricing upfront — no surprise bills','A rescue cat first-timer guide (digital)','ChatGPT-equivalent but vet-backed instant care Q&A'],
+    verbatims:['I felt bad and brought it home.','We were trying to figure out how old he was. We went to ChatGPT and Google.','The bonding started slowly. He is like a family member now — one of the youngest and most pampered kind.'],
+    surprise:'Used ChatGPT as his very first vet before physically taking Gippy anywhere. When asked about kitten age and nutritional needs, ChatGPT was the instant oracle — and he trusted it enough to act on it.'
+  },
+
+  /* ── N: Unit N / Dex & Lucy ── */
+  {
+    id:'unitn', name:'Unit N', initials:'UN',
+    species:'cat', breed:'Indie Mix', petName:'Dex & Lucy',
+    age:'~26', gender:'Female', petCount:'multiple',
+    tenure:'experienced', origin:'immigrant', welfareFirst:true,
+    userType:'Competition User',
+    tease:'Lucy sabotaged my roommate\'s Pilates class. Again. Now everyone expects her to show up.',
+    headlineQuote:{ q:'I never imagined I would have cats of all things. I\'ve made being a cat mom a part of my personality.', src:'Unit N, on her identity' },
+    lives:'Born Oman, university Malaysia, Bangalore 6 years (first time living in India). Lives with flatmate. Parents in Malaysia.',
+    works:'Personal trainer — freelance mornings (6:30am–noon), part-time gym afternoons. 6am–7pm working days.',
+    petsDetail:'Dex (ginger, male, ~4yr, semi-rescued from friend\'s BTM terrace litter) and Lucy (fluffy Indie female, ~4yr). Both born around same time. Lucy is unusually fluffy for an Indie.',
+    gotPet:'Dex: wanted an orange cat. Friend sent litter photos. "He was a ginger boy, no one\'s taking him — I will take him." Lucy acquired subsequently.',
+    typicalDay:'6:30am personal training sessions. Home by noon. Cat nap — both cats join. Afternoon gym. Evenings: social with friends. Dex waits outside bedroom door every morning for 10-minute group lie-down.',
+    anxieties:[
+      { title:'First solo trip', body:'Coordinated 4 friends on rotation for a 7-10 day trip. "I\'ve already spoken to four of my friends if they can come and take turns." Strategic because trusts specific people only.' },
+      { title:'Carbovirus trauma', body:'Parents got her a puppy in college who died of carbovirus within a week. "First night I just kept waking up to see if he is still alive." This fear transferred directly to Dex.' },
+      { title:'No family safety net', body:'"This was my first time living in India." Oman and Malaysia childhood. No family in Bangalore. Has built a trust network of friends as substitute family.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Balanced diet. Competition platforms. Experience-informed — has had pets in surrogate capacity since childhood in Oman.' },
+      { cat:'Healthcare', body:'Vaccination-aware from puppy loss. Specific trusted people for cat-sitting — has verified they know how to handle cats.' },
+      { cat:'Social', body:'Dex and Lucy are social fixtures — Instagram reels, Pilates appearances, friend network integration.' },
+      { cat:'Community', body:'Friendship-based care system. Gym trainer network = cat-friendly. Instagram for cat content sharing.' }
+    ],
+    channelReality:'Competition platforms for food/accessories. Friend network as primary boarding/care layer. No single digital pet platform dominant.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Competition platforms. Friend network as primary trust layer for care.',
+    wishlist:['A professional trusted-friend equivalent for cat sitting when friends aren\'t available','Cat vaccine record app — portable history','More cat-specific cafés and spaces in Bangalore'],
+    verbatims:['I never imagined I would have cats of all things. I\'ve made being a cat mom a part of my personality.','First night I just kept waking up to see if he is still alive.','I\'ve already spoken to four of my friends if they can come and take turns. First time not having them around.'],
+    surprise:'Is a fitness trainer who teaches patience as a professional skill — "it always takes time, and I really appreciate when people are patient." Applies this exact framework to cat parenting. Her patience with Dex and Lucy mirrors what she teaches at the gym every morning.'
+  },
+
+  /* ── O: Ruben / Fluffy ── */
+  {
+    id:'ruben', name:'Ruben', initials:'RU',
+    species:'cat', breed:'Indie', petName:'Fluffy',
+    age:'28', gender:'Male', petCount:'single',
+    tenure:'firsttime', origin:'localite', welfareFirst:false,
+    userType:'Competition User',
+    tease:'She came, I gave her food, she left. Then she came back. And back. And back.',
+    headlineQuote:{ q:'I prefer offline because you have genuineness there. But for something immediate — Zepto, Blinkit. QCom apps are really helpful.', src:'Ruben, on purchase philosophy' },
+    lives:'Born and raised in Bangalore. Lives with parents, brother, grandmother. 5-person household.',
+    works:'Project manager, Paradise Constructions. Civil engineering background. Methodical, research-driven.',
+    petsDetail:'Fluffy, Indie cat. Just showed up at their building. Given food. Came back. "Once I gave her food, she went, but then she came back again and again. So after that we were not able to leave her."',
+    gotPet:'No decision. Fluffy arrived. The family was gradually claimed.',
+    typicalDay:'Office most days. Fluffy independent — large household means someone always home. Weekends: museums, stock research, motorbike rides (Nandi Hills, Mysore), family shopping at Phoenix Mall.',
+    anxieties:[
+      { title:'Quality of information', body:'Reads YouTube reviews before purchases. Instagram for discovery. Wants verifiable sources — applies same framework to pet products as to financial decisions.' },
+      { title:'Offline verification reflex', body:'"I prefer offline because you have genuineness there." For pet healthcare, wants to see the clinic, speak to someone, verify.' },
+      { title:'Decision paralysis on large purchases', body:'Goes offline, narrows with staff help, then buys. Even for fridge. Same for large-ticket pet decisions.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Competition platforms for food. Zepto/Blinkit for immediate. YouTube + Instagram research before brand choice.' },
+      { cat:'Healthcare', body:'Competition clinics. Research-driven vet selection. Prefers to see clinic before trusting.' },
+      { cat:'Accessories', body:'Offline for large-ticket, online for medium. Multi-brand stores (Max, Pantaloons) philosophy extended to pet.' },
+      { cat:'Research', body:'YouTube reviews → offline verification → purchase. Fridge buying model = pet buying model.' }
+    ],
+    channelReality:'Zepto/Blinkit for immediate. Online for medium. Offline for quality-critical. Competition platforms for pet-specific. No strong brand loyalty.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Competition pet platforms and clinics. Zepto/Blinkit for general use.',
+    wishlist:['Offline pet store experience with knowledgeable staff (like a good electronics salesperson)','Transparent product reviews for cat food','First-time cat parent walkthrough when they just showed up at your door'],
+    verbatims:['Once I gave her food, she went, but then she came back again and again. So after that we were not able to leave her.','I prefer offline because you have genuineness there. For immediate — Zepto, Blinkit. QCom apps are really helpful.','I like going to museums. I get some new information there. You have so much to learn.'],
+    surprise:'Made the exact parallel between buying a fridge (YouTube + offline salesman) and selecting pet food — same validation process, same trust-building logic. The method is more transferable than the category.'
+  },
+
+  /* ── P: Nazia / Sophie ── */
+  {
+    id:'nazia', name:'Nazia', initials:'NA',
+    species:'cat', breed:'Persian', petName:'Sophie',
+    age:'22', gender:'Female', petCount:'single',
+    tenure:'experienced', origin:'localite', welfareFirst:false,
+    userType:'Competition User',
+    tease:'We are 5 members at home. Including my kitten.',
+    headlineQuote:{ q:'I am responsible for everything — from the food to the bath to the clinic. I just need my dad to come along.', src:'Nazia, on ownership with support' },
+    lives:'Born and raised in Bangalore, same lane all her life. Lives with mom, dad, brother + cousin visits.',
+    works:'Final year B.Com student, Jain Online. Group studies, malls, tight friend circle of 3 childhood friends.',
+    petsDetail:'Sophie, Persian, ~11-12 months. Previous Persian cat for 4 years (had to rehome to cousin — got emotional). Mom got Sophie as a comfort gift.',
+    gotPet:'Previous cat rehomed to cousin after family situation. Got emotional. Mom got Sophie as a replacement and comfort.',
+    typicalDay:'Online classes. Group study sessions. Mall outings — scouts products offline, orders online at discount (Nykaa, Myntra). Sophie just came back from vet (dehydration) on interview day.',
+    anxieties:[
+      { title:'Sophie\'s current health', body:'Dehydrated at 11-12 months. Just returned from vet. Still figuring out care patterns for young Persians.' },
+      { title:'Introvert who must interface with services', body:'"I am a little introverted, I cannot go alone." Dad accompanies to all vet visits. "When I am more confident in myself, I know everything — then I will be extrovert."' },
+      { title:'Getting it right after losing the first one', body:'Had to give away first cat. Fresh start with Sophie. Higher vigilance this time.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Persian-specific food. Still learning diet. Goes to clinic for guidance.' },
+      { cat:'Healthcare', body:'Goes proactively (not just emergency). Just had dehydration episode. Dad accompanies as confidence support.' },
+      { cat:'Grooming', body:'Handles with family backup. Standard Persian coat care.' },
+      { cat:'Shopping', body:'Offline scout → online buy habit. Mall for testing makeup and pet accessories, Nykaa/online for final purchase at discount.' }
+    ],
+    channelReality:'Offline-first for exploration. Online for final purchase at discount. Competition pet platforms. Local and family recommendations.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Competition pet clinics and stores. Local family network for guidance.',
+    wishlist:['Confidence-building content for first solo vet visits','Persian cat care guide — specifically for young Persians','App that remembers vet history and sends care reminders'],
+    verbatims:['We are 5 members including my kitten.','I am responsible for everything — from the food to the bath to the clinic. I just need my dad to come along.','When I am more confident in myself, I know everything — then I will be an extrovert.'],
+    surprise:'Goes to the mall specifically to test and swatch makeup, then comes home and orders online at the Nykaa discount price. Applies this exact same offline-scout-online-buy model to pet products. The research behaviour is more consistent than the category.'
+  },
+
+  /* ── Q: Reshma / 4 Persians ── */
+  {
+    id:'reshma', name:'Reshma', initials:'RE',
+    species:'cat', breed:'Persian', petName:'4 Persians',
+    age:'~38', gender:'Female', petCount:'multiple',
+    tenure:'experienced', origin:'localite', welfareFirst:false,
+    userType:'Competition User',
+    tease:'I quit international travel for 2-3 years. I couldn\'t go to my cousin\'s Dubai wedding.',
+    headlineQuote:{ q:'He follows me to the bathroom, to the kitchen, everywhere. He is most attached to me.', src:'Reshma, on her first Persian' },
+    lives:'Born in Bangalore. Married, lives in Bangalore. Nuclear family: husband (automobile business), son (15, Grade 10).',
+    works:'Quality analyst, 7am–4pm.',
+    petsDetail:'Male Persian (2.5yr, first, most attached), female Fluffy (~2yr), 2 newborn kittens (~1 month). A complete Persian family, accidental.',
+    gotPet:'Male from friend at 1 month old. Brought female 3-4 months ago for companionship. Kittens happened.',
+    typicalDay:'Work 7am–4pm. Male follows her before and after work — bathroom, kitchen, everywhere. Evening family time. Travel decisions now made around cats. Son shares her animal love.',
+    anxieties:[
+      { title:'Travel completely blocked', body:'International trips stopped 2-3 years. Cousin\'s Dubai wedding — only husband attended. "I felt bad. What to do." Every travel plan now goes through cat availability check.' },
+      { title:'Male cat\'s separation anxiety', body:'"I can\'t even leave him anywhere, I have to take him along." He follows her everywhere. She is his entire world.' },
+      { title:'Unexpected kittens', body:'Female produced a litter 1 month ago. 4 cats. Male not accepting kittens yet. Dynamics being managed.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Persian-specific premium food. Lifelong cat experience. Has fed all types — now focused on Persian diet protocol.' },
+      { cat:'Healthcare', body:'Competition clinics and local vets. Managing newborn kittens for first time.' },
+      { cat:'Grooming', body:'Persian coat care. Regular long-coat grooming. Local services used.' },
+      { cat:'Community', body:'Childhood rescue history (hidden cats from mom on terrace). Now full Persian household. Son continues the tradition.' }
+    ],
+    channelReality:'Local clinics, competition stores. Traditional sourcing. Not strongly digital-platform-active.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Local clinics and pet stores. Family-friend network.',
+    wishlist:['Travel-friendly boarding that feels like home for anxious Persians','Male cat separation anxiety management guidance','Vet specializing in multi-cat household dynamics and kittens'],
+    verbatims:['I quit international travel for 2-3 years because of them. I had a cousin\'s wedding in Dubai — couldn\'t go.','He follows me to the bathroom, to the kitchen, everywhere at home.','I have been an animal lover since childhood. My mom would shout at me: why are you bringing road cats home?'],
+    surprise:'Skipping a Dubai wedding to stay with her Persian cats was not a difficult decision — it just made sense. The cost of travel is measured entirely in time away from them. The cats are the anchor, the constraint, and also the justification.'
+  },
+
+  /* ── R: Vihaar / Sonu ── */
+  {
+    id:'vihaar', name:'Vihaar', initials:'VI',
+    species:'cat', breed:'Indie', petName:'Sonu',
+    age:'27', gender:'Male', petCount:'single',
+    tenure:'experienced', origin:'immigrant', welfareFirst:true,
+    userType:'Competition User',
+    tease:'She was shivering. I gave her milk. She left. Then she came back.',
+    headlineQuote:{ q:'I prefer working from home when work is low so I can stay for my cat and chill with her.', src:'Vihaar, on WFH logic' },
+    lives:'Salem → Bangalore, 9 years. Lives with mom, dad, younger brother.',
+    works:'Finance analyst at MS Sai Private Ltd. Hybrid — works from home when workload low.',
+    petsDetail:'Sonu, Indie cat, ~9 years. Found shivering outside building on arrival in Bangalore. Fed her. She left, kept returning. Has been with him 9 years — his entire Bangalore life.',
+    gotPet:'Shivering cat outside the building he moved into. Gave milk. She left, came back repeatedly. Family accepted her organically.',
+    typicalDay:'WFH when possible — to spend time with Sonu. Office otherwise. Friends on weekends (Watson\'s, pool table). Sports: snooker, pickleball, cricket. WFH days = Sonu + series time.',
+    anxieties:[
+      { title:'Single-vet dependence at local clinics', body:'"Here it is dependent on a single person. I don\'t know when they will be available. I have to check with them first." Reason for loyalty to Hebbal government vet hospital.' },
+      { title:'Travel time to Hebbal', body:'6km, 20-30 minutes in Bangalore traffic. Accepts this as the price of reliability.' },
+      { title:'Sonu ageing', body:'9 years. She arrived with his Bangalore life. Implicit weight to this.' }
+    ],
+    categories:[
+      { cat:'Food', body:'Regular vet guidance for diet. Standard cat food. Competition platforms.' },
+      { cat:'Healthcare', body:'Loyal to Hebbal government vet hospital — large institution, always staffed, no appointment needed, multiple doctors, cheap. Has never missed a check-up.' },
+      { cat:'Time', body:'"I prefer working from home when work is low so I can stay for my cat." WFH is Sonu-time, not just work convenience.' },
+      { cat:'Social', body:'Sonu is indoor cat. Weekends: Watson\'s pub, pool table, snooker, pickleball. Cat time is weekday WFH time.' }
+    ],
+    channelReality:'Hebbal government vet hospital for all healthcare. Competition platforms for food. Zepto/Blinkit for general convenience.',
+    stRecall:'Competition user. Not on Supertails.',
+    compRecall:'Hebbal government vet hospital (primary, loyal). Competition platforms for food and accessories.',
+    wishlist:['Multi-vet practice where any doctor can see Sonu without appointment — like Hebbal but private','Online vet consultation as Hebbal supplement','More series to binge with Sonu on WFH days'],
+    verbatims:['She was shivering. I gave her some milk. She went, but then she came back again and again.','I prefer working from home when work is low so I can stay for my cat and chill with her.','Bangalore people are very modern, fast moving, just chilling, working and chilling on weekends.'],
+    surprise:'Sonu has been with him for his entire Bangalore life — she found him in the same week he arrived in the city 9 years ago. She is not a pet. She is his Bangalore chapter, personified.'
+  }
+
+], /* end respondents */
+
+/* ─────────────────────────────────────────────
+   8 PROVOCATIONS
+───────────────────────────────────────────── */
+provocations: [
+  {
+    num:'01', style:'dark', span:'span-8',
+    title:'Everyone Has a Camera. Nobody Feels Better.',
+    body:'Almost every respondent has a camera trained on their pet when they leave. Yet the same people describe checking it obsessively, watching their animal sit alone, and feeling worse. The camera solves the visibility problem. It does not solve the guilt problem.',
+    detail:[
+      { q:'We keep a camera here. He responds when we talk. But he waits.', src:'Ritik (A)' },
+      { q:'We are always on camera even during dinner. She is just sitting on the bed doing nothing.', src:'Anushi (G)' },
+      { q:'We have camera and we will watch him over that. He is ok to be alone but doesn\'t want new people.', src:'Unit I' }
+    ]
+  },
+  {
+    num:'02', style:'green', span:'span-4',
+    title:'Speed Is Not the Job. Certainty Is.',
+    body:'Zepto delivers in 10 minutes. Yet three respondents describe staying with slower platforms because "I know the delivery will happen." The job isn\'t fast — it\'s certain.',
+    detail:[
+      { q:'If I\'m out of treats, I can immediately order and get it today. Their customer service is a person I can speak to.', src:'Lakshmi' },
+      { q:'With Amazon, I know that if I get something of bad quality, I can get it replaced quickly and easily.', src:'Lakshmi' },
+      { q:'Zepto is quicker also, Blinkit.', src:'Smrithi (D)' }
+    ]
+  },
+  {
+    num:'03', style:'orange', span:'span-4',
+    title:'The Vet Is the Brand.',
+    body:'Every respondent who switched platforms — not one switched vets without a concrete reason. Vet trust is the stickiest relationship in the entire ecosystem.',
+    detail:[
+      { q:'Once we touch Dr. Pampapathi, we don\'t have to go anywhere else.', src:'Pratham (B)' },
+      { q:'I actually want the same doctor. The first doctor was amazing. I would like to continue with him.', src:'Smrithi (D)' },
+      { q:'The ratings in Google give you a good idea. But once you find a good vet, you stay.', src:'Abhishek (M)' }
+    ]
+  },
+  {
+    num:'04', style:'plain', span:'span-4',
+    title:'Google Gives 10 Answers. Nobody Trusts Any.',
+    body:'Every first-time pet parent starts with Google. Every one of them also expresses distrust of what they find. ChatGPT is becoming the new first oracle — not because it\'s more accurate, but because it feels like a conversation.',
+    detail:[
+      { q:'We went to ChatGPT and Google. We were trying to figure out how old he was.', src:'Abhishek (M)' },
+      { q:'I watched some YouTube channels. From there I got some ideas.', src:'Ritik (A)' },
+      { q:'I asked ChatGPT as well, and it also suggested good things for him.', src:'Smrithi (D)' }
+    ]
+  },
+  {
+    num:'05', style:'dark', span:'span-4',
+    title:'The City Stripped Their Support System.',
+    body:'Every immigrant respondent made the same move: left behind the grandmothers, uncles, colony aunties who might have shared pet-care wisdom. What replaced that network? Google, WhatsApp groups, or a brand.',
+    detail:[
+      { q:'This was my first time living in India. I was the only person staying in that whole building.', src:'Unit N' },
+      { q:'I got him from some foster place. There was no one to guide me.', src:'Unit I' },
+      { q:'I got to know that in this colony, we have a WhatsApp group where these pet owners post questions.', src:'Abhishek (M)' }
+    ]
+  },
+  {
+    num:'06', style:'orange', span:'span-4',
+    title:'Brands Speak Kannada. Or They Don\'t.',
+    body:'Anushi chose Heads Up for Tails not for product quality but because the staff explained things to her. At local shops, she felt dismissed for not being from Karnataka. In Bangalore petcare, language accessibility is a brand advantage.',
+    detail:[
+      { q:'If we go to Head and Tails, they talk to us nicely and explain things. But if we go to local, they see that we are not Kannadiga and they don\'t say anything.', src:'Anushi (G)' },
+      { q:'We go for branded things because it is easy. In local, language problem is there.', src:'Anushi (G)' },
+      { q:'My dog also doesn\'t know Kannada but we are still communicating.', src:'Anushi (G)' }
+    ]
+  },
+  {
+    num:'07', style:'plain', span:'span-4',
+    title:'The Delivery That Called at 10pm.',
+    body:'Lakshmi\'s Supertails order arrived three days late — not because it wasn\'t available, but because an unfamiliar courier (Elastic Run) called at 10:24pm, asked for a live location, and marked her unavailable when she declined. The product was fine. The trust is gone.',
+    detail:[
+      { q:'He called me at 10:24 pm and sent me a message saying the customer was not available. Again the next night at 10:30 pm.', src:'Lakshmi' },
+      { q:'I wouldn\'t order anything I need immediately delivered on Supertails now because of this experience.', src:'Lakshmi' },
+      { q:'I already sent the feedback mail but I didn\'t receive anything back from them.', src:'Ritik (A)' }
+    ]
+  },
+  {
+    num:'08', style:'green', span:'span-8',
+    title:'They Already Know What a 10/10 Service Feels Like.',
+    body:'This cohort uses Zepto, Blinkit, CRED, Amazon Prime, and Swiggy. They receive notifications before they ask. They get callbacks within seconds. For petcare to feel right, it needs to match that bar — not directionally. Exactly.',
+    detail:[
+      { q:'With Amazon, customer service is a person I can speak to, explain my problem, and get a resolution. That\'s something I prefer.', src:'Lakshmi' },
+      { q:'QCom apps are really helpful. Something I need immediately.', src:'Ruben (O)' },
+      { q:'Life is very busy and we are running. Technology makes our life easy. Why can\'t we use it?', src:'Anushi (G)' }
+    ]
+  }
+],
+
+/* ─────────────────────────────────────────────
+   THEMES
+───────────────────────────────────────────── */
+themes: [
+  {
+    tag:'HEALTHCARE',
+    title:'The First Vet Visit Defines Everything',
+    summary:'The quality of the first vet encounter — knowledge, gentleness, cleanliness — determines whether a pet parent stays with a provider for life or never returns. There is no loyalty trial. There is one first impression.',
+    count:14, who:'Dog and cat parents, all tenure levels',
+    evidence:[
+      { q:'Once we touch Dr. Pampapathi, we don\'t have to go anywhere else.', src:'Pratham (B)' },
+      { q:'I could know that he was just bullshitting. He doesn\'t know. He asked me if the cat was 14 or 40 days old. If I can understand, then how can he?', src:'Smrithi (D)' },
+      { q:'The ratings in Google give you a good idea. A decent and good place — not high-end.', src:'Abhishek (M)' }
+    ]
+  },
+  {
+    tag:'BELONGING',
+    title:'No Support System = Brand Dependency',
+    summary:'Immigrant pet parents in Bangalore have no family knowledge network for pet care. The brand or platform that fills this gap — with warm, non-judgmental, expert answers — gets loyalty for life. This is structurally unique to the immigrant city.',
+    count:10, who:'Immigrant pet parents (dog and cat)',
+    evidence:[
+      { q:'I texted Smita at Supertails. I knew if I message her, she will contact me in the morning.', src:'Smrithi (D)' },
+      { q:'I got to know that in this colony we have a WhatsApp group where these pet owners post questions.', src:'Abhishek (M)' },
+      { q:'This was my first time living in India. I was the only person staying in that whole building.', src:'Unit N' }
+    ]
+  },
+  {
+    tag:'GUILT',
+    title:'Camera + Camera + Camera = Guilt, Not Security',
+    summary:'Cameras are universal. Peace of mind is not. Pet parents describe watching their animal sit alone and feeling more guilty for witnessing it. The camera is a guilt amplifier, not a comfort tool. The real product need is someone — not something — at home.',
+    count:8, who:'Working pet parents, immigrant and localite',
+    evidence:[
+      { q:'We are always on camera. She is sitting on the bed doing nothing. When we come back, she will not be happy.', src:'Anushi (G)' },
+      { q:'We keep a camera here. He responds when we talk.', src:'Ritik (A)' },
+      { q:'We have camera and we watch him. He is ok to be alone but we are conscious.', src:'Unit I' }
+    ]
+  },
+  {
+    tag:'IDENTITY',
+    title:'Pet Identity Becomes Self Identity',
+    summary:'For a significant subset, the pet is not owned — it is integrated. Name tattooed. Song dedicated. Instagram page. Personality reshaped. The pet arrived during a critical life chapter and became inseparable from the person\'s story.',
+    count:7, who:'Solo owners, immigrants, long-tenure parents',
+    evidence:[
+      { q:'I\'ve made being a cat mom a part of my personality.', src:'Unit N' },
+      { q:'He came to my life when I was not expecting it. Things got changed in a different and better way. He is my soul partner.', src:'Unit I' },
+      { q:'He is the centre of our life. I got his name tattooed on me.', src:'Unit I' }
+    ]
+  },
+  {
+    tag:'ANXIETY',
+    title:'First-Time Parents Are Terrified of Getting It Wrong',
+    summary:'First-time pet parents describe a specific, persistent anxiety: that they are doing it wrong, that something preventable will go wrong, and that ignorance will cost them the pet. They don\'t want to be told what to do. They want to be reassured they\'re not failing.',
+    count:9, who:'First-time dog and cat parents',
+    evidence:[
+      { q:'I don\'t think there is any redo. Because what if he catches a virus?', src:'Smrithi (D)' },
+      { q:'First night I just kept waking up to see if he is still alive.', src:'Unit N' },
+      { q:'We do small mistakes and keep learning and improving.', src:'Anushi (G)' }
+    ]
+  },
+  {
+    tag:'STANDARDS',
+    title:'Quality Benchmarks Are Set by Other Industries',
+    summary:'These consumers live in a Zepto/Amazon/Swiggy world. They don\'t compare Supertails to other petcare platforms. They compare it to what they already know — and the bar is already world-class. Petcare is not excused from that standard.',
+    count:12, who:'NCCS-A respondents, all profiles',
+    evidence:[
+      { q:'QCom apps are really helpful. Something I need immediately.', src:'Ruben (O)' },
+      { q:'With Amazon, I know that if something is wrong, I can get it replaced quickly and easily.', src:'Lakshmi' },
+      { q:'Life is very busy and we are running. Technology makes our life easy.', src:'Anushi (G)' }
+    ]
+  },
+  {
+    tag:'BEHAVIOUR',
+    title:'Dog Parents React. Cat Parents Observe.',
+    summary:'Dog parents describe anxiety triggered by symptoms — vomiting, injury, behaviour change. Cat parents describe a more ongoing vigilance: "something is off" before any visible symptom. The emotional contract is entirely different, and it shapes every service interaction.',
+    count:17, who:'Split between all dog and cat parents',
+    evidence:[
+      { q:'Sophie is suffering from dehydration. Just now we came from the clinic.', src:'Nazia (P), proactive' },
+      { q:'She is not eating or sleeping, she is restless. When we come back, she will not be happy.', src:'Anushi (G), reactive' },
+      { q:'For cats, they groom themselves. They are observational. You sense when something is off.', src:'Unit N' }
+    ]
+  },
+  {
+    tag:'VALUES',
+    title:'Indie vs Purebred Is a Values Signal, Not a Budget Signal',
+    summary:'Indie pet parents skew welfare-first. Purebred pet parents skew care-protocol-first. This is not about money — Unit F feeds 6 Persians and 40 strays simultaneously. The divide tracks a values difference: what does pet parenthood mean to me?',
+    count:17, who:'Visible across all profiles',
+    evidence:[
+      { q:'Indie dogs are a personality roulette. You do not know what you are going to get.', src:'Lakshmi' },
+      { q:'I was very strict that I wanted to adopt only. I didn\'t want to buy.', src:'Pratham (B)' },
+      { q:'I have been an animal lover since childhood. My mom would shout — why are you bringing road cats home?', src:'Reshma (Q)' }
+    ]
+  }
+],
+
+/* ─────────────────────────────────────────────
+   VERBATIM BRICK WALL
+───────────────────────────────────────────── */
+verbatims: [
+  { tag:'BOND', color:'brick-green', large:true, q:'He can talk through eyes. He knows when I am not well, he knows when I am down. He will give me my space and sit next to me.', src:'Unit I · Mixed dog · 12 years' },
+  { tag:'IDENTITY', color:'brick-dark', large:false, q:'I\'ve made being a cat mom a part of my personality. I never imagined I would have cats of all things.', src:'Unit N · Trainer · 4 years with cats' },
+  { tag:'CHAOS', color:'brick-orange', large:false, q:'She stood on the counter and eaten 500g of chicken, all by herself. Just sitting there, acting like nothing happened.', src:'Lakshmi · Zola the Indie' },
+  { tag:'VET', color:'brick-dark', large:false, q:'Once we touch Dr. Pampapathi, we don\'t have to go anywhere else.', src:'Pratham (B) · 5 years with Duffel' },
+  { tag:'GUILT', color:'brick-green', large:true, q:'Whenever I get money, the first thing I do is order him food and everything that he needs.', src:'Smrithi (D) · Student · First cat' },
+  { tag:'ANXIETY', color:'brick-plain', large:false, q:'I don\'t think there is any redo. Because what if he catches a virus?', src:'Smrithi (D) · After losing foster kitten to cross-infection' },
+  { tag:'FOUND', color:'brick-orange', large:false, q:'She was shivering. I gave her some milk. She went. Then she came back. And back. And back.', src:'Vihaar (R) · Sonu arrived with Bangalore' },
+  { tag:'TIMING', color:'brick-green', large:false, q:'He does this thing at 1:58pm. Like clockwork. He has managed to shift his treat time from 5pm to 2pm over six months.', src:'Lakshmi · On Nico\'s time manipulation' },
+  { tag:'LOSS', color:'brick-dark', large:false, q:'I quit international travel for 2-3 years. I had a cousin\'s wedding in Dubai. I couldn\'t go.', src:'Reshma (Q) · 4 Persians' },
+  { tag:'LANGUAGE', color:'brick-orange', large:true, q:'If we go to Heads Up for Tails, they talk to us nicely and explain things. But if we go to local, they see that we are not Kannadiga and they don\'t say anything.', src:'Anushi (G) · Punjabi family in Bangalore' },
+  { tag:'FEAR', color:'brick-plain', large:false, q:'I am scared of dogs but also a dog lover. That\'s a weird combination.', src:'Nitesh (J) · Bitten multiple times, still choosing dogs' },
+  { tag:'DELIVERY', color:'brick-dark', large:false, q:'He called me at 10:24pm and sent me a message saying the customer was not available. I was home, waiting.', src:'Lakshmi · On Supertails\' Elastic Run courier' },
+  { tag:'ADOPTION', color:'brick-green', large:false, q:'I was very strict that I wanted to adopt only. I didn\'t want to buy. I never wanted to buy.', src:'Pratham (B) · On finding Duffel' },
+  { tag:'RESCUE', color:'brick-orange', large:false, q:'It was raining. He was drenched and alone. I felt bad and brought him home.', src:'Abhishek (M) · On finding Gippy' },
+  { tag:'INDEPENDENCE', color:'brick-plain', large:false, q:'If I open the gate, he will go for a walk and come back on his own. He is just that way.', src:'Komal (K) · On Bingo\'s earned freedom' },
+  { tag:'SOUL', color:'brick-dark', large:false, q:'She is not just a pet. She is with me since I came to Bangalore. She is my Bangalore story.', src:'Vihaar (R) · On Sonu · 9 years' },
+  { tag:'NUTRITION', color:'brick-green', large:false, q:'I don\'t use polyester. It is not really good for anyone — not only for animals, but even for human beings.', src:'Unit F · On materials for pets and people' },
+  { tag:'FEEDBACK', color:'brick-plain', large:false, q:'I already sent the feedback mail with the screenshot and reproduction steps. But I didn\'t receive anything back.', src:'Ritik (A) · Software engineer, sent Supertails a bug report' },
+  { tag:'HOMECOMING', color:'brick-orange', large:true, q:'Every time I come back home, he is extremely cuddly. He comes into my arms and gives me kisses for 5-10 minutes. Non-negotiable.', src:'Smrithi (D) · On Ghibli\'s welcome ritual' },
+  { tag:'STANDARDS', color:'brick-dark', large:false, q:'We go for brands because it is easy. Life is very busy and we are running. We don\'t have so much time.', src:'Anushi (G) · On why premium brands win' }
+],
+
+/* ─────────────────────────────────────────────
+   CATEGORY DEEP-DIVES (4)
+───────────────────────────────────────────── */
+categories: [
+  {
+    id:'food', icon:'🍗', name:'Food',
+    oneLiner:'The daily anchor ritual. Shift the food brand, lose the relationship.',
+    pills:['12/17 buy branded packaged food','5/17 mix packaged + homemade','Zepto / Blinkit used for emergency restocking','Brand switching is triggered by price, not quality belief'],
+    truth:'Pet food is not a category decision — it is a daily act of love. The brand that earns daily trust earns the whole ecosystem.'
+  },
+  {
+    id:'health', icon:'🩺', name:'Healthcare',
+    oneLiner:'Where trust is made. One good vet creates a customer for life. One bad experience exits the whole platform.',
+    pills:['9/17 have a named trusted vet they won\'t leave','Vet@Home resonates with cat parents especially','Clinic environment judged on cleanliness + staff behaviour','3/17 use WhatsApp community for vet discovery'],
+    truth:'Healthcare trust is the conversion engine. Earn it once, through the vet, and the rest of the ecosystem unlocks.'
+  },
+  {
+    id:'groom', icon:'✂️', name:'Grooming',
+    oneLiner:'The most stressful category in the room. For the pet. For the parent. For the groomer.',
+    pills:['Anxious dogs rejected at grooming = brand trust broken','5/17 do basic grooming themselves','Cat grooming = self-managed for most','Language barrier mentioned at 2 grooming interactions'],
+    truth:'Grooming is where brands can catastrophically fail — one bad session becomes a story told to friends for years.'
+  },
+  {
+    id:'access', icon:'🛍️', name:'Accessories',
+    oneLiner:'The love expenditure. Bought with heart, not logic. But still judged by quality and ease.',
+    pills:['Amazon dominant for accessories (cashback + returns)','HUfT for premium + staff-explained items','Zepto for urgent everyday restocking','International sourcing for toys/treats unavailable in India'],
+    truth:'Accessories are the visible expression of love. The channel that makes this discovery easiest — with the right curation — wins the impulse.'
+  }
+],
+
+/* ─────────────────────────────────────────────
+   CHANNEL MATRIX
+───────────────────────────────────────────── */
+channels: [
+  {
+    name:'Supertails', role:'Full-stack platform + clinics',
+    job:'Vet@Home, pharmacy, food, QC, grooming, full-stack discovery',
+    food:3, health:5, groom:3, treats:3,
+    signal:'They know what we want. Every order, they give small gifts.'
+  },
+  {
+    name:'Amazon', role:'Accessories + treats default',
+    job:'Cashback-driven loyalty, reliable delivery, frictionless returns',
+    food:2, health:1, groom:1, treats:4,
+    signal:'If something goes wrong, I can get it replaced quickly and easily. Customer service is a person.'
+  },
+  {
+    name:'Zepto / Blinkit', role:'Emergency + immediate',
+    job:'Out-of-treats panic purchase. Late-night pharma. Now encroaching on food.',
+    food:4, health:2, groom:1, treats:3,
+    signal:'Zepto is quicker. For something I need immediately, QCom apps are really helpful.'
+  },
+  {
+    name:'Heads Up for Tails', role:'Premium discovery store',
+    job:'Physical exploration + staff-explained recommendations for accessories',
+    food:1, health:1, groom:2, treats:2,
+    signal:'They talk to us nicely and explain things. Other places don\'t do that.'
+  },
+  {
+    name:'Local pet store', role:'First-time orientation hub',
+    job:'Emergency night visit, first vet referral, physical \'see it\' before buying',
+    food:2, health:2, groom:1, treats:2,
+    signal:'I asked the shopkeeper — what do I give a drenched kitten? He gave dry food for the night.'
+  },
+  {
+    name:'WhatsApp / FB groups', role:'Peer trust layer',
+    job:'Crowdsourced vet recommendations, product warnings, rescue coordination',
+    food:2, health:3, groom:1, treats:1,
+    signal:'In this colony, we have a WhatsApp group where pet owners post any questions they have.'
+  },
+  {
+    name:'Vet clinic shop', role:'In-clinic retail',
+    job:'Bought during/after vet visit — highest trust context for discovery',
+    food:2, health:3, groom:2, treats:2,
+    signal:'There was a lady, she said — I took him to one of the shops. I got the neck belt from there.'
+  }
+],
+
+/* ─────────────────────────────────────────────
+   PERSIAN HOUSEHOLD vs INDIE HOUSEHOLD
+───────────────────────────────────────────── */
+twoBLR: {
+  a: {
+    label:'The Persian Household',
+    title:'Planned. Protocol-driven. Product-conscious.',
+    desc:'These parents sourced their pets deliberately — from breeders, friends, trusted networks. They know the breed\'s health requirements, follow a care protocol, buy Persian-specific products. Their relationship with petcare is structured.',
+    signals:[
+      'Breed-specific food, grooming, and health protocols from day one',
+      'Named vets with specialised Persian experience preferred',
+      'Premium product orientation — "pugs need royal treatment"',
+      'Nazia, Reshma, Anushi — localite Bangalore women, most with family nearby',
+      'Persian coat care and brachycephalic health are active anxieties',
+      'Travel blocked by inability to board Persian-standard cats'
+    ]
+  },
+  b: {
+    label:'The Indie Household',
+    title:'Found. Rescued. Claimed by the animal, not the other way around.',
+    desc:'These parents did not choose their pet — their pet chose them. Soaking in the rain, sitting outside a KFC, shivering outside a building. The story begins with the animal in need. Welfare-first is not a stance. It\'s the origin story.',
+    signals:[
+      'Pet arrived before any preparation — emergency first night',
+      'ChatGPT and Google as first responders, not pet stores',
+      'Welfare-first lens applied to all purchase decisions',
+      'Smrithi, Lakshmi, Abhishek, Vihaar — immigrant to Bangalore, no family network',
+      'Higher emotional resonance in origin story = higher platform loyalty when trust earned',
+      'Community-building natural — rescue WhatsApp groups, Facebook groups, vet networks'
+    ]
+  }
+},
+
+/* ─────────────────────────────────────────────
+   MOMENTS TIMELINE
+───────────────────────────────────────────── */
+moments: [
+  {
+    when:'Day 0 · Arrival night',
+    title:'The First Night',
+    body:'Every pet arrived without a manual. Dry food borrowed from a pet store. A bucket with cushions inside. A sweater worn as a baby carrier. Whatever was available. The first night is improvised — and remembered forever.',
+    v:{ q:'We didn\'t have toys, we didn\'t have food, nothing. Amazon wasn\'t delivering. His first bed was a bucket.', src:'Lakshmi, on Nico in lockdown 2020' }
+  },
+  {
+    when:'Week 1–2 · The first vet',
+    title:'The Vet Audit',
+    body:'The first vet visit is not a health check — it\'s a trust check. Pet parents judge vets the way they judge any service: does this person know more than I do? One wrong answer ends the relationship permanently.',
+    v:{ q:'He asked me if the cat was 14 or 40 days old. If I can understand, how can he not? I knew he was just bullshitting.', src:'Smrithi (D), on her first vet' }
+  },
+  {
+    when:'Month 1 · The departure anxiety',
+    title:'The First Time Leaving Them',
+    body:'The first time leaving the pet alone — even for 2 hours — triggers something irreversible. Camera installed. WhatsApp checked from dinner. Music left on via Alexa. The calculus of guilt begins and never fully switches off.',
+    v:{ q:'We are always on camera even during dinner. We speak to her. She is sitting on the bed doing nothing. When we come back, she will not be happy.', src:'Anushi (G), on Scooby' }
+  },
+  {
+    when:'Month 3–6 · Routine locked',
+    title:'The Pet Takes Over the Schedule',
+    body:'By month 3, the pet\'s schedule has absorbed the human\'s. Dinner at 8pm because Nico starts reminding at 7:45. WFH days chosen based on who needs to be home. Treats at 2pm because that\'s what he negotiated for himself.',
+    v:{ q:'He does this thing at 1:58pm. Like clockwork. He has shifted his treat time from 5pm to 2pm over six months by pure persistence.', src:'Lakshmi, on Nico' }
+  },
+  {
+    when:'Annual · The birthday',
+    title:'The Birthday Ritual',
+    body:'Dog cakes are a rite of passage — almost everyone bought one, almost nobody\'s pet ate it. The cake is replaced by homemade chicken keema shaped like a number, or KFC-style crispy chicken that gets eaten off the counter before the party starts.',
+    v:{ q:'He absolutely hated the dog cake. He was like, absolutely not, I am not eating this weird stuff. All the street dogs had a feast.', src:'Lakshmi, on Nico\'s first birthday' }
+  },
+  {
+    when:'Year 1+ · The emergency away',
+    title:'The Out-of-City Crisis',
+    body:'A broken nail at a Chikmaglur resort. A dehydrated cat on interview day. An anxious dog who won\'t pee in a new city. The first away-from-home health event tests everything: whether the parent has a plan, a vet on call, a trusted contact.',
+    v:{ q:'She had a broken nail. First time we saw her screaming like a human. We left the museum and rushed to find a doctor. Doctor said not to panic. In 20 minutes, she was alright.', src:'Anushi (G), on Scooby at Chikmaglur' }
+  },
+  {
+    when:'Year 3+ · The travel ban',
+    title:'The Calendar Blocked',
+    body:'The calculus of travel changes permanently. Dubai wedding: can\'t go. Solo trek to Sakleshpur: cancelled. Europe holiday: leave guilt-managed. For some, international travel has simply stopped. The pet is the most powerful calendar constraint in the household.',
+    v:{ q:'I quit international travel for 2-3 years because of them. I had a cousin\'s wedding in Dubai. I couldn\'t go. Only my husband left.', src:'Reshma (Q), on 4 Persians' }
+  },
+  {
+    when:'Year 8–12 · The shadow',
+    title:'The Aging Awareness',
+    body:'A specific anxiety sets in when the pet turns 8+. Spending patterns change. Travel cuts back not for logistics but for presence. "I just want to be around always." The shadow of what\'s coming is present in every daily ritual.',
+    v:{ q:'I tend to spend time with him a lot because of what may happen in the future. I have stopped traveling a lot recently.', src:'Pratham (B), on Duffel' }
+  }
+],
+
+/* ─────────────────────────────────────────────
+   WISHLIST (Sticky Notes)
+───────────────────────────────────────────── */
+wishlist: [
+  { q:'An app that opens in under one second. I sent the bug report. Nobody replied.', src:'Ritik (A) · ST user' },
+  { q:'The same in-home vet every single time. I don\'t want a lottery.', src:'Smrithi (D) · Cat parent' },
+  { q:'Grooming that\'s trained for anxious dogs. Not turned away at the door.', src:'Ritik (A) · First-time dog parent' },
+  { q:'Pet-friendly cabs as a standard Rapido / Ola option. Every time.', src:'Anushi (G) · Pug parent, Punjab-origin' },
+  { q:'Someone who explains pet care in Hindi. Not Kannada. Not English.', src:'Anushi (G) · Language barrier at local stores' },
+  { q:'Fix the last-mile delivery. No unknown couriers calling at 10pm asking for live location.', src:'Lakshmi · On Supertails Elastic Run' },
+  { q:'Boarding specifically designed for anxious, anti-social dogs who don\'t want to play.', src:'Lakshmi · On Zola\' s battle scars' },
+  { q:'International toy and treat range available in India. Not just what\'s local.', src:'Lakshmi · Brings toys from Europe' },
+  { q:'A multi-vet practice where any doctor can see Sonu without an appointment.', src:'Vihaar (R) · Loyal to Hebbal hospital model' },
+  { q:'Vegetarian-certified dog food range with vet endorsement.', src:'Nitesh (J) · Vegetarian Jain household' },
+  { q:'Support resources for households that have just lost a pet. Before getting the next one.', src:'Nitesh (J) · After Taco died Christmas Eve' },
+  { q:'A cat-proof flat checklist for house-sitters who have never had a cat.', src:'Smrithi (D) · After lily-scare with friend' },
+  { q:'Travel-friendly Persian-specialist boarding. Not a generic kennel.', src:'Reshma (Q) · Skipped Dubai wedding' },
+  { q:'A community for working women with dogs. People who actually get the schedule.', src:'Komal (K) · Senior manager, 3hr commute' },
+  { q:'One platform for health records, vet history, pharmacy, and food. All of it.', src:'Multiple respondents · ST plus model' },
+  { q:'First-time rescue cat parent guide. What to do the first 48 hours.', src:'Abhishek (M) · Found Gippy in the rain' },
+  { q:'A Sakleshpur trip that Duffel can come on. Before it\'s too late.', src:'Pratham (B) · On Duffel\'s health' }
+],
+
+/* ─────────────────────────────────────────────
+   OPERATIONAL SO-WHATS
+───────────────────────────────────────────── */
+sowhat: [
+  {
+    who:'Product · Delivery',
+    title:'Fix Last-Mile. Now.',
+    body:'Two separate respondents described losing trust in Supertails because of delivery experience — not product quality. Elastic Run calling at 10pm. Bug reports ignored for months. These are not platform problems. They are trust-destroyers dressed as ops problems.',
+    tactic:'Mandate delivery partner standards: no calls after 9pm, no live-location requests, standard ShadowFax/Delhivery only. Build in-app delivery tracking with ETA like Swiggy.'
+  },
+  {
+    who:'Product · Healthcare',
+    title:'Build Vet Identity Into the Platform',
+    body:'Pet parents are loyal to vets, not platforms. The platform that lets them request the same vet for every @Home visit, see their history, and book continuity — becomes invisible infrastructure. That\'s the loyalty play.',
+    tactic:'Add "My Vet" persistent preference in @Home booking flow. Show vet profile, past visit summary, recommended next visit before they ask.'
+  },
+  {
+    who:'Brand · Community',
+    title:'The Immigrant Pet Parent Has No Support System',
+    body:'10 of 17 respondents are immigrants to Bangalore. Every one of them described the moment they needed pet-care knowledge and had nobody to call. WhatsApp groups, Reddit, and sometimes Google filled the gap. A brand that fills this structurally wins the acquisition.',
+    tactic:'Build "Sidekick Network" — a Bangalore-specific in-app community with neighbourhood vet recommendations, rescue resources, and real pet parents answering in Hindi/English.'
+  },
+  {
+    who:'CRM · Retention',
+    title:'Camera Anxiety Is a Brand Opportunity',
+    body:'Pet parents with cameras feel more guilty, not less. The camera shows them their pet alone. The job to be done isn\'t visibility — it\'s reassurance. A brand that shows up with "Cooper has a vet check due" before they worry is the sidekick. Not the catalogue.',
+    tactic:'Proactive care nudges via CleverTap — vaccine reminders, weight check reminders, seasonal tick/flea alerts — before the parent thinks to search.'
+  },
+  {
+    who:'Commercial · QC',
+    title:'Pharmacy + Food in 30 Minutes Is the Moat',
+    body:'Three respondents explicitly described moving to Zepto/Blinkit when they needed food urgently — and not returning to Supertails for food. Supertails has the vet. The pharmacy is the natural upgrade. Own 30-minute pharmacy delivery and the ecosystem snaps shut.',
+    tactic:'Launch ST Express QC pharmacy in Bangalore\'s top-5 pet-parent hubs. Partner with existing dark stores. Price against Blinkit pharmacy, not offline clinics.'
+  },
+  {
+    who:'Product · Vet@Home',
+    title:'Allow Doctor Preference. Always.',
+    body:'Smrithi will not use a service where she gets a different vet each time. Her exact words: "I would like to continue with him rather than anyone else, because you understand when a doctor is good." This is solvable and it would unlock the cat-parent cohort entirely.',
+    tactic:'Add doctor preference toggle in @Home. Route to preferred vet when available. Show wait time vs next available alternative — let the parent decide.'
+  }
+]
+
+}; /* end window.__DATA__ */
+</script>
+
+</body>
+</html>
