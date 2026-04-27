@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLR Persona Overlay V1 — Supertails 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Shantell+Sans:wght@600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS — Supertails 2026
+============================================================ */
+:root {
+  --st-green:       #2ECC71;
+  --st-green-deep:  #1A7A44;
+  --st-green-soft:  #E8F8EF;
+  --st-black:       #0F0F0F;
+  --st-white:       #FAFAF8;
+  --st-cream:       #F5F3EE;
+  --ink-1:          #0F0F0F;
+  --ink-2:          #2C2C2C;
+  --ink-3:          #5E5E5E;
+  --ink-4:          #9A9A9A;
+  --line:           #E2E2DC;
+
+  --font-display: 'Poppins', sans-serif;
+  --font-body:    'Nunito Sans', sans-serif;
+  --font-accent:  'Shantell Sans', cursive;
+
+  --gap-1:4px; --gap-2:8px; --gap-3:12px; --gap-4:16px;
+  --gap-5:24px; --gap-6:32px; --gap-7:48px; --gap-8:64px;
+  --r-sm:6px; --r-md:12px; --r-lg:20px; --r-pill:999px;
+  --max:1200px;
+
+  /* persona colours */
+  --aarav:    #F97316;
+  --shalaka:  #8B5CF6;
+  --akanksha: #EC4899;
+  --ashok:    #3B82F6;
+
+  /* persona soft tints */
+  --aarav-soft:    rgba(249,115,22,0.08);
+  --shalaka-soft:  rgba(139,92,246,0.08);
+  --akanksha-soft: rgba(236,72,153,0.08);
+  --ashok-soft:    rgba(59,130,246,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--st-white);
+  color: var(--ink-1);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.site-header {
+  background: var(--st-black);
+  color: var(--st-white);
+  padding: 56px 40px 48px;
+  text-align: center;
+}
+.header-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--st-green);
+  border: 1px solid var(--st-green);
+  border-radius: var(--r-pill);
+  padding: 4px 14px;
+  margin-bottom: 20px;
+}
+.site-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--st-white);
+  max-width: 820px;
+  margin: 0 auto 16px;
+}
+.site-header h1 span {
+  color: var(--st-green);
+}
+.site-header p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-4);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   SECTION WRAPPERS
+============================================================ */
+.section {
+  padding: 64px 40px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.section-dark {
+  background: var(--ink-1);
+  max-width: 100%;
+  padding: 64px 40px;
+}
+.section-dark-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--ink-1);
+  margin-bottom: 8px;
+}
+.section-title-dark {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--st-white);
+  margin-bottom: 8px;
+}
+.section-sub {
+  font-size: 14px;
+  color: var(--ink-3);
+  margin-bottom: 40px;
+}
+.section-sub-dark {
+  font-size: 14px;
+  color: var(--ink-4);
+  margin-bottom: 40px;
+}
+
+/* ============================================================
+   SCATTER MAP
+============================================================ */
+.map-wrapper {
+  background: var(--st-cream);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  border: 1px solid var(--line);
+}
+
+/* Legend row */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Axis labels container */
+.map-container-outer {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  grid-template-rows: 1fr 28px;
+  gap: 0;
+  height: 560px;
+}
+
+/* Y-axis label */
+.y-axis-label {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  white-space: nowrap;
+  gap: 4px;
+}
+.y-axis-label .axis-ends {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  font-size: 10px;
+  color: var(--ink-4);
+  padding: 4px 0;
+  writing-mode: vertical-rl;
+}
+
+/* Main plot area */
+.map-plot {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  border: 2px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: visible;
+  background: var(--st-white);
+}
+
+/* Quadrant fills */
+.quadrant {
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%; height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.q-bl { top: 50%; left: 0; width: 50%; height: 50%; background: var(--aarav-soft); }
+.q-tl { top: 0; left: 0; width: 50%; height: 50%; background: var(--shalaka-soft); }
+.q-br { top: 50%; left: 50%; width: 50%; height: 50%; background: var(--akanksha-soft); }
+.q-tr { top: 0; left: 50%; width: 50%; height: 50%; background: var(--ashok-soft); }
+
+/* Quadrant dividers */
+.q-line-h {
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 1px;
+  background: var(--line);
+  pointer-events: none;
+}
+.q-line-v {
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--line);
+  pointer-events: none;
+}
+
+/* Quadrant watermark labels */
+.q-label {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 3vw, 30px);
+  font-weight: 900;
+  opacity: 0.09;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.q-label-aarav    { bottom: 12px; left: 12px; color: var(--aarav); }
+.q-label-shalaka  { top: 12px; left: 12px; color: var(--shalaka); }
+.q-label-akanksha { bottom: 12px; right: 12px; color: var(--akanksha); }
+.q-label-ashok    { top: 12px; right: 12px; color: var(--ashok); }
+
+/* Axis label tags on sides */
+.axis-tag-top, .axis-tag-bottom {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+  pointer-events: none;
+}
+.axis-tag-top { top: 6px; left: 50%; transform: translateX(-50%); }
+.axis-tag-bottom { bottom: 6px; left: 50%; transform: translateX(-50%); }
+
+/* x-axis label row */
+.x-axis-row {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 4px 0;
+}
+.x-axis-row span {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+}
+.x-axis-center {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+}
+
+/* Dots */
+.dot {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  color: white;
+  transform: translate(-50%, 50%);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 2.5px solid rgba(255,255,255,0.6);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  z-index: 2;
+  text-align: center;
+  line-height: 1.1;
+}
+.dot:hover {
+  transform: translate(-50%, 50%) scale(1.18);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+  z-index: 10;
+}
+.dot.active {
+  transform: translate(-50%, 50%) scale(1.2);
+  box-shadow: 0 0 0 3px white, 0 0 0 5px currentColor, 0 4px 16px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+/* Tooltip on hover */
+.dot-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink-1);
+  color: var(--st-white);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: var(--r-sm);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-family: var(--font-body);
+  z-index: 20;
+}
+.dot:hover .dot-tooltip { opacity: 1; }
+
+/* ============================================================
+   SIDE PANEL
+============================================================ */
+.panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,15,15,0.4);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.panel-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.side-panel {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 360px;
+  background: var(--st-white);
+  z-index: 101;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -4px 0 32px rgba(0,0,0,0.18);
+}
+.side-panel.open {
+  transform: translateX(0);
+}
+
+.panel-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  background: var(--st-white);
+  z-index: 1;
+}
+.panel-close {
+  width: 32px; height: 32px;
+  border: none;
+  background: var(--st-cream);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--ink-2);
+  font-size: 16px;
+  transition: background 0.15s;
+}
+.panel-close:hover { background: var(--line); }
+
+.panel-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink-1);
+  line-height: 1.2;
+}
+.panel-initials-badge {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+.panel-name-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.persona-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+}
+
+.pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pill {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--st-cream);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 3px 10px;
+  text-transform: capitalize;
+}
+
+.panel-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-4);
+  margin-bottom: 4px;
+}
+.panel-section-value {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+.panel-section-value strong {
+  color: var(--ink-1);
+  font-weight: 700;
+}
+
+.panel-quote {
+  background: var(--st-cream);
+  border-left: 3px solid var(--st-green);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 12px 14px;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.panel-need {
+  background: var(--st-green-soft);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+}
+.panel-need .panel-section-label { color: var(--st-green-deep); }
+.panel-need .panel-section-value { color: var(--st-green-deep); font-weight: 600; }
+
+.panel-divider {
+  height: 1px;
+  background: var(--line);
+}
+
+/* ============================================================
+   PERSONA CLUSTER CARDS
+============================================================ */
+.persona-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.persona-card {
+  background: var(--st-white);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  padding: 28px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.persona-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+}
+.persona-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+}
+.persona-card.aarav::before    { background: var(--aarav); }
+.persona-card.shalaka::before  { background: var(--shalaka); }
+.persona-card.akanksha::before { background: var(--akanksha); }
+.persona-card.ashok::before    { background: var(--ashok); }
+
+.persona-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.persona-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  flex-shrink: 0;
+}
+.persona-card-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink-1);
+}
+.persona-card-desc {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+.persona-count-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.persona-count-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+}
+.persona-count-label {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+.persona-names {
+  font-size: 11px;
+  color: var(--ink-4);
+  font-style: italic;
+}
+
+.persona-blr-variant {
+  background: var(--st-cream);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.persona-blr-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  margin-bottom: 4px;
+}
+.persona-blr-text {
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.persona-gap-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-4);
+  margin-bottom: 4px;
+}
+.persona-gap-text {
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* ============================================================
+   GAP CARDS
+============================================================ */
+.gap-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.gap-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-left: 4px solid var(--st-green);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  padding: 24px 28px;
+}
+.gap-card-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--st-white);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+.gap-card-body {
+  font-size: 14px;
+  color: var(--ink-4);
+  line-height: 1.6;
+}
+.gap-num {
+  display: inline-block;
+  font-family: var(--font-accent);
+  font-size: 11px;
+  color: var(--st-green);
+  background: rgba(46,204,113,0.12);
+  border-radius: var(--r-pill);
+  padding: 2px 10px;
+  margin-bottom: 10px;
+}
+
+/* ============================================================
+   SUMMARY TABLE
+============================================================ */
+.table-section {
+  padding: 64px 40px;
+  background: var(--st-cream);
+}
+.table-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--st-white);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.summary-table th {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  background: var(--st-cream);
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+.summary-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+.summary-table tr:last-child td { border-bottom: none; }
+.summary-table tr:hover td { background: var(--st-cream); }
+
+.persona-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.persona-dot-sm {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.7;
+}
+
+.status-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.status-no       { background: #FEE2E2; color: #991B1B; }
+.status-partial  { background: #FEF3C7; color: #92400E; }
+.status-yes      { background: var(--st-green-soft); color: var(--st-green-deep); }
+
+.table-count {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 900;
+  display: block;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer {
+  background: var(--st-black);
+  padding: 32px 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-4);
+  font-family: var(--font-body);
+}
+.site-footer strong { color: var(--st-green); }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .section { padding: 40px 20px; }
+  .section-dark { padding: 40px 20px; }
+  .site-header { padding: 40px 20px 32px; }
+  .persona-grid { grid-template-columns: 1fr; }
+  .side-panel { width: 100%; }
+  .table-section { padding: 40px 20px; }
+  .summary-table { font-size: 12px; }
+  .summary-table th, .summary-table td { padding: 10px 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SECTION 1 — HEADER
+============================================================ -->
+<header class="site-header">
+  <div class="header-badge">Persona Overlay · V1 · Apr 2026</div>
+  <h1>17 Bangalore Pet Parents × <span>Supertails Persona Framework</span></h1>
+  <p>Where do real BLR pet parents land on the manifesto archetypes — and where does the map break?</p>
+</header>
+
+<!-- ============================================================
+     SECTION 2 — SCATTER MAP
+============================================================ -->
+<section class="section">
+  <div class="section-title">The Overlay Map</div>
+  <div class="section-sub">Click any dot to see the full respondent profile. Position = Money (x) × Knowledge/Time (y).</div>
+
+  <div class="map-wrapper">
+    <!-- Legend -->
+    <div class="map-legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--aarav)"></div>
+        Struggling Aarav
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--shalaka)"></div>
+        Lonely Shalaka
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--akanksha)"></div>
+        Empathetic Akanksha
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--ashok)"></div>
+        Efficient Ashok
+      </div>
+    </div>
+
+    <!-- Map + axes -->
+    <div class="map-container-outer">
+      <!-- Y-axis label -->
+      <div class="y-axis-label">
+        <span>Knowledge / Time</span>
+      </div>
+
+      <!-- Plot area -->
+      <div class="map-plot" id="mapPlot">
+        <!-- Quadrant backgrounds -->
+        <div class="q-bl"></div>
+        <div class="q-tl"></div>
+        <div class="q-br"></div>
+        <div class="q-tr"></div>
+
+        <!-- Divider lines -->
+        <div class="q-line-h"></div>
+        <div class="q-line-v"></div>
+
+        <!-- Watermark labels -->
+        <div class="q-label q-label-aarav">AARAV</div>
+        <div class="q-label q-label-shalaka">SHALAKA</div>
+        <div class="q-label q-label-akanksha">AKANKSHA</div>
+        <div class="q-label q-label-ashok">ASHOK</div>
+
+        <!-- Axis endpoint tags -->
+        <div class="axis-tag-top">High Knowledge</div>
+        <div class="axis-tag-bottom">Low Knowledge</div>
+
+        <!-- Dots rendered by JS -->
+      </div>
+
+      <!-- X-axis label -->
+      <div class="x-axis-row">
+        <span>Low Money</span>
+        <span class="x-axis-center">Money →</span>
+        <span>High Money</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3 — PERSONA CLUSTER CARDS
+============================================================ -->
+<section class="section" style="padding-top:0">
+  <div class="section-title">The Four Clusters</div>
+  <div class="section-sub">How the manifesto archetypes map onto the 17 BLR respondents — and where each BLR variant diverges.</div>
+
+  <div class="persona-grid">
+
+    <!-- AARAV -->
+    <div class="persona-card aarav">
+      <div class="persona-card-header">
+        <div class="persona-icon" style="background:var(--aarav)">AA</div>
+        <div>
+          <div class="persona-card-name" style="color:var(--aarav)">Struggling Aarav</div>
+          <div class="persona-card-desc">Money-Minded · Clueless · Unplanned · Age 25</div>
+        </div>
+      </div>
+
+      <div class="persona-count-row">
+        <div class="persona-count-num" style="color:var(--aarav)">5</div>
+        <div>
+          <div class="persona-count-label">of 17 respondents</div>
+          <div class="persona-names">Ritik, Anushi, Smrithi, Ruben, Abhishek</div>
+        </div>
+      </div>
+
+      <div class="persona-blr-variant">
+        <div class="persona-blr-label">BLR Variant</div>
+        <div class="persona-blr-text">The Immigrant Aarav. 4 of 5 relocated to Bangalore alone. The manifesto Aarav is clueless about pet parenting. The BLR Aarav is clueless AND alone in a city where they have no network, no local vet, and sometimes can't communicate in the local language.</div>
+      </div>
+
+      <div class="persona-gap-label">Key gap</div>
+      <div class="persona-gap-text">Manifesto Aarav needs a Calming Coach. BLR Aarav needs a Calming Coach who also knows Bangalore.</div>
+    </div>
+
+    <!-- SHALAKA -->
+    <div class="persona-card shalaka">
+      <div class="persona-card-header">
+        <div class="persona-icon" style="background:var(--shalaka)">SH</div>
+        <div>
+          <div class="persona-card-name" style="color:var(--shalaka)">Lonely Shalaka</div>
+          <div class="persona-card-desc">Seeks Warmth · "More than Value" · Seasoned · Age 29</div>
+        </div>
+      </div>
+
+      <div class="persona-count-row">
+        <div class="persona-count-num" style="color:var(--shalaka)">4</div>
+        <div>
+          <div class="persona-count-label">of 17 respondents</div>
+          <div class="persona-names">Unit N, Unit I, Lakshmi, Vihaar</div>
+        </div>
+      </div>
+
+      <div class="persona-blr-variant">
+        <div class="persona-blr-label">BLR Variant</div>
+        <div class="persona-blr-text">The Identity-Integrated Shalaka. These are not people who have a pet. These are people whose identity has been restructured around their pet. One has a tattoo. One calls their cat a soul partner. One has made 'cat mom' their entire personality. The loneliness that defines the manifesto Shalaka is here — but it's resolved by the pet, not waiting to be resolved.</div>
+      </div>
+
+      <div class="persona-gap-label">Key gap</div>
+      <div class="persona-gap-text">Manifesto Shalaka is lonely and seeking warmth. BLR Shalaka HAS the warmth — she needs a brand that honours the depth of that bond, not one that treats her as a sophisticated consumer.</div>
+    </div>
+
+    <!-- AKANKSHA -->
+    <div class="persona-card akanksha">
+      <div class="persona-card-header">
+        <div class="persona-icon" style="background:var(--akanksha)">AK</div>
+        <div>
+          <div class="persona-card-name" style="color:var(--akanksha)">Empathetic Akanksha</div>
+          <div class="persona-card-desc">Emotional · Money No Bar · Seeks Feel-Good · Age 32</div>
+        </div>
+      </div>
+
+      <div class="persona-count-row">
+        <div class="persona-count-num" style="color:var(--akanksha)">3</div>
+        <div>
+          <div class="persona-count-label">of 17 respondents</div>
+          <div class="persona-names">Unit F, Nazia, Unit L</div>
+        </div>
+      </div>
+
+      <div class="persona-blr-variant">
+        <div class="persona-blr-label">BLR Variant</div>
+        <div class="persona-blr-text">The Welfare-Mission Akanksha. The manifesto Akanksha is emotionally driven and premium-spending. The BLR Akanksha adds a welfare dimension — feeding strays, adopting Indies, welfare-first product decisions. The feel-good factor is less about brand storytelling and more about genuine alignment.</div>
+      </div>
+
+      <div class="persona-gap-label">Key gap</div>
+      <div class="persona-gap-text">Manifesto Akanksha wants brands that feel good to buy. BLR Akanksha wants brands that DO good. The distinction matters for content, not just product.</div>
+    </div>
+
+    <!-- ASHOK -->
+    <div class="persona-card ashok">
+      <div class="persona-card-header">
+        <div class="persona-icon" style="background:var(--ashok)">AS</div>
+        <div>
+          <div class="persona-card-name" style="color:var(--ashok)">Efficient Ashok</div>
+          <div class="persona-card-desc">Unimpressed · Prefers Control · Expert · Age 35</div>
+        </div>
+      </div>
+
+      <div class="persona-count-row">
+        <div class="persona-count-num" style="color:var(--ashok)">5</div>
+        <div>
+          <div class="persona-count-label">of 17 respondents</div>
+          <div class="persona-names">Pratham, Sandeep, Nitesh, Komal, Reshma</div>
+        </div>
+      </div>
+
+      <div class="persona-blr-variant">
+        <div class="persona-blr-label">BLR Variant</div>
+        <div class="persona-blr-text">The Protocol-Driven Ashok. The manifesto Ashok outsources and controls. BLR Ashok has figured out a system — specific vet, specific food, specific routine — and wants it maintained without friction. The highest-value segment in the room. 4 of 5 are NOT Supertails users.</div>
+      </div>
+
+      <div class="persona-gap-label">Key gap</div>
+      <div class="persona-gap-text">Manifesto Ashok wants an Expert Executor. BLR Ashok is ALREADY executing — he wants Supertails to slot into his system, not ask him to rebuild it.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4 — GAP ANALYSIS
+============================================================ -->
+<div class="section-dark">
+  <div class="section-dark-inner">
+    <div class="section-title-dark">What the manifesto map misses in Bangalore.</div>
+    <div class="section-sub-dark">Three structural gaps between the archetype framework and what the ethnography actually shows.</div>
+
+    <div class="gap-grid">
+
+      <div class="gap-card">
+        <div class="gap-num">Gap 01</div>
+        <div class="gap-card-title">"Shalaka is the dominant BLR type — but the brand primarily speaks to Aarav."</div>
+        <div class="gap-card-body">9 of 17 respondents are experienced, seasoned pet parents with strong emotional bonds and high knowledge. The brand's primary tone — educational, coaching, reassuring — is calibrated for the first-timer. It's landing on people who don't need to be taught. They need to be respected.</div>
+      </div>
+
+      <div class="gap-card">
+        <div class="gap-num">Gap 02</div>
+        <div class="gap-card-title">"The immigrant dimension cuts across all 4 archetypes — and the manifesto doesn't name it."</div>
+        <div class="gap-card-body">10 of 17 respondents relocated to Bangalore. Aarav immigrants need a local guide. Shalaka immigrants built identity around the pet because the city didn't give them community. Akanksha immigrants research harder because they don't have trusted referrals. Ashok immigrants have systems from their previous city and are rebuilding. Each needs something the original archetype doesn't account for.</div>
+      </div>
+
+      <div class="gap-card">
+        <div class="gap-num">Gap 03</div>
+        <div class="gap-card-title">"The manifesto has no persona for the welfare-first, high-knowledge, high-conviction parent."</div>
+        <div class="gap-card-body">Unit F, Lakshmi, Vihaar, Smrithi — these respondents don't fit cleanly. They're not Aarav (not new). They're not Shalaka (not lonely). They're not Akanksha (not premium-spend driven). They're not Ashok (not control-driven). They are conviction-driven. The manifesto has four quadrants. Bangalore needs a fifth.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SECTION 5 — BRAND NEED SUMMARY TABLE
+============================================================ -->
+<div class="table-section">
+  <div class="table-inner">
+    <div class="section-title">Brand Need Summary</div>
+    <div class="section-sub" style="margin-bottom:28px">What each persona cluster actually needs from Supertails — and whether they're getting it today.</div>
+
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Persona</th>
+          <th>BLR Count</th>
+          <th>BLR Variant</th>
+          <th>What they need from the brand</th>
+          <th>Currently getting it?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="persona-chip" style="background:var(--aarav)">
+              <div class="persona-dot-sm"></div>
+              Aarav
+            </div>
+          </td>
+          <td>
+            <span class="table-count" style="color:var(--aarav)">5</span>
+            <span style="font-size:11px;color:var(--ink-4)">of 17</span>
+          </td>
+          <td>Immigrant Aarav</td>
+          <td>Calming Coach who knows BLR</td>
+          <td><span class="status-pill status-partial">Partially — app/price fail</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="persona-chip" style="background:var(--shalaka)">
+              <div class="persona-dot-sm"></div>
+              Shalaka
+            </div>
+          </td>
+          <td>
+            <span class="table-count" style="color:var(--shalaka)">4</span>
+            <span style="font-size:11px;color:var(--ink-4)">of 17</span>
+          </td>
+          <td>Identity-Integrated</td>
+          <td>Thoughtful Friend who honours depth</td>
+          <td><span class="status-pill status-no">No — treated as sophisticated shopper</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="persona-chip" style="background:var(--akanksha)">
+              <div class="persona-dot-sm"></div>
+              Akanksha
+            </div>
+          </td>
+          <td>
+            <span class="table-count" style="color:var(--akanksha)">3</span>
+            <span style="font-size:11px;color:var(--ink-4)">of 17</span>
+          </td>
+          <td>Welfare-Mission</td>
+          <td>Soft-spoken Expert who shares values</td>
+          <td><span class="status-pill status-partial">Partially — welfare content thin</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="persona-chip" style="background:var(--ashok)">
+              <div class="persona-dot-sm"></div>
+              Ashok
+            </div>
+          </td>
+          <td>
+            <span class="table-count" style="color:var(--ashok)">5</span>
+            <span style="font-size:11px;color:var(--ink-4)">of 17</span>
+          </td>
+          <td>Protocol-Driver</td>
+          <td>Expert Executor who slots into his system</td>
+          <td><span class="status-pill status-no">No — 4/5 are not ST users</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer">
+  <strong>Supertails</strong> · Persona Overlay V1 · Apr 2026 · BLR Ethnographic Research · Brand &amp; Strategy
+</footer>
+
+<!-- ============================================================
+     SIDE PANEL OVERLAY
+============================================================ -->
+<div class="panel-overlay" id="panelOverlay"></div>
+
+<div class="side-panel" id="sidePanel">
+  <div class="panel-header">
+    <div class="panel-name-block">
+      <div class="panel-initials-badge" id="panelBadge"></div>
+      <div>
+        <div class="panel-name" id="panelName"></div>
+        <div id="panelPersonaBadge"></div>
+      </div>
+    </div>
+    <button class="panel-close" id="panelClose" aria-label="Close panel">✕</button>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+/* ─── PERSONA CONFIG ─── */
+const PERSONAS = {
+  aarav:    { label: 'Struggling Aarav',    color: '#F97316', need: 'Calming Coach' },
+  shalaka:  { label: 'Lonely Shalaka',      color: '#8B5CF6', need: 'Thoughtful Friend' },
+  akanksha: { label: 'Empathetic Akanksha', color: '#EC4899', need: 'Soft-spoken Expert' },
+  ashok:    { label: 'Efficient Ashok',     color: '#3B82F6', need: 'Expert Executor' },
+};
+
+/* ─── RESPONDENT DATA ─── */
+const respondents = [
+  {
+    id:'ritik', name:'Ritik (A)', initials:'RI',
+    persona:'aarav',
+    money:30, knowledge:20,
+    species:'dog', breed:'Shih Tzu', tenure:'First-time', origin:'Immigrant',
+    blrVariant:'The Immigrant Aarav — no network, no local vet, learning from scratch in a new city with no family support',
+    fitNote:'Maps to Aarav precisely: money-conscious (Zepto vs ST price-checking), clueless about grooming standards, anxious. The immigrant dimension is absent from the manifesto Aarav.',
+    quote:'Application is bad, it is very lagging. I already sent feedback mail but I didn\'t receive anything back.',
+    need:'Calming Coach who also knows Bangalore — not just pet parenting in general'
+  },
+  {
+    id:'anushi', name:'Anushi (G)', initials:'AN',
+    persona:'aarav',
+    money:25, knowledge:25,
+    species:'dog', breed:'Pug', tenure:'First-time', origin:'Immigrant',
+    blrVariant:'The Anxious Immigrant Aarav — camera guilt, language barrier at grooming, ChatGPT as oracle',
+    fitNote:'Aarav with an additional Bangalore-specific layer: Kannada exclusion in service touchpoints. Manifesto Aarav is Hindi/urban — doesn\'t account for language as a barrier.',
+    quote:'The grooming staff only spoke Kannada. I couldn\'t understand them and they couldn\'t understand me.',
+    need:'Calming Coach who speaks her language — literally and figuratively'
+  },
+  {
+    id:'smrithi', name:'Smrithi (D)', initials:'SM',
+    persona:'aarav',
+    money:40, knowledge:45,
+    species:'cat', breed:'Indie', tenure:'First-time', origin:'Immigrant',
+    blrVariant:'The Welfare-First Aarav — first-time but deeply principled; knowledge comes from conviction, not experience',
+    fitNote:'Sits between Aarav and Shalaka. First-time = Aarav anxiety. Welfare-first + deeply researched = Shalaka values. BLR produces a hybrid the manifesto doesn\'t name.',
+    quote:'I don\'t think there is any redo. Because what if he catches a virus?',
+    need:'Calming Coach who shares her values — welfare-first, not protocol-first'
+  },
+  {
+    id:'ruben', name:'Ruben (O)', initials:'RU',
+    persona:'aarav',
+    money:20, knowledge:30,
+    species:'cat', breed:'Indie', tenure:'First-time', origin:'Localite',
+    blrVariant:'The Localite Aarav — born in Bangalore, but still lost as a first-time cat parent',
+    fitNote:'Aarav without the immigrant dimension. Origin doesn\'t reduce the knowledge gap for first-timers. Leans on QCom for convenience, hasn\'t found a trusted platform.',
+    quote:'QCom apps are really helpful. Something I need immediately, I get it.',
+    need:'Calming Coach who meets him where he already is — quick commerce mindset'
+  },
+  {
+    id:'abhishek', name:'Abhishek (M)', initials:'AB',
+    persona:'aarav',
+    money:35, knowledge:40,
+    species:'cat', breed:'Indie', tenure:'First-time', origin:'Immigrant',
+    blrVariant:'The Careful Aarav — first-time but methodical; does research before every decision',
+    fitNote:'Aarav who researches. The anxiety is there but expressed as over-preparation rather than confusion. Sits at the Aarav-Shalaka boundary.',
+    quote:'I Google everything before I decide. I don\'t want to make the wrong choice.',
+    need:'Calming Coach who rewards research — not just reassurance but validation'
+  },
+  {
+    id:'unitn', name:'Unit N', initials:'UN',
+    persona:'shalaka',
+    money:60, knowledge:75,
+    species:'cat', breed:'Indie x2', tenure:'Experienced', origin:'Immigrant',
+    blrVariant:'The Identity-Integrated Shalaka — "I\'ve made being a cat mom a part of my personality." The pet IS the identity.',
+    fitNote:'Shalaka match is near-perfect. Seasoned, emotionally anchored, identity-integrated. BLR variant: immigrant who built identity around the cat because the city didn\'t give her community.',
+    quote:'I\'ve made being a cat mom a part of my personality.',
+    need:'Thoughtful Friend who sees the cat parent, not just the cat'
+  },
+  {
+    id:'uniti', name:'Unit I', initials:'UI',
+    persona:'shalaka',
+    money:50, knowledge:60,
+    species:'dog', breed:'Mixed', tenure:'Experienced', origin:'Localite',
+    blrVariant:'The Soul-Bonded Shalaka — "He is my soul partner. I got his name tattooed." Pet as life chapter.',
+    fitNote:'Shalaka\'s emotional depth mapped onto a male, dog-owning localite. Gender and species are different; the emotional architecture is identical.',
+    quote:'He came to my life when I was not expecting it. He is my soul partner. I got his name tattooed on me.',
+    need:'Thoughtful Friend who honours the depth of this bond — not just the practicalities'
+  },
+  {
+    id:'lakshmi', name:'Lakshmi', initials:'LA',
+    persona:'shalaka',
+    money:55, knowledge:70,
+    species:'dog', breed:'Indie x2', tenure:'Experienced', origin:'Immigrant',
+    blrVariant:'The Community-Builder Shalaka — knowledge-rich, welfare-first, built her own pet parent network in Bangalore',
+    fitNote:'Shalaka with Akanksha\'s welfare drive. Multiple dogs, welfare-first, community-oriented. The 10pm pharmacy failure story is a Thoughtful Friend failure — she needed someone to show up and nobody did.',
+    quote:'After that I started keeping a stock of medicines at home. I don\'t trust last-minute delivery anymore.',
+    need:'Thoughtful Friend who is also operationally reliable — emotional support without logistical failure'
+  },
+  {
+    id:'vihaar', name:'Vihaar (R)', initials:'VI',
+    persona:'shalaka',
+    money:45, knowledge:70,
+    species:'cat', breed:'Indie', tenure:'Experienced', origin:'Immigrant',
+    blrVariant:'The Principled Shalaka — welfare-first values, deep knowledge, immigrant who chose Bangalore intentionally',
+    fitNote:'Shalaka\'s knowledge and warmth-seeking, with stronger welfare convictions. Doesn\'t spend lavishly but invests in the right things.',
+    quote:'I research everything. I want to know what I am buying and why.',
+    need:'Thoughtful Friend who shares his principles — not just his preferences'
+  },
+  {
+    id:'unitf', name:'Unit F', initials:'UF',
+    persona:'akanksha',
+    money:80, knowledge:80,
+    species:'dog+cat', breed:'Persian x6 + Mixed', tenure:'Experienced', origin:'Localite',
+    blrVariant:'The Extreme Akanksha — feeds 6 Persians AND 40 street animals. Welfare as lifestyle, not just sentiment.',
+    fitNote:'Akanksha\'s emotional drive amplified to an extreme. High spend, high knowledge, high conviction. Welfare-first is not an attitude — it is the entire operating system.',
+    quote:'We feed about 40 street animals as well. It is not separate from our life.',
+    need:'Soft-spoken Expert who takes the welfare mission seriously — not just the premium product line'
+  },
+  {
+    id:'nazia', name:'Nazia (P)', initials:'NA',
+    persona:'akanksha',
+    money:75, knowledge:65,
+    species:'cat', breed:'Persian', tenure:'Experienced', origin:'Localite',
+    blrVariant:'The Proactive Akanksha — monitors before symptoms appear, takes action before crisis. Persian-parent hypervigilance.',
+    fitNote:'Akanksha\'s emotional investment expressed as health proactivity. Came to the interview straight from the vet. This is a parent who wants to be ahead of the problem, not reactive to it.',
+    quote:'Sophie is suffering from dehydration. Just now we came from the clinic.',
+    need:'Soft-spoken Expert who matches her proactivity — not who responds after she panics'
+  },
+  {
+    id:'unitl', name:'Unit L', initials:'UL',
+    persona:'akanksha',
+    money:60, knowledge:60,
+    species:'dog', breed:'Boxer', tenure:'Experienced', origin:'Immigrant',
+    blrVariant:'The Careful Akanksha — Kerala origin, deliberate, quality-over-price, welfare-aware',
+    fitNote:'Akanksha\'s emotional thoughtfulness without the high spend. Mid-range but quality-conscious. Welfare-first as a values signal.',
+    quote:'I want to do right by him. I research before I buy anything.',
+    need:'Soft-spoken Expert who respects the research she\'s already done'
+  },
+  {
+    id:'pratham', name:'Pratham (B)', initials:'PR',
+    persona:'ashok',
+    money:65, knowledge:65,
+    species:'dog', breed:'Cocker Spaniel', tenure:'Experienced', origin:'Localite',
+    blrVariant:'The Vet-Loyal Ashok — protocols in place, vet relationship non-negotiable, organised',
+    fitNote:'Ashok\'s efficiency with a warmer emotional register. Still calls his Chennai vet on WhatsApp. The Expert Executor who also values continuity of relationship.',
+    quote:'My vet in Chennai — I still call him on WhatsApp even though I am here. He knows Duffel.',
+    need:'Expert Executor who also remembers the history — not just the next task'
+  },
+  {
+    id:'sandeep', name:'Sandeep (H)', initials:'SA',
+    persona:'ashok',
+    money:65, knowledge:65,
+    species:'dog', breed:'Lab', tenure:'Experienced', origin:'Localite',
+    blrVariant:'The Classic Ashok — efficient, delegates, reacts fast when needed, no patience for friction',
+    fitNote:'Closest match to the manifesto Ashok. Experienced, organised, Lab parent, efficiency-first. Not using Supertails — the expert executor is going elsewhere.',
+    quote:'If the delivery is late I will just go to the nearest shop.',
+    need:'Expert Executor who is faster and more reliable than the nearest alternative'
+  },
+  {
+    id:'nitesh', name:'Nitesh (J)', initials:'NI',
+    persona:'ashok',
+    money:60, knowledge:55,
+    species:'dog', breed:'Shih Tzu', tenure:'Experienced', origin:'Localite',
+    blrVariant:'The Protocol Ashok — experienced, has a routine, doesn\'t want it disrupted',
+    fitNote:'Ashok\'s control preference. Has figured out a system that works and wants it maintained. Low tolerance for change or friction.',
+    quote:'I know what he needs. I just want it to be available when I need it.',
+    need:'Expert Executor who maintains the system without requiring his attention'
+  },
+  {
+    id:'komal', name:'Komal (K)', initials:'KO',
+    persona:'ashok',
+    money:55, knowledge:55,
+    species:'dog', breed:'Beagle', tenure:'Experienced', origin:'Localite',
+    blrVariant:'The Price-Conscious Ashok — experienced and efficient but actively arbitrages price across platforms',
+    fitNote:'Ashok with Shalaka\'s price awareness. The control preference is there but expressed through platform-switching rather than premium loyalty.',
+    quote:'I compare between apps before buying food. Whatever is cheaper on that day.',
+    need:'Expert Executor who also delivers price confidence — not just reliability'
+  },
+  {
+    id:'reshma', name:'Reshma (Q)', initials:'RE',
+    persona:'ashok',
+    money:85, knowledge:75,
+    species:'cat', breed:'Persian x4', tenure:'Experienced', origin:'Localite',
+    blrVariant:'The Premium Akanksha-Ashok — high spend, high knowledge, protocol-driven AND emotionally invested in Persian breed culture',
+    fitNote:'Sits at the Akanksha-Ashok boundary. High control preference (protocols, breed standards), high emotional investment. The manifesto doesn\'t have a persona for this combination.',
+    quote:'For Persian cats the brush matters a lot. Not just any brush from the catalogue.',
+    need:'Expert Executor who also understands breed-specific emotional investment'
+  }
+];
+
+/* ─── RENDER DOTS ─── */
+const plot = document.getElementById('mapPlot');
+let activeDot = null;
+
+respondents.forEach(r => {
+  const p = PERSONAS[r.persona];
+  const dot = document.createElement('div');
+  dot.className = 'dot';
+  dot.style.cssText = `
+    background: ${p.color};
+    left: ${r.money}%;
+    bottom: ${r.knowledge}%;
+  `;
+  dot.setAttribute('data-id', r.id);
+  dot.setAttribute('role', 'button');
+  dot.setAttribute('tabindex', '0');
+  dot.setAttribute('aria-label', `${r.name} — ${p.label}`);
+
+  // Initials (split onto 2 lines if 2 chars)
+  dot.innerHTML = `<span style="line-height:1">${r.initials}</span>
+    <div class="dot-tooltip">${r.name}</div>`;
+
+  dot.addEventListener('click', () => openPanel(r));
+  dot.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openPanel(r); });
+
+  plot.appendChild(dot);
+});
+
+/* ─── PANEL LOGIC ─── */
+const overlay  = document.getElementById('panelOverlay');
+const panel    = document.getElementById('sidePanel');
+const closeBtn = document.getElementById('panelClose');
+
+function openPanel(r) {
+  const p = PERSONAS[r.persona];
+
+  // Badge
+  const badge = document.getElementById('panelBadge');
+  badge.style.background = p.color;
+  badge.textContent = r.initials;
+
+  // Name
+  document.getElementById('panelName').textContent = r.name;
+
+  // Persona badge
+  document.getElementById('panelPersonaBadge').innerHTML =
+    `<div class="persona-badge" style="background:${p.color};margin-top:4px">${p.label}</div>`;
+
+  // Body
+  const body = document.getElementById('panelBody');
+  body.innerHTML = `
+    <div>
+      <div class="panel-section-label">Species · Breed · Experience · Origin</div>
+      <div class="pills-row">
+        <span class="pill">${r.species}</span>
+        <span class="pill">${r.breed}</span>
+        <span class="pill">${r.tenure}</span>
+        <span class="pill">${r.origin}</span>
+      </div>
+    </div>
+
+    <div class="panel-divider"></div>
+
+    <div>
+      <div class="panel-section-label">Money Score</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+        <div style="flex:1;height:6px;background:var(--line);border-radius:999px;overflow:hidden">
+          <div style="height:100%;width:${r.money}%;background:${p.color};border-radius:999px"></div>
+        </div>
+        <span style="font-size:12px;font-weight:700;color:var(--ink-2)">${r.money}/100</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel-section-label">Knowledge Score</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+        <div style="flex:1;height:6px;background:var(--line);border-radius:999px;overflow:hidden">
+          <div style="height:100%;width:${r.knowledge}%;background:${p.color};border-radius:999px"></div>
+        </div>
+        <span style="font-size:12px;font-weight:700;color:var(--ink-2)">${r.knowledge}/100</span>
+      </div>
+    </div>
+
+    <div class="panel-divider"></div>
+
+    <div>
+      <div class="panel-section-label">BLR Variant</div>
+      <div class="panel-section-value"><strong>${r.blrVariant.split('—')[0].trim()}</strong>${r.blrVariant.includes('—') ? ' — ' + r.blrVariant.split('—').slice(1).join('—').trim() : ''}</div>
+    </div>
+
+    <div>
+      <div class="panel-section-label">Fit Note</div>
+      <div class="panel-section-value">${r.fitNote}</div>
+    </div>
+
+    <div class="panel-quote">"${r.quote}"</div>
+
+    <div class="panel-need">
+      <div class="panel-section-label">Brand Need</div>
+      <div class="panel-section-value">${r.need}</div>
+    </div>
+  `;
+
+  // Highlight active dot
+  if (activeDot) activeDot.classList.remove('active');
+  activeDot = plot.querySelector(`[data-id="${r.id}"]`);
+  if (activeDot) activeDot.classList.add('active');
+
+  overlay.classList.add('open');
+  panel.classList.add('open');
+}
+
+function closePanel() {
+  overlay.classList.remove('open');
+  panel.classList.remove('open');
+  if (activeDot) { activeDot.classList.remove('active'); activeDot = null; }
+}
+
+overlay.addEventListener('click', closePanel);
+closeBtn.addEventListener('click', closePanel);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+</script>
+
+</body>
+</html>
